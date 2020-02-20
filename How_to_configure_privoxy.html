@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.64.1" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
-<meta name="supported-color-schemes" content="light dark"><title>Privoxy不完全教程——实现自动切换代理(AutoProxy)与广告屏蔽(AdblockPlus)&nbsp;&ndash;&nbsp;Ellinia</title><link rel="stylesheet" href="/localhost/css/core.min.23cf2408a7bbf383778ab163ca01c615250ed41c122a52c02d83618a440898a34d9584fae91a0a2c0da793b5121359c1.css" integrity="sha384-I88kCKe784N3irFjygHGFSUO1BwSKlLALYNhikQImKNNlYT66RoKLA2nk7USE1nB"><link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-icon-57x57.png">
+<meta name="supported-color-schemes" content="light dark"><title>Privoxy不完全教程——实现自动切换代理(AutoProxy)与广告屏蔽(AdblockPlus)&nbsp;&ndash;&nbsp;Ellinia</title><link rel="stylesheet" href="/ellinia.me/css/core.min.23cf2408a7bbf383778ab163ca01c615250ed41c122a52c02d83618a440898a34d9584fae91a0a2c0da793b5121359c1.css" integrity="sha384-I88kCKe784N3irFjygHGFSUO1BwSKlLALYNhikQImKNNlYT66RoKLA2nk7USE1nB"><link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-icon-57x57.png">
 <link rel="apple-touch-icon" sizes="60x60" href="/favicons/apple-icon-60x60.png">
 <link rel="apple-touch-icon" sizes="72x72" href="/favicons/apple-icon-72x72.png">
 <link rel="apple-touch-icon" sizes="76x76" href="/favicons/apple-icon-76x76.png">
@@ -20,8 +20,8 @@
 <meta name="theme-color" content="#ffffff">
 <body>
     <div class="base-body"><section id="header" class="site header">
-    <div class="header wrap"><span class="header left-side"><a class="site home" href="/localhost/"><img class="site logo" src="/localhost/images/avatar.png" alt /><span class="site name">Ellinia</span></a></span>
-        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/localhost/tags/">Tags</a></nav></div></span></div></section><div id="content"><section class="article header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/ellinia.me/"><img class="site logo" src="/ellinia.me/images/avatar.png" alt /><span class="site name">Ellinia</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/ellinia.me/tags/">Tags</a></nav></div></span></div></section><div id="content"><section class="article header">
     <h1 class="article title">Privoxy不完全教程——实现自动切换代理(AutoProxy)与广告屏蔽(AdblockPlus)</h1><p class="article date">2016-10-16</p></section><article class="article markdown-body"><h1 id="缘由">缘由</h1>
 <p>前一段时间，firefox浏览器自动升级了，常常使用的代理拓展工具Forxyproxy也遇到了一些错误，一打开就报json错误，只能选择全部走代理或者全部直连，很不方便，于是在网上接触了到这款叫<a href="https%ef%bc%9a//www.privoxy.org/"target="_blank">Privoxy</a>的软件。Privoxy是一个强大的工具，开源，免费，这个软件从2002年就有了，但它更新很慢，不过真的算是挺好用方便的；它至少可以实现代理转发；广告屏蔽；自动切换线路等功能（需要事先转换规则）。在查阅了一些资料后，摸索了一天，基本实现了以上三个功能。部分地方仍然有瑕疵，如有错误还请指正。</p>
 <h1 id="客户端下载安装">客户端下载安装</h1>
@@ -59,7 +59,7 @@ bash autoproxy2privoxy gfwlist.txt &gt; gfw.action
 </code></pre><p>如果成功，你会在该脚本的目录里面看到一个名为gfw.action的文件(如果你试了多次没成功，这里有已经生成好的文件)，此时利用工具把这个文件下载到电脑上来，并放到privoxy的安装路径下，然后进入config.txt里面在最下面添加一行：</p>
 <pre><code>actionsfile gfw.action
 </code></pre><p>然后重新启动privoxy，此时你应该能够实现自动切换代理。</p>
-</article><section class="article labels"><a class="tag" href=/localhost/tags/Linux/>Linux</a></section><section class="article navigation"><p><a class="link" href="localhost/posts/log-in-centos-via-ssh-key/"><span class="li">&larr;</span>CentOS开启密钥登录的相关设置</a></p><p><a class="link" href="localhost/posts/vps-log/"><span class="li">&rarr;</span>自用VPS存根</a></p></section><section class="article discussion"><div id="disqus_thread"></div>
+</article><section class="article labels"><a class="tag" href=/ellinia.me/tags/Linux/>Linux</a></section><section class="article navigation"><p><a class="link" href="ellinia.me/posts/log-in-centos-via-ssh-key/"><span class="li">&larr;</span>CentOS开启密钥登录的相关设置</a></p><p><a class="link" href="ellinia.me/posts/vps-log/"><span class="li">&rarr;</span>自用VPS存根</a></p></section><section class="article discussion"><div id="disqus_thread"></div>
 <script type="application/javascript">
     var disqus_config = function () {
     

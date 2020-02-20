@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.64.1" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
-<meta name="supported-color-schemes" content="light dark"><title>CentOS开启密钥登录的相关设置&nbsp;&ndash;&nbsp;Ellinia</title><link rel="stylesheet" href="/localhost/css/core.min.23cf2408a7bbf383778ab163ca01c615250ed41c122a52c02d83618a440898a34d9584fae91a0a2c0da793b5121359c1.css" integrity="sha384-I88kCKe784N3irFjygHGFSUO1BwSKlLALYNhikQImKNNlYT66RoKLA2nk7USE1nB"><link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-icon-57x57.png">
+<meta name="supported-color-schemes" content="light dark"><title>CentOS开启密钥登录的相关设置&nbsp;&ndash;&nbsp;Ellinia</title><link rel="stylesheet" href="/ellinia.me/css/core.min.23cf2408a7bbf383778ab163ca01c615250ed41c122a52c02d83618a440898a34d9584fae91a0a2c0da793b5121359c1.css" integrity="sha384-I88kCKe784N3irFjygHGFSUO1BwSKlLALYNhikQImKNNlYT66RoKLA2nk7USE1nB"><link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-icon-57x57.png">
 <link rel="apple-touch-icon" sizes="60x60" href="/favicons/apple-icon-60x60.png">
 <link rel="apple-touch-icon" sizes="72x72" href="/favicons/apple-icon-72x72.png">
 <link rel="apple-touch-icon" sizes="76x76" href="/favicons/apple-icon-76x76.png">
@@ -20,8 +20,8 @@
 <meta name="theme-color" content="#ffffff">
 <body>
     <div class="base-body"><section id="header" class="site header">
-    <div class="header wrap"><span class="header left-side"><a class="site home" href="/localhost/"><img class="site logo" src="/localhost/images/avatar.png" alt /><span class="site name">Ellinia</span></a></span>
-        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/localhost/tags/">Tags</a></nav></div></span></div></section><div id="content"><section class="article header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/ellinia.me/"><img class="site logo" src="/ellinia.me/images/avatar.png" alt /><span class="site name">Ellinia</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/ellinia.me/tags/">Tags</a></nav></div></span></div></section><div id="content"><section class="article header">
     <h1 class="article title">CentOS开启密钥登录的相关设置</h1><p class="article date">2016-10-16</p></section><article class="article markdown-body"><h1 id="前言">前言</h1>
 <p>使用SSH key 来登录服务器是比较安全的选择之一，本次我想分享给大家一个较为简单的方式来实现Linux服务器的SSH key登录。并且实现禁止密码认证的功能。这样一来，只要保护好私钥，我们的服务器就会相对安全的多。</p>
 <p>环境：CentOS 6.6/6.7/7  ；工具：因为我使用的是putty，为了方便，我使用puttygen.exe 作为生成密钥的工具，大家可以从它的官方站点下载。下面教程开始：</p>
@@ -50,7 +50,7 @@ chown $USER:$USER ~/.ssh -R
 </code></pre><p>然后执行</p>
 <pre><code>systemctl restart sshd.service
 </code></pre><p>来刷新一下配置，记得不要把窗口关了，此时再试一下密钥登录，登录成功后再关掉窗口，以免配置失误把自己锁外头，此时应该已经不能用密码登录而只能用SSH key登录了，配置成功。</p>
-</article><section class="article labels"><a class="tag" href=/localhost/tags/Linux/>Linux</a></section><section class="article navigation"><p><a class="link" href="localhost/how-to-boot-into-safe-mode-on-window8.html"><span class="li">&larr;</span>如何在windows8中进入安全模式</a></p><p><a class="link" href="localhost/How_to_configure_privoxy.html"><span class="li">&rarr;</span>Privoxy不完全教程——实现自动切换代理(AutoProxy)与广告屏蔽(AdblockPlus)</a></p></section><section class="article discussion"><div id="disqus_thread"></div>
+</article><section class="article labels"><a class="tag" href=/ellinia.me/tags/Linux/>Linux</a></section><section class="article navigation"><p><a class="link" href="ellinia.me/how-to-boot-into-safe-mode-on-window8.html"><span class="li">&larr;</span>如何在windows8中进入安全模式</a></p><p><a class="link" href="ellinia.me/How_to_configure_privoxy.html"><span class="li">&rarr;</span>Privoxy不完全教程——实现自动切换代理(AutoProxy)与广告屏蔽(AdblockPlus)</a></p></section><section class="article discussion"><div id="disqus_thread"></div>
 <script type="application/javascript">
     var disqus_config = function () {
     

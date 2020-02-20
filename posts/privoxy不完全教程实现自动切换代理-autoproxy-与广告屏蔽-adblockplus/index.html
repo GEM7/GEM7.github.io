@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.64.1" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>Privoxy不完全教程——实现自动切换代理(AutoProxy)与广告屏蔽(AdblockPlus)&nbsp;&ndash;&nbsp;Ellinia</title><link rel="stylesheet" href="/localhost/css/core.min.23cf2408a7bbf383778ab163ca01c615250ed41c122a52c02d83618a440898a34d9584fae91a0a2c0da793b5121359c1.css" integrity="sha384-I88kCKe784N3irFjygHGFSUO1BwSKlLALYNhikQImKNNlYT66RoKLA2nk7USE1nB"><link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/favicons/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/favicons/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/favicons/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/favicons/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/favicons/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/favicons/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/favicons/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/favicons/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicons/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/favicons/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+<body>
+    <div class="base-body"><section id="header" class="site header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/localhost/"><img class="site logo" src="/localhost/images/avatar.jpeg" alt /><span class="site name">Ellinia</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/localhost/tags/">Tags</a></nav></div></span></div></section><div id="content"><section class="article header">
+    <h1 class="article title">Privoxy不完全教程——实现自动切换代理(AutoProxy)与广告屏蔽(AdblockPlus)</h1><p class="article date">2016-10-16</p></section><article class="article markdown-body"><h1 id="缘由">缘由</h1>
+<p>前一段时间，firefox浏览器自动升级了，常常使用的代理拓展工具Forxyproxy也遇到了一些错误，一打开就报json错误，只能选择全部走代理或者全部直连，很不方便，于是在网上接触了到这款叫<a href="https%ef%bc%9a//www.privoxy.org/"target="_blank">Privoxy</a>的软件。Privoxy是一个强大的工具，开源，免费，这个软件从2002年就有了，但它更新很慢，不过真的算是挺好用方便的；它至少可以实现代理转发；广告屏蔽；自动切换线路等功能（需要事先转换规则）。在查阅了一些资料后，摸索了一天，基本实现了以上三个功能。部分地方仍然有瑕疵，如有错误还请指正。</p>
+<h1 id="客户端下载安装">客户端下载安装</h1>
+<p>首先先到官网下载，Prixoxy支持非常多的平台，几大主流操作系统均支持。可以根据需要选择适合自己操作系统的版本。<a href="http://www.privoxy.org/sf-download-mirror"target="_blank">点此进入下载页面</a>因为我是Windows,在这里我选择win32,版本我选择最新的3.0.26。我下载的是绿色版，也就是那个zip包，当然只是个人喜好，使用起来安装版和绿色版没有并没有太大的区别。</p>
+<p>安装版双击安装，绿色版直接解压。一切妥当之后在软件路径下会有一个叫做config.txt的文件，这个文件就是我们配置这款软件的地方。</p>
+<h1 id="自动切换代理">自动切换代理</h1>
+<p>用文本编辑器打开config.txt这个文件，搜索“<code>listen-address  127.0.0.1:8118</code>”字段，并跳转到该字段，这个字段表明Privoxy会监听在本机的8118端口，如果你只是在本机上使用privoxy，可以不用管。如果你想让局域网或虚拟机里的电脑也使用你本机上的代理，你可以把<code>127.0.0.1</code>改为<code>0.0.0.0</code>也就是listen-address  <code>127.0.0.1:8118</code>代表可以从任何地址联入，如果你想要监听其他端口，就把8118改为你想要的端口。（在config.txt中字段前面有&rdquo;#&ldquo;代表字段不被识别，也就是说如果你想添加或在原设置上做一些变动，务必保证你修改的字段前没有“#”）</p>
+<p>有一个能够自动将AutoProxy的规则切换成Privoxy规则的脚本autoproxy2privoxy。有了这个脚本我们就容易多了，进入该项目的github页面如果你对Linux很擅长可以按教程安装自己生成一个文件出来。如果你不想生成这里也有那里的脚本，但那个脚本并不能实现代理的自动切换。因此你必须自己手动设置一下。</p>
+<p>首先我们需要搞到AutoProxy的规则文件并设法将其转换成为Privoxy文件，这里我在网上找到了解决方案，需要在Linux环境下才能够成功，另外，那些PAC的地址很可能都无法直接连接成功，所以即使你有Linux虚拟机的话最好能够连接国际互联网保证能够顺利下载下来先，如果你有一台VPS那就再好不过了。我现在在Ubuntu环境下示范。按照作者给的步骤autoproxy2privoxy</p>
+<p>连上服务器并下载该脚本：请按顺序执行以下指令，Ubuntu的指令用橙色来表示，CentOS的指令用紫色来表示。Ubuntu用户复制橙色指令，CentOS用户复制紫色指令。以root身份执行。</p>
+<h1 id="脚本安装">脚本安装</h1>
+<pre><code>sudo apt-get install git -y
+yum install git -y
+</code></pre><h2 id="下载源码">下载源码</h2>
+<pre><code>sudo git clone https://github.com/cckpg/autoproxy2privoxy.git
+git clone https://github.com/cckpg/autoproxy2privoxy.git
+</code></pre><h2 id="定义下载地址">定义下载地址</h2>
+<pre><code>gfwlist=https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt
+</code></pre><h2 id="下载规则文件">下载规则文件</h2>
+<pre><code>sudo wget -qO- &quot;${gfwlist}&quot; | base64 -d &gt; gfwlist.txt
+wget -qO- &quot;${gfwlist}&quot; | base64 -d &gt; gfwlist.txt
+</code></pre><h2 id="提前设置代理信息">提前设置代理信息</h2>
+<p>这个地方没有限制，取决于你用什么样的工具和你的工具监听在什么样的端口，比如说你使用Gae并且使用http方式监听在本机的8080端口，那么你的PROXY_ADDR就应该等于<code>127.0.0.1:8080</code> ;PROXY_TYPE这一栏就应填写HTTP；如果你使用的是代理类型是SOCKS5并且监听的本地的7000端口，你的下列字段就应该分别改成<code>PROXY_ADDR=127.0.0.1:1080 PROXY_TYPE=SOCKS5</code>;值得注意的是，如果你使用TOR的话PROXY_TYPE那一行最好的是填写SOCKS5T。据说这是专门为TOR优化后的选择。</p>
+<pre><code>sudo export PROXY_ADDR=127.0.0.1:1080 PROXY_TYPE=SOCKS5
+export PROXY_ADDR=127.0.0.1:1080 PROXY_TYPE=SOCKS5
+</code></pre><h2 id="给脚本赋权">给脚本赋权</h2>
+<pre><code>sudo chmod +x autoproxy2privoxy
+chmod +x autoproxy2privoxy
+</code></pre><h2 id="执行命令生成文件">执行命令生成文件</h2>
+<p>先执行一下命令进入脚本目录中：</p>
+<pre><code>cd autoproxy2privoxy
+</code></pre><p>然后执行以下指令生成文件：</p>
+<pre><code>sudo bash autoproxy2privoxy gfwlist.txt &gt; gfw.action
+bash autoproxy2privoxy gfwlist.txt &gt; gfw.action
+</code></pre><p>如果成功，你会在该脚本的目录里面看到一个名为gfw.action的文件(如果你试了多次没成功，这里有已经生成好的文件)，此时利用工具把这个文件下载到电脑上来，并放到privoxy的安装路径下，然后进入config.txt里面在最下面添加一行：</p>
+<pre><code>actionsfile gfw.action
+</code></pre><p>然后重新启动privoxy，此时你应该能够实现自动切换代理。</p>
+</article><section class="article labels"><a class="tag" href=/localhost/tags/linux/>Linux</a></section><section class="article navigation"><p><a class="link" href="localhost/posts/centos%E4%BD%BF%E7%94%A8ssh-key%E5%BC%80%E5%90%AF%E7%99%BB%E5%BD%95%E7%9A%84%E7%9B%B8%E5%85%B3%E8%AE%BE%E7%BD%AE/"><span class="li">&larr;</span>CentOS开启密钥登录的相关设置</a></p></section><section class="article discussion"><div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "ellinia-me" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></section></div><section id="footer" class="footer"><div class="footer-wrap">
+    <p class="copyright">@Bazzi</p>
+    <p class="powerby"><span>Powered by </span><a href="https://gohugo.io" 
+        target="_blank">Hugo</a><span> and the </span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+        target="_blank">Notepadium</a></p>
+</div></section><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/&#43;DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l&#43;B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd&#43;qj&#43;o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body);"></script>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-85751090-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+</div>
+</body>
+
+</html>
