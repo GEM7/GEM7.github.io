@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.64.1" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
-<meta name="supported-color-schemes" content="light dark"><title>Project V 负载均衡的两种方法&nbsp;&ndash;&nbsp;Ellinia</title><link rel="stylesheet" href="/ellinia.me/css/core.min.23cf2408a7bbf383778ab163ca01c615250ed41c122a52c02d83618a440898a34d9584fae91a0a2c0da793b5121359c1.css" integrity="sha384-I88kCKe784N3irFjygHGFSUO1BwSKlLALYNhikQImKNNlYT66RoKLA2nk7USE1nB"><link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-icon-57x57.png">
+<meta name="supported-color-schemes" content="light dark"><title>Project V 负载均衡的两种方法&nbsp;&ndash;&nbsp;Ellinia</title><link rel="stylesheet" href="/css/core.min.23cf2408a7bbf383778ab163ca01c615250ed41c122a52c02d83618a440898a34d9584fae91a0a2c0da793b5121359c1.css" integrity="sha384-I88kCKe784N3irFjygHGFSUO1BwSKlLALYNhikQImKNNlYT66RoKLA2nk7USE1nB"><link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-icon-57x57.png">
 <link rel="apple-touch-icon" sizes="60x60" href="/favicons/apple-icon-60x60.png">
 <link rel="apple-touch-icon" sizes="72x72" href="/favicons/apple-icon-72x72.png">
 <link rel="apple-touch-icon" sizes="76x76" href="/favicons/apple-icon-76x76.png">
@@ -20,8 +20,8 @@
 <meta name="theme-color" content="#ffffff">
 <body>
     <div class="base-body"><section id="header" class="site header">
-    <div class="header wrap"><span class="header left-side"><a class="site home" href="/ellinia.me/"><img class="site logo" src="/ellinia.me/images/avatar.png" alt /><span class="site name">Ellinia</span></a></span>
-        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/ellinia.me/tags/">Tags</a></nav></div></span></div></section><div id="content"><section class="article header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><img class="site logo" src="/images/avatar.png" alt /><span class="site name">Ellinia</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/tags/">Tags</a></nav></div></span></div></section><div id="content"><section class="article header">
     <h1 class="article title">Project V 负载均衡的两种方法</h1><p class="article date">2018-01-04</p></section><article class="article markdown-body"><h1 id="前言">前言</h1>
 <p>许多朋友有不只一台的服务器，那么在使用Project V 的过程中，可以通过Project V 本身或者 Haproxy 来实现负载均衡，从而达到均摊流量，减少单个IP连接的时间，从而减少暴露面而降低被封的可能性（可能没有用）。本文将介绍的两种方法。</p>
 <h1 id="利用-project-v-自带的负载均衡">利用 Project V 自带的负载均衡</h1>
@@ -207,7 +207,7 @@ backend v2ray
 <p><a href="https://xstarcd.github.io/wiki/sysadmin/haproxy_confs.html"target="_blank">Haproxy配置范例</a>
 <a href="http://network.51cto.com/art/201108/286178.htm"target="_blank">Haproxy轮询方式介绍</a>
 <a href="https://toutyrater.github.io/app/balance.html"target="_blank">自带负载均衡</a></p>
-</article><section class="article navigation"><p><a class="link" href="ellinia.me/Load-balancing-project-v-by-nginx.html"><span class="li">&larr;</span>使用 Nginx 对 Project V 做负载均衡</a></p><p><a class="link" href="ellinia.me/Use_caddy_to_reverse_proxy_project_v.html"><span class="li">&rarr;</span>使用Caddy反向代理Project V</a></p></section><section class="article discussion"><div id="disqus_thread"></div>
+</article><section class="article navigation"><p><a class="link" href="/Load-balancing-project-v-by-nginx.html"><span class="li">&larr;</span>使用 Nginx 对 Project V 做负载均衡</a></p><p><a class="link" href="/Use_caddy_to_reverse_proxy_project_v.html"><span class="li">&rarr;</span>使用Caddy反向代理Project V</a></p></section><section class="article discussion"><div id="disqus_thread"></div>
 <script type="application/javascript">
     var disqus_config = function () {
     

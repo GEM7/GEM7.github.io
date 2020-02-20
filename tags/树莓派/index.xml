@@ -2,49 +2,49 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>树莓派 on Ellinia</title>
-    <link>ellinia.me/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/</link>
+    <link>/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/</link>
     <description>Recent content in 树莓派 on Ellinia</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>@Bazzi</copyright>
     <lastBuildDate>Thu, 01 Mar 2018 16:11:00 +0000</lastBuildDate>
     
-        <atom:link href="ellinia.me/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>使用 Nginx 对 Project V 做负载均衡</title>
-      <link>ellinia.me/Load-balancing-project-v-by-nginx.html</link>
+      <link>/Load-balancing-project-v-by-nginx.html</link>
       <pubDate>Thu, 01 Mar 2018 16:11:00 +0000</pubDate>
       
-      <guid>ellinia.me/Load-balancing-project-v-by-nginx.html</guid>
+      <guid>/Load-balancing-project-v-by-nginx.html</guid>
       <description>前言 在之前的一篇文章中介绍了两种 Project V 的负载均衡的方式：1. 通过 Project V 自带的负载均衡 2. 通过 Haproxy。 今天来介绍第三种方式：Nginx Nginx 简介</description>
     </item>
     
     <item>
       <title>树莓派安装adbyby去除广告</title>
-      <link>ellinia.me/Use_adbyby_to_block_ads_on_raspberry_pi.html</link>
+      <link>/Use_adbyby_to_block_ads_on_raspberry_pi.html</link>
       <pubDate>Sat, 28 Oct 2017 16:11:00 +0000</pubDate>
       
-      <guid>ellinia.me/Use_adbyby_to_block_ads_on_raspberry_pi.html</guid>
+      <guid>/Use_adbyby_to_block_ads_on_raspberry_pi.html</guid>
       <description>在树莓派上安装adbyby来去除广告 Adbyby是一款广告去除软件，被内置在多个著名的路由器系统中。但是由于路由器的性能因素，adbyby常</description>
     </item>
     
     <item>
       <title>树莓派dnsmasq通过Host文件去除广告</title>
-      <link>ellinia.me/how_to_block_ads_on_gateway_by_host_file.html</link>
+      <link>/how_to_block_ads_on_gateway_by_host_file.html</link>
       <pubDate>Mon, 02 Oct 2017 14:18:41 +0000</pubDate>
       
-      <guid>ellinia.me/how_to_block_ads_on_gateway_by_host_file.html</guid>
+      <guid>/how_to_block_ads_on_gateway_by_host_file.html</guid>
       <description>dnsmasq通过Host文件去除广告 通过host去除广告是比较原始的一种方式，类似于“从源头阻断这样一个思想”，我们会看到广告，是因为加载</description>
     </item>
     
     <item>
       <title>How to set up transparent gateway</title>
-      <link>ellinia.me/How_to_configure_transparent_gateway.html</link>
+      <link>/How_to_configure_transparent_gateway.html</link>
       <pubDate>Fri, 29 Sep 2017 20:01:26 +0000</pubDate>
       
-      <guid>ellinia.me/How_to_configure_transparent_gateway.html</guid>
+      <guid>/How_to_configure_transparent_gateway.html</guid>
       <description>How to configure transparent gateway on Raspberry Pi Troditional transparent proxy methods like &amp;lsquo;to be AP&amp;rsquo; and &amp;lsquo;to be Gateway&amp;rsquo; are almost as the same performance. However, when there isn&amp;rsquo;t any proxy software installed on your device, or the software inn&amp;rsquo;t compatible with your device, a well-configured transparent AP or gateway on an embedded device in order to reach the world. Here comes the procedures. Before we get started, here&amp;rsquo;re</description>
     </item>
     
