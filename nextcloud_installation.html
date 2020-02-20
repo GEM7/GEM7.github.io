@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.64.1" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>Nextcloud 安装教程&nbsp;&ndash;&nbsp;Ellinia</title><link rel="stylesheet" href="/localhost/css/core.min.23cf2408a7bbf383778ab163ca01c615250ed41c122a52c02d83618a440898a34d9584fae91a0a2c0da793b5121359c1.css" integrity="sha384-I88kCKe784N3irFjygHGFSUO1BwSKlLALYNhikQImKNNlYT66RoKLA2nk7USE1nB"><link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/favicons/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/favicons/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/favicons/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/favicons/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/favicons/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/favicons/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/favicons/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/favicons/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicons/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/favicons/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+<body>
+    <div class="base-body"><section id="header" class="site header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/localhost/"><img class="site logo" src="/localhost/images/avatar.png" alt /><span class="site name">Ellinia</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/localhost/tags/">Tags</a></nav></div></span></div></section><div id="content"><section class="article header">
+    <h1 class="article title">Nextcloud 安装教程</h1><p class="article date">2017-08-10</p></section><article class="article markdown-body"><h1 id="nextcloud-教程">Nextcloud 教程</h1>
+<h2 id="简介">简介</h2>
+<blockquote>
+<p>随着国内多家网盘的陆续关停、百度云盘的严重限速、将小电影替换成8秒教育片等等，国内网盘不是阉割就是残废，真的让人寒心，在找不到能放心使用下去的云服务时，我们的数据该怎么办呢？相对简单靠谱的方案有购买 Office 365 用微软的 OneDrive、番·羽·土·啬使用国外的 Dropbox、Google Drive 等、或者购买 NAS 设备。当然，如果你有动手能力，那么还可以用自家/公司的电脑或租用 VPS 服务器来「搭建自己的私有云网盘」！除了介绍过的ownCloud、Syncthing 外，新一代的开源网盘 Nextcloud 同样值得推荐.</p>
+</blockquote>
+<p>下面简要介绍以下安装流程</p>
+<h2 id="hyperapp-服务端配置">HyperApp 服务端配置</h2>
+<ul>
+<li>在安装<code>Nextcloud</code>前，需要先安装<code>Nginx Proxy</code>和<code>Nginx SSL Support</code>和<code>Mysql</code>,前两个的参数不需要变动。（如果之前已经安装了则可不用安装）</li>
+</ul>
+<h3 id="mysql设置">Mysql设置：</h3>
+<ul>
+<li>首先打开HyperApp找到Mysql安装，填写相关配置：</li>
+</ul>
+<pre><code>	 &quot;Version&quot;             选择&quot;latest&quot;
+	 &quot;Root Password&quot;       设置一个Mysql的&quot;Root密码&quot;
+	 &quot;Database&quot;            设置一个数据库名,此处示例为&quot;nextcloud&quot;
+	 &quot;User&quot;                设置一个数据库用户,此处示例为&quot;nextcloud&quot;
+	 &quot;Password&quot;            设置一个数据库密码,此处示例为&quot;nextcloud&quot;
+	 &quot;Port&quot;                此处`留空`
+</code></pre><ul>
+<li>
+<p>其他设置如未说明则保持默认</p>
+</li>
+<li>
+<p>填写完成之后点击最下方的&quot;保存&rdquo;</p>
+</li>
+<li>
+<p>Mysql 配置完成后如下：</p>
+</li>
+</ul>
+<p><!-- raw HTML omitted --></p>
+<h3 id="nextcloud-设置">Nextcloud 设置：</h3>
+<ul>
+<li>首先打开HyperApp在应用中找到Nextcloud,填写相关配置：</li>
+</ul>
+<pre><code>	 &quot;Version&quot;             &quot;latest&quot;
+	 &quot;Port&quot;                此处&quot;留空&quot;
+	 &quot;Data dir&quot;            保持默认
+	 &quot;Link Containers&quot;     选择&quot;Mysql&quot;
+</code></pre><ul>
+<li>再展开&quot;Show Nginx and SSL options&quot;选项</li>
+</ul>
+<pre><code>	 &quot;Custom Domain&quot;       填写&quot;你的域名&quot;
+	 &quot;Port&quot;                此处&quot;留空&quot;
+	 &quot;HTTPS&quot;               推荐选择&quot;Redirect http to https&quot;
+</code></pre><ul>
+<li>再来到&quot;Nginx SSL Support&quot;选项(如果你之前已经通过HyperApp申请好证书则此步骤不需要填写)</li>
+</ul>
+<pre><code>	 &quot;Domain&quot;      填写你的&quot;域名&quot;
+	 &quot;Email&quot;       填写你的&quot;邮箱&quot;
+</code></pre><ul>
+<li>填写完成之后点击最下方的&quot;保存&rdquo;</li>
+</ul>
+<p>全部填写好的示意图如下：</p>
+<p><!-- raw HTML omitted --></p>
+<h2 id="防火墙配置">防火墙配置</h2>
+<ul>
+<li>CentOS</li>
+</ul>
+<pre><code>	firewall-cmd --add-port=80/tcp --permanent
+	firewall-cmd --add-port=443/tcp --permanent
+	firewall-cmd --reload
+</code></pre><ul>
+<li>Ubuntu</li>
+</ul>
+<pre><code>	sudo ufw allow 80
+	sudo ufw allow 443
+</code></pre><h2 id="使用nextcloud">使用Nextcloud</h2>
+<p>打开浏览器，键入你的域名，回车即可看到nextcloud的页面,首先我们需要初始化</p>
+<ul>
+<li>首先要点击屏幕上的&quot;存储&amp;数据库&quot;待其菜单展开后依次配置以下内容</li>
+</ul>
+<pre><code>数据目录                          保持默认
+配置数据库                        选择Mysql/MariaDB
+数据库用户                        填写在Mysql中设置的数据库用户，本教程中为&quot;nextcloud&quot;
+数据库密码                        填写在Mysql中设置的数据库密码，本教程中为&quot;nextcloud&quot;
+数据库名称                        填写在Mysql中设置的数据库名称，本教程中为&quot;nextcloud&quot;
+数据库地址                        本教程中因为之前设置了nextcloud连接到容器mysql，所以这里填mysql(宿主机中的Mysql一般是127.0.0.1)   
+
+</code></pre><p><!-- raw HTML omitted --></p>
+<p>等待初始化完成后，用刚刚创建的账户登陆进去即可。</p>
+<p><!-- raw HTML omitted --></p>
+<p>大功告成！</p>
+<h2 id="客户端教程">客户端教程</h2>
+<h3 id="客户端下载">客户端下载</h3>
+<p>客户端下载地址如下，如果链接失效请前往<a href="https://nextcloud.com/install/"target="_blank">此处</a>到页面右下角下载</p>
+<ul>
+<li><a href="https://nextcloud.com/install/#install-clients"target="_blank">Windows &amp; Mac &amp; Linux</a></li>
+<li><a href="https://play.google.com/store/apps/details?id=com.nextcloud.client"target="_blank">Android</a></li>
+<li><a href="https://itunes.apple.com/us/app/nextcloud/id1125420102?mt=8"target="_blank">IOS</a></li>
+</ul>
+<h3 id="客户端的使用">客户端的使用</h3>
+<p>以Window客户端为例，下载之后进行安装，然后打开。</p>
+<p>在server address中填写你的域名，然后点击下一步</p>
+<p><!-- raw HTML omitted --></p>
+<p>然后输入刚才创建的用户名和密码</p>
+<p><!-- raw HTML omitted --></p>
+<p>然后上面选择相关的设置参数，比如同步大小到多大时通知用户，默认500M，按照自己需求设置，下面选择本地文件夹，选好之后点击完成。</p>
+<p><!-- raw HTML omitted --></p>
+<ul>
+<li>此时配置完成，客户端会最小化到任务栏同时可以看到客户端和云端已经可以看到开始了自动同步，你可以打开所设置的本地文件夹，在里面放一个文件，它便会自动同步到云端。</li>
+</ul>
+<p>大功告成。</p>
+<p><!-- raw HTML omitted --></p>
+<h2 id="后续配置">后续配置</h2>
+<p>如果你想要自己配置相关参数，在右下角通知栏打开Nextcloud然后进行设置即可，这里贴上一个设置代理的方法。</p>
+<pre><code>打开Nextcloud
+选项卡选择&quot;Network&quot;
+在代理设置(Proxy Settings)中 选择&quot;手动指定代理&quot;(Specify proxy manually as)为 &quot;socks5&quot;
+&quot;Host&quot;填写&quot;127.0.0.1&quot;，右侧的方框是填写端口的，一般填写&quot;1080&quot;
+</code></pre><p><!-- raw HTML omitted --></p>
+<p>然后代理即设置完毕，点击关闭即可。</p>
+</article><section class="article labels"><a class="tag" href=/localhost/tags/Linux/>Linux</a></section><section class="article navigation"><p><a class="link" href="localhost/nodebb_forum_installation.html"><span class="li">&larr;</span>NodeBB 搭建教程</a></p><p><a class="link" href="localhost/how_to_compile_bbr_on_centos7.html"><span class="li">&rarr;</span>How to compile BBR on CentOS7</a></p></section><section class="article discussion"><div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "ellinia-me" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></section></div><section id="footer" class="footer"><div class="footer-wrap">
+    <p class="copyright">@Bazzi</p>
+    <p class="powerby"><span>Powered by </span><a href="https://gohugo.io" 
+        target="_blank">Hugo</a><span> and the </span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+        target="_blank">Notepadium</a></p>
+</div></section><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/&#43;DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l&#43;B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd&#43;qj&#43;o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body);"></script>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-85751090-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+</div>
+</body>
+
+</html>

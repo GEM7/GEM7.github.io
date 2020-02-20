@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ellinia</title>
+    <link>localhost/</link>
+    <description>Recent content on Ellinia</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>@Bazzi</copyright>
+    <lastBuildDate>Sun, 08 Jul 2018 08:46:12 +0000</lastBuildDate>
+    
+        <atom:link href="localhost/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Posts</title>
+      <link>localhost/posts/</link>
+      <pubDate>Sun, 08 Jul 2018 08:46:12 +0000</pubDate>
+      
+      <guid>localhost/posts/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

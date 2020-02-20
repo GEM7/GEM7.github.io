@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.64.1" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>CentOS开启密钥登录的相关设置&nbsp;&ndash;&nbsp;Ellinia</title><link rel="stylesheet" href="/localhost/css/core.min.23cf2408a7bbf383778ab163ca01c615250ed41c122a52c02d83618a440898a34d9584fae91a0a2c0da793b5121359c1.css" integrity="sha384-I88kCKe784N3irFjygHGFSUO1BwSKlLALYNhikQImKNNlYT66RoKLA2nk7USE1nB"><link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/favicons/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/favicons/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/favicons/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/favicons/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/favicons/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/favicons/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/favicons/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/favicons/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicons/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/favicons/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+<body>
+    <div class="base-body"><section id="header" class="site header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/localhost/"><img class="site logo" src="/localhost/images/avatar.png" alt /><span class="site name">Ellinia</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/localhost/tags/">Tags</a></nav></div></span></div></section><div id="content"><section class="article header">
+    <h1 class="article title">CentOS开启密钥登录的相关设置</h1><p class="article date">2016-10-16</p></section><article class="article markdown-body"><h1 id="前言">前言</h1>
+<p>使用SSH key 来登录服务器是比较安全的选择之一，本次我想分享给大家一个较为简单的方式来实现Linux服务器的SSH key登录。并且实现禁止密码认证的功能。这样一来，只要保护好私钥，我们的服务器就会相对安全的多。</p>
+<p>环境：CentOS 6.6/6.7/7  ；工具：因为我使用的是putty，为了方便，我使用puttygen.exe 作为生成密钥的工具，大家可以从它的官方站点下载。下面教程开始：</p>
+<p>首先打开puttygen.exe，在最下面一行有一行字：the number of bits of generated key, 默认值为2048， 我们将其更改为4096，然后点击“Generate”；此时我们需要在界面中随意滑动鼠标来生成密钥，生成完成后我们会在上方的对话框中看到一个以 ssh-rsa开头的一大串字符，那个就是我们所要放进服务器里的公钥，为了进一步保证安全，我们可以设置Key passphrase 我们可以把它设成一个稍微简单的密码。这个密码很重要，如果你设置了就要记住它，这相当于你用SSH KEY 登录后的一个另一层的认证密码。丢了很麻烦，当然如果你不设置它，在用SSH key认证的情况下就可以直接登录而不再需要密码。各有利弊，建议还是要设置passphrase。设置完成之后，我们点击&quot;Save pricate key&quot;来保存自己的私钥，注意一定要保管好咯～</p>
+<p>利用putty或者其他你熟悉的工具登录进你的服务器之中。按照以下命令执行（在此处我以CentOS为例，逐条执行，切勿全部复制粘贴）：</p>
+<h1 id="第一步">第一步</h1>
+<p>使用vi编辑器在<code>/root/.ssh</code>目录下创造一个<code>authorized_keys</code>文件，注：如果事先没有新建<code>/.ssh</code>目录那么直接执行指令会保存不了，此时你应该退出vi编辑器，键入 <code>mkdir /root/.ssh</code> 来新建一个目录，然后再执行下列指令</p>
+<pre><code>mkdir -p ~/.ssh
+vi ~/.ssh/authorized_keys
+</code></pre><p>如果你使用的不是root用户，那么以上命令需要做微调，假如你目前使用的用户名是“test”，那么以上命令应该是</p>
+<pre><code>mkdir -p /home/test/.ssh
+vi /home/test/.ssh/authorized_keys
+</code></pre><p>相应地，后续步骤中的命令也应该做调整。</p>
+<h1 id="第二步">第二步</h1>
+<p>然后再复制刚才在<code>puttygen</code>中生成的公钥，把那一大串字符（以ssh-rsa开头的）全部复制到<code>autorized_key</code>，注意复制的时候在vi编辑器中先按下i 编程输入模式，否则直接粘贴进去会窜行。之后再逐条执行以下指令：</p>
+<pre><code>chmod 700 ~/.ssh
+chmod 600 ~/.ssh/authorized_keys
+chown $USER:$USER ~/.ssh -R
+</code></pre><h1 id="第三步">第三步</h1>
+<p>以上指令执行完毕之后，我们已经可以使用密钥登录了，我拿putty作为例子：首先打开putty,先选中你要登录的服务器：然后别着急登录，再左侧一次点开Connection-SSH-Auth，然后再右方有一个“browse”按钮，点击它，然后选中你之前保存的私钥。再返回登录你的服务器，不出问题的话 应该会认证密钥，密钥认证成功后会询问你的passphrase，填入之前生成密钥时设置的passphrase，就可以顺利登陆了。为了安全起见，我们可以关闭密码认证。具体方法如下：</p>
+<h1 id="第四步">第四步</h1>
+<p>打开并编辑sshd_config文件：</p>
+<pre><code>vi /etc/ssh/sshd_config
+</code></pre><p>找到<code>PasswordAuthentication yes</code>这一行，把<code>yes</code>改成<code>no</code></p>
+<pre><code>sed -i s/&quot;PasswordAuthentication yes&quot;/&quot;PasswordAuthentication no&quot;/g /etc/ssh/sshd_config
+</code></pre><p>然后执行</p>
+<pre><code>systemctl restart sshd.service
+</code></pre><p>来刷新一下配置，记得不要把窗口关了，此时再试一下密钥登录，登录成功后再关掉窗口，以免配置失误把自己锁外头，此时应该已经不能用密码登录而只能用SSH key登录了，配置成功。</p>
+</article><section class="article labels"><a class="tag" href=/localhost/tags/Linux/>Linux</a></section><section class="article navigation"><p><a class="link" href="localhost/how-to-boot-into-safe-mode-on-window8.html"><span class="li">&larr;</span>如何在windows8中进入安全模式</a></p><p><a class="link" href="localhost/How_to_configure_privoxy.html"><span class="li">&rarr;</span>Privoxy不完全教程——实现自动切换代理(AutoProxy)与广告屏蔽(AdblockPlus)</a></p></section><section class="article discussion"><div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "ellinia-me" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></section></div><section id="footer" class="footer"><div class="footer-wrap">
+    <p class="copyright">@Bazzi</p>
+    <p class="powerby"><span>Powered by </span><a href="https://gohugo.io" 
+        target="_blank">Hugo</a><span> and the </span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+        target="_blank">Notepadium</a></p>
+</div></section><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/&#43;DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l&#43;B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd&#43;qj&#43;o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body);"></script>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-85751090-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+</div>
+</body>
+
+</html>

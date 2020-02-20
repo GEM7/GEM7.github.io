@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.64.1" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>Project V 负载均衡的两种方法&nbsp;&ndash;&nbsp;Ellinia</title><link rel="stylesheet" href="/localhost/css/core.min.23cf2408a7bbf383778ab163ca01c615250ed41c122a52c02d83618a440898a34d9584fae91a0a2c0da793b5121359c1.css" integrity="sha384-I88kCKe784N3irFjygHGFSUO1BwSKlLALYNhikQImKNNlYT66RoKLA2nk7USE1nB"><link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/favicons/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/favicons/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/favicons/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/favicons/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/favicons/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/favicons/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/favicons/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/favicons/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicons/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/favicons/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+<body>
+    <div class="base-body"><section id="header" class="site header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/localhost/"><img class="site logo" src="/localhost/images/avatar.png" alt /><span class="site name">Ellinia</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/localhost/tags/">Tags</a></nav></div></span></div></section><div id="content"><section class="article header">
+    <h1 class="article title">Project V 负载均衡的两种方法</h1><p class="article date">2018-01-04</p></section><article class="article markdown-body"><h1 id="前言">前言</h1>
+<p>许多朋友有不只一台的服务器，那么在使用Project V 的过程中，可以通过Project V 本身或者 Haproxy 来实现负载均衡，从而达到均摊流量，减少单个IP连接的时间，从而减少暴露面而降低被封的可能性（可能没有用）。本文将介绍的两种方法。</p>
+<h1 id="利用-project-v-自带的负载均衡">利用 Project V 自带的负载均衡</h1>
+<ul>
+<li>本部分内容部分引用自<a href="https://toutyrater.github.io/app/balance.html"target="_blank">白话文教程</a></li>
+</ul>
+<p>此方法不需要任何外部软件，配置简单易用，可以达到分摊流量，较少单个暴露时间的效果。缺点同样存在，那就是只能进行简单的轮询，也就是类似先用“A”，再用“B”，再用“C”然后周而复始的状况，即“A-B-C-A-B-C···”，显得不是特别灵活。此外，如果有一个服务器离线或者不能连接，Project V 也往往不能够自动将其剔除。这样，不仅每次都会出现轮询到不能用的服务器而不能上网，并且它需要人为发现并手动处理，十分不智能。</p>
+<blockquote>
+<p>但还是值得一试</p>
+</blockquote>
+<h2 id="拓扑结构">拓扑结构</h2>
+<pre><code>                      ====&gt; server1
+                      |
+data ====&gt; Project V  ====&gt; server2
+                      |
+                      ====&gt; server3
+</code></pre><h2 id="project-v-配置">Project V 配置</h2>
+<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+  <span class="nt">&#34;inbound&#34;</span><span class="p">:</span> <span class="p">{</span>
+  <span class="err">.</span><span class="err">.</span><span class="err">.</span>
+  <span class="p">}</span><span class="p">,</span>
+  <span class="nt">&#34;outbound&#34;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&#34;protocol&#34;</span><span class="p">:</span> <span class="s2">&#34;vmess&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;settings&#34;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nt">&#34;vnext&#34;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+          <span class="nt">&#34;address&#34;</span><span class="p">:</span> <span class="s2">&#34;address_of_vps1&#34;</span><span class="p">,</span>
+          <span class="nt">&#34;port&#34;</span><span class="p">:</span> <span class="mi">8232</span><span class="p">,</span>
+          <span class="nt">&#34;users&#34;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+              <span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="s2">&#34;1ce383ea-13e9-4939-9b1d-20d67135969a&#34;</span><span class="p">,</span>
+              <span class="nt">&#34;alterId&#34;</span><span class="p">:</span> <span class="mi">64</span>
+            <span class="p">}</span>
+          <span class="p">]</span>
+        <span class="p">}</span><span class="p">,</span>
+        <span class="p">{</span>
+          <span class="nt">&#34;address&#34;</span><span class="p">:</span> <span class="s2">&#34;address_of_vps2&#34;</span><span class="p">,</span>
+          <span class="nt">&#34;port&#34;</span><span class="p">:</span> <span class="mi">4822</span><span class="p">,</span>
+          <span class="nt">&#34;users&#34;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+              <span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="s2">&#34;bc172445-4b5e-49b2-a712-12c5295fd26b&#34;</span><span class="p">,</span>
+              <span class="nt">&#34;alterId&#34;</span><span class="p">:</span> <span class="mi">64</span>
+            <span class="p">}</span>
+          <span class="p">]</span>
+        <span class="p">}</span>
+        <span class="err">/</span><span class="err">/</span><span class="err">如</span><span class="err">果</span><span class="err">还</span><span class="err">有</span><span class="err">更</span><span class="err">多</span><span class="err">服</span><span class="err">务</span><span class="err">器</span><span class="err">可</span><span class="err">继</span><span class="err">续</span><span class="err">添</span><span class="err">加</span>
+      <span class="p">]</span>
+    <span class="p">}</span><span class="p">,</span>
+    <span class="nt">&#34;streamSettings&#34;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="err">.</span><span class="err">.</span><span class="err">.</span>
+    <span class="p">}</span>
+  <span class="p">}</span><span class="p">,</span>
+  <span class="err">.</span><span class="err">.</span><span class="err">.</span>
+<span class="p">}</span>
+</code></pre></div><blockquote>
+<p>如端口、id 这些在 vnext 数组内的配置项可以各不相同，但是它们的传输层配置（streamSettings）必须一致。如果有配置 TLS 的需求，只需申请一个 TLS 证书，然后把证书和密钥复制到所有的 VPS 并配置好 TLS，接着客户端配置里 address 填各个服务器的 IP，在 tlsSettings 的 serverName 填证书的域名。</p>
+</blockquote>
+<p>这样，我们就设置好了负载均衡了，每次新建连接时，它会自动帮我们依次选择服务器来连接。</p>
+<h1 id="利用-haproxy-实现负载均衡">利用 Haproxy 实现负载均衡</h1>
+<p>通过之前的分析，我们可以知道，内置负载均衡的一个很大的缺点，就是不能自动排除已掉线的服务器。那么我们可以换一种思路，利用著名的负载均衡软件 Haproxy 来协助我们完成这项工作。它的优势有很多：1. 它拥有更多的轮询方式，2. 它可以自动排除掉线的服务器。3.拥有WEB管理页面方便我们的管理。</p>
+<p>Haproxy的介绍暂不赘述，它的详细使用方法在<a href="https://xstarcd.github.io/wiki/sysadmin/haproxy_confs.html"target="_blank">这里</a></p>
+<h2 id="拓扑结构-1">拓扑结构</h2>
+<pre><code>                                    ====&gt; server1
+                                    |
+data ====&gt; Project V  ====&gt; Haproxy ====&gt; server2
+                                    |
+                                    ====&gt; server3
+</code></pre><h2 id="haproxy-配置">Haproxy 配置</h2>
+<p>以下贴出简单的配置：</p>
+<pre><code>global
+	ulimit-n 51200
+	log /dev/log local0
+	log /dev/log local1 notice
+	chroot /var/lib/haproxy
+	pidfile /var/run/haproxy.pid
+	user haproxy
+	group haproxy
+	daemon
+
+defaults
+
+	log global
+	mode tcp
+
+	retries	3
+
+	option	dontlognull
+	option	redispatch
+
+	timeout	connect 5s  #上游TCP服务器连接等待时间 
+	timeout	client 24h
+	timeout	server 24h
+
+#以下为Web管理页面设置,如不需要可以删除
+
+listen	admin_stats          
+	bind 0.0.0.0:80
+	mode http
+	log 127.0.0.1 local0 err
+	stats refresh 30s
+	stats uri /haproxy
+	stats realm welcome login\ Haproxy
+	stats auth admin:admin
+	stats hide-version
+	stats admin if TRUE
+
+#以上为Web管理页面设置,如不需要可以删除
+	
+frontend v2ray-in
+
+	mode	tcp
+	bind	0.0.0.0:7777 #Haproxy监听的端口
+	default_backend v2ray
+
+backend v2ray
+
+	mode tcp
+	option	tcp-check 
+	balance roundrobin
+#	balance leastconn
+
+	server v2ray1 服务器1的IP:服务器1的端口 check inter 1000 
+	server v2ray2 服务器2的IP:服务器2的端口 check inter 1000 	
+        server v2ray3 服务器3的IP:服务器3的端口 check inter 1000 
+</code></pre><h2 id="project-v-配置-1">Project V 配置</h2>
+<ul>
+<li>
+<p>如果你没有启用TLS，那么Project 的配置方法和第一种方法中介绍的一样。</p>
+</li>
+<li>
+<p>如果你启用了TLS，那么配置要做调整：只需申请一个 TLS 证书，然后把证书和密钥复制到所有的 VPS 并配置好 TLS，接着客户端配置里 address 填各个服务器的 IP，在 tlsSettings 的 serverName 填证书的域名。</p>
+</li>
+</ul>
+<p>启用了TLS后，Project V 的配置文件如下：</p>
+<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+  <span class="nt">&#34;inbound&#34;</span><span class="p">:</span> <span class="p">{</span>
+  <span class="err">.</span><span class="err">.</span><span class="err">.</span>
+  <span class="p">}</span><span class="p">,</span>
+  <span class="nt">&#34;outbound&#34;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&#34;protocol&#34;</span><span class="p">:</span> <span class="s2">&#34;vmess&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;settings&#34;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nt">&#34;vnext&#34;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+          <span class="nt">&#34;address&#34;</span><span class="p">:</span> <span class="s2">&#34;0.0.0.0&#34;</span><span class="p">,</span> <span class="err">/</span><span class="err">/</span><span class="err">H</span><span class="err">a</span><span class="err">p</span><span class="err">r</span><span class="err">o</span><span class="err">x</span><span class="err">y</span><span class="err">监</span><span class="err">听</span><span class="err">的</span><span class="err">地</span><span class="err">址</span>
+          <span class="nt">&#34;port&#34;</span><span class="p">:</span> <span class="mi">7777</span><span class="p">,</span>         <span class="err">/</span><span class="err">/</span><span class="err">H</span><span class="err">a</span><span class="err">p</span><span class="err">r</span><span class="err">o</span><span class="err">x</span><span class="err">y</span><span class="err">监</span><span class="err">听</span><span class="err">的</span><span class="err">端</span><span class="err">口</span>
+          <span class="nt">&#34;users&#34;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+              <span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="s2">&#34;1ce383ea-13e9-4939-9b1d-20d67135969a&#34;</span><span class="p">,</span>
+              <span class="nt">&#34;alterId&#34;</span><span class="p">:</span> <span class="mi">64</span>
+            <span class="p">}</span>
+          <span class="p">]</span>
+        <span class="p">}</span>
+      <span class="p">]</span>
+    <span class="p">}</span><span class="p">,</span>
+    <span class="nt">&#34;streamSettings&#34;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&#34;tlsSettings&#34;</span><span class="p">:</span><span class="p">{</span>
+                <span class="nt">&#34;serverName&#34;</span><span class="p">:</span><span class="s2">&#34;TLS证书对应的域名&#34;</span><span class="p">,</span>
+                <span class="nt">&#34;allowInsecure&#34;</span><span class="p">:</span><span class="kc">true</span>
+        <span class="p">}</span><span class="p">,</span>
+
+    <span class="err">.</span><span class="err">.</span><span class="err">.</span>
+    <span class="p">}</span>
+  <span class="p">}</span><span class="p">,</span>
+  <span class="err">.</span><span class="err">.</span><span class="err">.</span>
+<span class="p">}</span>
+</code></pre></div><p>此时，Haproxy 配置中的,服务器端口应指定为443，即：</p>
+<pre><code>···
+backend v2ray
+
+	mode tcp
+	option	tcp-check 
+	balance roundrobin
+#	balance leastconn
+
+	server v2ray1 服务器1的IP:443 check inter 1000 
+	server v2ray2 服务器2的IP:443 check inter 1000 	
+        server v2ray3 服务器3的IP:443 check inter 1000
+··· 
+</code></pre><p>如此以来我们就成功借助Haproxy实现了负载均衡，并且可以除了简单轮询外还可以实现，加权，自动排除掉线服务器等功能。</p>
+<h1 id="写在最后">写在最后</h1>
+<p>以上两种方法都已经介绍完毕，如果需要使用一些Haproxy的其他功能，可以参考参考文献列出的一些文章。</p>
+<h1 id="参考文献">参考文献</h1>
+<p><a href="https://xstarcd.github.io/wiki/sysadmin/haproxy_confs.html"target="_blank">Haproxy配置范例</a>
+<a href="http://network.51cto.com/art/201108/286178.htm"target="_blank">Haproxy轮询方式介绍</a>
+<a href="https://toutyrater.github.io/app/balance.html"target="_blank">自带负载均衡</a></p>
+</article><section class="article navigation"><p><a class="link" href="localhost/Load-balancing-project-v-by-nginx.html"><span class="li">&larr;</span>使用 Nginx 对 Project V 做负载均衡</a></p><p><a class="link" href="localhost/Use_caddy_to_reverse_proxy_project_v.html"><span class="li">&rarr;</span>使用Caddy反向代理Project V</a></p></section><section class="article discussion"><div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "ellinia-me" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></section></div><section id="footer" class="footer"><div class="footer-wrap">
+    <p class="copyright">@Bazzi</p>
+    <p class="powerby"><span>Powered by </span><a href="https://gohugo.io" 
+        target="_blank">Hugo</a><span> and the </span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+        target="_blank">Notepadium</a></p>
+</div></section><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/&#43;DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l&#43;B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd&#43;qj&#43;o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body);"></script>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-85751090-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+</div>
+</body>
+
+</html>

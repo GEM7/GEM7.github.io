@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.64.1" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>How to set up transparent gateway&nbsp;&ndash;&nbsp;Ellinia</title><link rel="stylesheet" href="/localhost/css/core.min.23cf2408a7bbf383778ab163ca01c615250ed41c122a52c02d83618a440898a34d9584fae91a0a2c0da793b5121359c1.css" integrity="sha384-I88kCKe784N3irFjygHGFSUO1BwSKlLALYNhikQImKNNlYT66RoKLA2nk7USE1nB"><link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/favicons/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/favicons/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/favicons/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/favicons/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/favicons/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/favicons/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/favicons/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/favicons/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicons/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/favicons/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+<body>
+    <div class="base-body"><section id="header" class="site header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/localhost/"><img class="site logo" src="/localhost/images/avatar.png" alt /><span class="site name">Ellinia</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/localhost/tags/">Tags</a></nav></div></span></div></section><div id="content"><section class="article header">
+    <h1 class="article title">How to set up transparent gateway</h1><p class="article date">2017-09-29</p></section><article class="article markdown-body"><h1 id="how-to-configure-transparent-gateway-on-raspberry-pi">How to configure transparent gateway on Raspberry Pi</h1>
+<blockquote>
+<p>Troditional transparent proxy methods like &lsquo;to be AP&rsquo; and &lsquo;to be Gateway&rsquo; are almost as the same performance. However, when there isn&rsquo;t any proxy software installed on your device, or the software inn&rsquo;t compatible with your device, a well-configured transparent AP or gateway on an embedded device in order to reach the world. Here comes the procedures.</p>
+</blockquote>
+<p>Before we get started, here&rsquo;re some tool I use and recommend:</p>
+<ul>
+<li>Raspberry Pi 3B</li>
+<li>Reliable cables</li>
+<li>Reliable power source</li>
+<li>A computer</li>
+</ul>
+<h1 id="install-dependency">Install dependency</h1>
+<h2 id="open-two-dokodemo-doors-at-inbound-settings">open two dokodemo-doors at inbound settings</h2>
+<p>one for redirecting requests, another one for DNS querying. Dokodemo-door is a very convenient function of v2ray that can drive your traffic to where you want to visit through your foreign server with v2ray installed. You would need <a href="https://github.com/darkk/redsocks"target="_blank">redsocks</a> to receive those traffics that are redirected to it and convert them from protocol http to pro socks, then the proxy softwares will be able to handle the requests. But dokodemo-door has been combained the two parts mentioned privious into one part. Which means you don&rsquo;t have to care about the protocol convertion, the only thing you need to do is to write iptables rules. For more about dokodemo-door, go to <a href="https://www.v2ray.com/chapter_02/protocols/dokodemo.html"target="_blank">here</a>.</p>
+<p>Add code blocks to your <code>config.json</code> like the following，The first one is to be set as transparent proxy, you can see it will listen to port 1111, which means you will send your traffic to this port by iptables to go aboard.</p>
+<p>The second one which listen to port 5353 localhost is uesd to handle DNS query requests sent by dnsmasq, important ditto.</p>
+<pre><code>{
+	&quot;domainOverride&quot;: [&quot;http&quot;, &quot;tls&quot;],
+	&quot;protocol&quot;:&quot;dokodemo-door&quot;,
+	&quot;port&quot;:1111,
+	&quot;settings&quot;:{
+		&quot;network&quot;:&quot;tcp,udp&quot;,
+		&quot;timeout&quot;:30,
+		&quot;followRedirect&quot;:true
+	}
+},
+{
+	&quot;protocol&quot;:&quot;dokodemo-door&quot;,
+	&quot;port&quot;:5353,
+	&quot;listen&quot;:&quot;127.0.0.1&quot;,
+	&quot;settings&quot;:{
+		&quot;port&quot;:53,
+		&quot;address&quot;:&quot;8.8.8.8&quot;,
+		&quot;network&quot;:&quot;udp&quot;,
+		&quot;timeout&quot;:0,
+		&quot;followRedirect&quot;:false
+		}
+}
+</code></pre><h2 id="install-dnsmasq">Install dnsmasq</h2>
+<p>dnsmasq is a self-managed dns software which can prevent DNS Pollution, it has been highly recommended by many of those professionals.</p>
+<p>type two commands listed below to install dnsmasq.</p>
+<pre><code>sudo apt install dnsmasq
+mkdir -p /etc/dnsmasq.d
+</code></pre><p>add this line<code>conf-dir=/etc/dnsmasq.d</code> to tail of dnsmasq configuration file at <code>/etc/dnsmasq.conf</code> to set another directory to store those who are needed to query via google public DNS.</p>
+<pre><code>cat 'conf-dir=/etc/dnsmasq.d' &gt;&gt; /etc/dnsmasq.conf
+</code></pre><h2 id="configure-query-rules">Configure query rules</h2>
+<p>gfwlist2dnsmasq is a tool that can transfer gfwlist to dnsmasq related configuration file. Do the following to install that.</p>
+<pre><code>git clone https://github.com/cokebar/gfwlist2dnsmasq.git
+cd gfwlist2dnsmasq
+chmod +x gfwlist2dnsmasq.sh
+./gfwlist2dnsmasq.sh -o gfwlist.conf -s gfwlist
+cp gfwlist.conf /etc/dnsmasq.d/
+</code></pre><p>This will make gfwlist&rsquo;s domain be queried at 127.0.0.1:5353,as same as quering at 8.8.8.8 directly，which means it can prevent getting wrong results.</p>
+<h2 id="install-ipset">Install ipset</h2>
+<p>IP sets are a framework inside the Linux kernel, which can be administered by the ipset utility. Depending on the type, an IP set may store IP addresses, networks, (TCP/UDP) port numbers, MAC addresses, interface names or combinations of them in a way, which ensures lightning speed when matching an entry against a set.</p>
+<pre><code>apt-get install ipset -y
+</code></pre><h3 id="set-blacklist">Set blacklist</h3>
+<p>Blacklist is so called gfwlist. It&rsquo;s a list maintained by volunteers which include websites blocked in China.</p>
+<pre><code> ipset -N gfwlist iphash
+</code></pre><h3 id="set-whitelist">Set whitelist</h3>
+<p>Whitelist includes all China IP address blocks.</p>
+<pre><code> ipset -N chnroute hash:net maxelem 65536
+
+ curl 'http://ftp.apnic.net/apnic/stats/apnic/delegated-apnic-latest' | grep ipv4 | grep CN | awk -F\| '{ printf(&quot;%s/%d\n&quot;, $4, 32-log($5)/log(2)) }' &gt; chnroute.txt
+
+ ipset add chnroute 1.0.1.0/24
+ ipset add chnroute 1.0.2.0/23
+ ipset add chnroute 1.0.8.0/21
+ ipset add chnroute 1.0.32.0/19
+ ipset add chnroute 1.1.0.0/24
+</code></pre><p>Then write a shell script to import IP address from chnroute.txt to <code>chnroute</code> set in ipset.</p>
+<pre><code>vim set-ipset.sh
+</code></pre><p>paste these into set-ipset.sh</p>
+<pre><code> #!/bin/bash
+ for ip in $(cat '/root/chnroute.txt'); do
+    ipset add chnroute $ip
+ done
+</code></pre><p>Then do</p>
+<pre><code>chmod +x set-ipset.sh
+./set-ipset.sh
+</code></pre><h1 id="ready-to-run">Ready to run</h1>
+<p>Now one last step to finish, you have two choices. Running as blacklist mode is for one, in which the server will be able to match the blocked IP addresses and visit them via proxy automatically. For another is the mode of whitelist, it offten could be smoothly then previous one, the traffic will be return to the default route, once non-china IP address are matched, traffic to this IP address will be driven to proxy port.</p>
+<ul>
+<li>WARNING: YOU CAN ONLY CHOOSE ONE OF TWO OPTIONS!</li>
+</ul>
+<h2 id="option-1-running-as-blacklist-mode">OPTION 1: Running as blacklist mode</h2>
+<pre><code>  iptables -t nat -A PREROUTING -p tcp -m set --match-set gfwlist dst -j REDIRECT --to-port 1111
+  iptables -t nat -A OUTPUT -p tcp -m set --match-set gfwlist dst -j REDIRECT --to-port 1111
+</code></pre><h2 id="option-2-running-as-whitelist-mode">OPTION 2: Running as whitelist mode</h2>
+<pre><code>  iptables -t nat -A PREROUTING -p udp --dport 53 -j RETURN
+  iptables -t nat -A PREROUTING -p tcp -m set ! --match-set chnroute dst -j REDIRECT --to-port 1111
+  iptables -t nat -A OUTPUT -p udp --dport 53 -j RETURN
+  iptables -t nat -A OUTPUT -p tcp -d  Your proxy IP address -j RETURN
+  iptables -t nat -A OUTPUT -p tcp -m set ! --match-set chnroute dst -j REDIRECT --to-port 1111
+</code></pre><h2 id="check-out-and-flush-iptables-settings">Check out and flush iptables settings</h2>
+<p>To check out current iptables settings, do</p>
+<pre><code>iptables -t nat -L
+</code></pre><p>If you set iptables by wrong, just type there to flush it.</p>
+<pre><code>iptables -t nat -F
+</code></pre><h1 id="backup-and-restore-ipsets-and-iptables">Backup and restore ipsets and iptables</h1>
+<p>ipset and iptables will be flushed automatically by default, if you want to restore it everytime after reboot finished. Do as the following</p>
+<ul>
+<li><strong>backup</strong></li>
+</ul>
+<pre><code>iptables-save &gt; /etc/iptables-backup
+ipset-save &gt; /etc/ipset-backup
+</code></pre><ul>
+<li><strong>restore</strong>
+You must restore ipset after reboot</li>
+</ul>
+<pre><code>iptables-restore &lt; /etc/iptables-backup
+ipset-restore &lt; /etc/ipset-backup
+</code></pre><ul>
+<li><strong>All done</strong></li>
+</ul>
+<p>Change the gateway address and DNS address to your embedded divice&rsquo;s ip address and you a good to go!</p>
+<h1 id="extra-settings-if-needed">Extra Settings if needed</h1>
+<h2 id="set-a-static-ip-address-for-gateway">Set a static IP address for gateway</h2>
+<p>if you want to set a static ip address for PI, edit <code>/etc/dhcpcd.conf</code> the append the following scripts and save.</p>
+<pre><code>interface eth0
+static ip_address=192.168.1.100/24
+static routers=192.168.1.1
+static domain_name_servers=192.168.1.1
+</code></pre><ul>
+<li>the IP address, routers and DNS server must be set according your local network settings, do not copy &amp; paste it anyway.</li>
+</ul>
+<h2 id="set-the-default-gateway-and-dns-of-you-main-router">Set the default gateway and DNS of you main router</h2>
+<p>if you want to be proxied automatically once connected to router, you may need make some extra settings on you main router.</p>
+<p>go to the control panel of your router, (visit 192.168.1.1  by default), then find the <code>DHCP settings</code>, set the <code>gateway</code> to your PI&rsquo;s IP address, set the DNS to your PI&rsquo;s address, too. Save and quit.</p>
+<ul>
+<li>Then you will get a automatic transparent gateway, while you connect to the WIFI, you will be able to touch the world without any extra settings.</li>
+</ul>
+<h1 id="references">References</h1>
+<p><a href="https://0x32.tk/2017/06/26/v2ray&#43;dnsmasq%E6%90%AD%E5%BB%BA%E9%80%8F%E6%98%8E%E4%BB%A3%E7%90%86%E7%BD%91%E5%85%B3/"target="_blank">1</a>
+<a href="https://yuln.com/thread-30-1-1.html"target="_blank">2</a>
+<a href="https://www.raspberrypi.org/forums/viewtopic.php?f=28&amp;t=134190"target="_blank">3</a></p>
+</article><section class="article labels"><a class="tag" href=/localhost/tags/Linux/>Linux</a><a class="tag" href=/localhost/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/>树莓派</a></section><section class="article navigation"><p><a class="link" href="localhost/how_to_block_ads_on_gateway_by_host_file.html"><span class="li">&larr;</span>树莓派dnsmasq通过Host文件去除广告</a></p><p><a class="link" href="localhost/nodebb_forum_installation.html"><span class="li">&rarr;</span>NodeBB 搭建教程</a></p></section><section class="article discussion"><div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "ellinia-me" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></section></div><section id="footer" class="footer"><div class="footer-wrap">
+    <p class="copyright">@Bazzi</p>
+    <p class="powerby"><span>Powered by </span><a href="https://gohugo.io" 
+        target="_blank">Hugo</a><span> and the </span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+        target="_blank">Notepadium</a></p>
+</div></section><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/&#43;DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l&#43;B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd&#43;qj&#43;o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body);"></script>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-85751090-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+</div>
+</body>
+
+</html>

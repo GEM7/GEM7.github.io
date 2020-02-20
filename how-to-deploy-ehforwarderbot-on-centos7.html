@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.64.1" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>“在Telegram上实现微信收发”——EHForwarderBot搭建指南&nbsp;&ndash;&nbsp;Ellinia</title><link rel="stylesheet" href="/localhost/css/core.min.23cf2408a7bbf383778ab163ca01c615250ed41c122a52c02d83618a440898a34d9584fae91a0a2c0da793b5121359c1.css" integrity="sha384-I88kCKe784N3irFjygHGFSUO1BwSKlLALYNhikQImKNNlYT66RoKLA2nk7USE1nB"><link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/favicons/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/favicons/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/favicons/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/favicons/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/favicons/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/favicons/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/favicons/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/favicons/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicons/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/favicons/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+<body>
+    <div class="base-body"><section id="header" class="site header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/localhost/"><img class="site logo" src="/localhost/images/avatar.png" alt /><span class="site name">Ellinia</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/localhost/tags/">Tags</a></nav></div></span></div></section><div id="content"><section class="article header">
+    <h1 class="article title">“在Telegram上实现微信收发”——EHForwarderBot搭建指南</h1><p class="article date">2017-05-18</p></section><article class="article markdown-body"><h1 id="前言">前言</h1>
+<blockquote>
+<p>EHForwarderBot是一个开源项目，利用Telegram中的Bot来实现在Telegram上收发微信消息的效果。本文参考了<a href="https://ehforwarderbot.readthedocs.io/en/latest/"target="_blank">官方文档</a>中的相关指引，并综合网上所能查到的<a href="https://blog.1a23.com/2017/01/09/EFB-How-to-Send-and-Receive-Messages-from-WeChat-on-Telegram-zh-CN/"target="_blank">资料</a>在CentOS7上搭建成功，希望能帮助到想在CentOS7上搭建该服务的朋友们。（THForwarderBot以下简称TFB）</p>
+</blockquote>
+<h1 id="准备工作">准备工作</h1>
+<p>此程序会调用Telegram中的BOT，因此你需要在telegram中事先申请一个BOT，具体教程详见<a href="https://blog.1a23.com/2017/01/09/EFB-How-to-Send-and-Receive-Messages-from-WeChat-on-Telegram-zh-CN/"target="_blank">作者博文</a>的0x030章节</p>
+<h1 id="设置目录并安装">设置目录并安装</h1>
+<p>首先安装git，并进入到你想要安装EHForwarderBot的目录，当然可以在~目录下直接安装，此处我选择把它放在/usr/local目录下</p>
+<pre><code>yum install git -y
+cd /usr/local
+git clone https://github.com/blueset/ehForwarderBot.git
+cd ehForwarderBot
+</code></pre><p>进入该目录后再新建一个文件夹来存放日后运行EFB时所要处理的信息</p>
+<pre><code>mkdir storage
+chmod +rw /usr/local/storage
+</code></pre><h1 id="安装依赖">安装依赖</h1>
+<h2 id="安装python36">安装Python3.6</h2>
+<pre><code>cd ~
+yum install -y https://centos7.iuscommunity.org/ius-release.rpm
+yum update -y
+yum install -y python36u python36u-libs python36u-devel python36u-pip python36u-setuptools
+which -a python3.6
+
+</code></pre><p>运行完成后再shell中键入python3.6看能否进入python，如果能则进入下一步，如果显示路径错误则编辑~/bashrc文件<code>vi ~/.bashrc</code>在其中键入<code>python3.6='/usr/bin/python3.6'</code>退出vi编辑器并在shell下键入<code>source ~/.bashrc</code>保存更改</p>
+<h2 id="安装非python依赖项">安装非Python依赖项</h2>
+<pre><code>sudo rpm --import http://li.nux.ro/download/nux/RPM-GPG-KEY-nux.ro
+</code></pre><pre><code>sudo rpm -Uvh http://li.nux.ro/download/nux/dextop/el7/x86_64/nux-dextop-release-0-5.el7.nux.noarch.rpm
+</code></pre><pre><code>yum install -y libwebp-devel file-devel ffmpeg 
+</code></pre><h2 id="后续配置">后续配置</h2>
+<pre><code>cd /usr/local/ehForwarderBot/ 
+pip3.6 install -r requirements.txt
+cp config.sample.py config.py
+vi config.py
+</code></pre><p>配置文件援引<a href="https://blog.1a23.com/2017/01/09/EFB-How-to-Send-and-Receive-Messages-from-WeChat-on-Telegram-zh-CN/"target="_blank">作者博客</a>0x31的内容。其中token填写刚刚申请到的BOT密钥。admins填写你的telegramID。ID的获取可以<a href="https://t.me/get_id_bot"target="_blank">@get_id_bot</a> 发送 /start来获得。</p>
+<pre><code># ##############################
+#  Configs for EH Forwarder Bot
+# ##############################
+#
+#  Basic settings
+# ----------------
+#
+# Master/Slave Channels
+#
+# Master channel:
+# The channel that is mainly used to view/manage messages
+# from slave channels.
+# Currently only 1 master channel is supported.
+#
+# Slave channels:
+# Channels that are hosted on the server and being delivered
+# to and from the master channel.
+# You may have more than 1 slave channel.
+#
+master_channel = 'plugins.eh_telegram_master', 'TelegramChannel'
+slave_channels = [('plugins.eh_wechat_slave', 'WeChatChannel')]
+#
+#  Plugin specific settings
+# --------------------------
+# Plugin specific settings should be written below in the format of:
+# `channel_name = {&quot;key1&quot;: &quot;value1&quot;, &quot;key2&quot;: &quot;value2&quot;}`
+# Please refer to docs of individual plugin for details
+#
+eh_telegram_master = {
+    &quot;token&quot;: &quot;12345678:QWFPGJLUYarstdheioZXCVBKM&quot;,
+    &quot;admins&quot;: [123456789]
+}
+</code></pre><h1 id="启动服务">启动服务</h1>
+<p>进入EHB的目录，键入以下命令以开启服务</p>
+<pre><code>python3.6 daemon.py start
+</code></pre><p>然后会弹出二维码，扫码即可。</p>
+<h1 id="参考文献">参考文献</h1>
+<p><a href="https://ehforwarderbot.readthedocs.io/en/latest/">https://ehforwarderbot.readthedocs.io/en/latest/</a>
+<a href="https://blog.1a23.com/2017/01/09/EFB-How-to-Send-and-Receive-Messages-from-WeChat-on-Telegram-zh-CN/">https://blog.1a23.com/2017/01/09/EFB-How-to-Send-and-Receive-Messages-from-WeChat-on-Telegram-zh-CN/</a></p>
+</article><section class="article labels"><a class="tag" href=/localhost/tags/Linux/>Linux</a></section><section class="article navigation"><p><a class="link" href="localhost/posts/Linux-shell-fragments/"><span class="li">&larr;</span>Linux shell 剪藏</a></p><p><a class="link" href="localhost/fix-the-problem-of-disappearing-of-volume-icon-on-windows.html"><span class="li">&rarr;</span>Windows任务栏音量电量等图标消失的解决方法</a></p></section><section class="article discussion"><div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "ellinia-me" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></section></div><section id="footer" class="footer"><div class="footer-wrap">
+    <p class="copyright">@Bazzi</p>
+    <p class="powerby"><span>Powered by </span><a href="https://gohugo.io" 
+        target="_blank">Hugo</a><span> and the </span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+        target="_blank">Notepadium</a></p>
+</div></section><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/&#43;DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l&#43;B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd&#43;qj&#43;o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body);"></script>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-85751090-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+</div>
+</body>
+
+</html>

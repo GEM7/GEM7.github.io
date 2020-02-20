@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.64.1" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>树莓派启用看门狗&nbsp;&ndash;&nbsp;Ellinia</title><link rel="stylesheet" href="/localhost/css/core.min.23cf2408a7bbf383778ab163ca01c615250ed41c122a52c02d83618a440898a34d9584fae91a0a2c0da793b5121359c1.css" integrity="sha384-I88kCKe784N3irFjygHGFSUO1BwSKlLALYNhikQImKNNlYT66RoKLA2nk7USE1nB"><link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/favicons/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/favicons/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/favicons/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/favicons/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/favicons/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/favicons/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/favicons/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/favicons/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicons/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/favicons/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+<body>
+    <div class="base-body"><section id="header" class="site header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/localhost/"><img class="site logo" src="/localhost/images/avatar.png" alt /><span class="site name">Ellinia</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/localhost/tags/">Tags</a></nav></div></span></div></section><div id="content"><section class="article header">
+    <h1 class="article title">树莓派启用看门狗</h1><p class="article date">2017-10-16</p></section><article class="article markdown-body"><h1 id="树莓派启用看门狗防止死机">树莓派启用看门狗防止死机</h1>
+<blockquote>
+<p>树莓派是一款性价比不错的设备。它可以当作一台性能够用的Linux主机，其最大额优势是功耗低，大部分人都可以可以接受树莓派的长时间运行。但是在我使用树莓派的一段时间内出现了几次系统崩溃的情况，并且因为使用它作为网关，所以一旦崩溃的话局域网内所有的设备就将无法上网，而每次非要到不能上网时才能发现。另外，树莓派放在远处，每次死机后都得走过去找到它断掉再开机，频繁在运行时断掉会对TF卡造成不好影响。后来在网上搜索到一种解决方案，那就是看门狗。很幸运树莓派自带硬件看门狗，不需要额外搭建电路，不过网上直接搜索到的教程大都已经过期，不过经过一番周折，终于搭建成功。</p>
+</blockquote>
+<p>看门狗被广泛应用在自动化控制领域，大部分需要长时间不间断运行的设备几乎都配备有看门狗电路。当系统正常运行时，我们可以设定每分钟给看门狗发送一个脉冲信号，这个动作可以叫做“喂狗“，只要系统不出故障，就会自动不停得喂狗，而看门狗只要被定期投喂，就相安无事。一旦系统故障，投喂的动作就会中断，看门狗突然没东西吃了就会来咬你，让你清醒过来。让系统清醒的直接体现就是重新启动。(比方可能不恰当，但大概是这个意思)</p>
+<p>如果我设置一个看门狗，当树莓派无法ping通路由器；内存占满；或者温度过高时自动重启，那么我就不用再人工干预了。</p>
+<p>树莓派搭载的这颗博通CPU自带有硬件看门狗，用起来更加方便顺手，以下是流程。</p>
+<h1 id="启用硬件看门狗设备">启用硬件看门狗设备</h1>
+<p>树莓派的硬件看门狗默认是不启用的，首先需要在系统配置文件中写入相关字段来开启它。</p>
+<ul>
+<li>编辑系统配置文件</li>
+</ul>
+<pre><code>sudo vi /boot/config.txt
+</code></pre><ul>
+<li>把下面这一行加到整个文件的底部</li>
+</ul>
+<pre><code>activating the hardware watchdog
+dtparam=watchdog=on
+</code></pre><p>添加完成以后保存，并退出。然后重启树莓派，待重启完成后，查看设备列表会发现里面多出两个名字分别是&rsquo;watchdog'和&rsquo;watchdog0'的看门狗设备，这代表硬件已经启用成功</p>
+<pre><code>pi@raspi-tst:~ $ ls -al /dev/watchdog*
+crw------- 1 root root  10, 130 May 19 07:09 /dev/watchdog
+crw------- 1 root root 253,   0 May 19 07:09 /dev/watchdog0
+</code></pre><p>看起来似乎有两个看门狗，但是实际上只有一个可以用，不过他们彼此之间有关联，不过这不影响。我们进入下一步。</p>
+<h1 id="安装看门狗软件">安装看门狗软件</h1>
+<ul>
+<li>输入以下命令来安装看门狗</li>
+</ul>
+<pre><code>sudo apt-get install watchdog -y 
+</code></pre><p>在以前的版本中，看门狗的配置文件位于<code>/etc/modprobe.d/watchdog.conf) </code>，但是现在今非昔比，一些老教程中已经过时，目前的配置文件在这个位置<code>/etc/watchdog.conf </code></p>
+<ul>
+<li>编辑配置文件</li>
+</ul>
+<pre><code>vi /etc/watchdog.conf
+</code></pre><p>因为我使用树莓派当作网关，我的需求就是ping不通路由器时自动重启，此时的设置应该是添加一条<code>ping 192.168.1.1</code>, 另外我还需要在内存沾满时自动重启，机器同时开启的进程太多时也重启。并且还要保证以上时间发生后15秒钟执行。于是我的配置可以是这样</p>
+<pre><code>ping=192.168.1.1
+max-load-1 = 24
+min-memory = 1
+watchdog-device = /dev/watchdog
+watchdog-timeout=15
+</code></pre><p>如果你还有其他的需求，请对照以下这个表来选择，需要的功能就取消在其开头的注释符（&quot;#&ldquo;号），不需要的功能就在前面添加上井号来注释掉</p>
+<pre><code>#以下是一些默认的配置范例
+
+#ping                   = 172.31.14.1
+#ping                   = 172.26.1.255
+#interface              = eth0
+#file                   = /var/log/messages
+#change                 = 1407
+
+# 如果要使能，请去掉行前的注释标号，设置其中一个的值为0来禁用
+# 这些值应设定为在正常使用期间不会重启你的设备的值
+# (如果你的机器真的死机了，平均载入进程量应该超过25)
+
+#max-load-m=n表示在m分钟内开超过n个进程的时候重启
+
+max-load-1              = 24
+#max-load-5             = 18
+#max-load-15            = 12
+
+# 注意这是内存分页的数量
+# 请检查你的机器的分页大小以获取真实的大小
+
+#最小剩余内存，保持默认即可
+#min-memory             = 1
+
+#最小可分配内存
+#allocatable-memory     = 1
+#repair-binary          = /usr/sbin/repair
+#repair-timeout         =
+#test-binary            =
+#test-timeout           =
+
+#选择看门狗设备，这里用默认值
+
+watchdog-device = /dev/watchdog
+
+# 已经编译进二进制文件的默认值
+#这个文件里面的内容就是CPU温度（摄氏温标）的一千倍
+
+temperature-device      = /sys/class/thermal/thermal_zone0/temp
+
+#设定为重置温度的一千倍(比如要满80度重启则设置成800000)
+
+# max-temperature = 80000
+
+# 已经编译进二进制文件的默认值
+#admin                  = root
+#interval               = 1
+#logtick                = 1
+#log-dir                = /var/log/watchdog
+
+# 这极大地减少了在你的机器真正加载完成前看门狗不被列入进程表的几率
+realtime                = yes
+priority                = 1
+# 使能下面这行来检查rsyslogd是否仍然在运行
+#pidfile                = /var/run/rsyslogd.pid
+</code></pre><ul>
+<li>注意：在配置文件中务必有<code>watchdog-timeout=15</code>这一行，如果没有这一行，会报以下错误：</li>
+</ul>
+<blockquote>
+<p>cannot set timeout 60 (errno = 22 = &lsquo;Invalid argument&rsquo;)</p>
+</blockquote>
+<p>它似乎是设置在某个地方的一个默认值，但它是错的，也可能是个BUG。因为树莓派MBC的最大时延是15秒。</p>
+<h1 id="启用看门狗">启用看门狗</h1>
+<h2 id="启动">启动</h2>
+<p>看门狗有多种启动方式，这里使用systemd来启动</p>
+<pre><code>sudo systemctl start watchdog
+</code></pre><h2 id="查询状态">查询状态</h2>
+<p>在启动完成后键入以下命令来查询状态：</p>
+<pre><code>sudo systemctl status watchdog
+</code></pre><p>正常情况可以看到以下内容：</p>
+<pre><code>pi@raspi-server:~ $ sudo systemctl status watchdog
+● watchdog.service - watchdog daemon
+Loaded: loaded (/lib/systemd/system/watchdog.service; static)
+Active: active (running) since Thu 2016-05-19 21:04:47 CEST; 33min ago
+Process: 627 ExecStart=/bin/sh -c [ $run_watchdog != 1 ] || exec /usr/sbin/watchdog $watchdog_options (code=exited, status=0/SUCCESS)
+Process: 623 ExecStartPre=/bin/sh -c [ -z &quot;${watchdog_module}&quot; ] || [ &quot;${watchdog_module}&quot; = &quot;none&quot; ] || /sbin/modprobe $watchdog_module (code=exited, status=0/SUCCESS)
+Main PID: 632 (watchdog)
+CGroup: /system.slice/watchdog.service
+└─632 /usr/sbin/watchdog
+
+May 19 21:04:47 raspi-server watchdog[632]: int=1s realtime=yes sync=no soft=no mla=24 mem=1
+May 19 21:04:47 raspi-server watchdog[632]: ping: 192.168.1.1
+May 19 21:04:47 raspi-server watchdog[632]: file: no file to check
+May 19 21:04:47 raspi-server watchdog[632]: pidfile: no server process to check
+May 19 21:04:47 raspi-server watchdog[632]: interface: no interface to check
+May 19 21:04:47 raspi-server watchdog[632]: temperature: no sensors to check
+May 19 21:04:47 raspi-server watchdog[632]: test=none(0) repair=none(0) alive=/dev/watchdog heartbeat=none to=roo...ce=no
+May 19 21:04:47 raspi-server watchdog[632]: watchdog now set to 15 seconds
+May 19 21:04:47 raspi-server watchdog[632]: hardware watchdog identity: Broadcom BCM2835 Watchdog timer
+May 19 21:04:47 raspi-server systemd[1]: Started watchdog daemon.
+Hint: Some lines were ellipsized, use -l to show in full.
+</code></pre><h2 id="停止看门狗">停止看门狗</h2>
+<pre><code>sudo systemctl stop watchdog
+</code></pre><h2 id="设置开机启动">设置开机启动</h2>
+<p>在设置开机启动时如果你使用systemd中的方式：</p>
+<pre><code>sudo systemctl enable watchdog
+</code></pre><p>你会看到以下内容，并且启动不成功</p>
+<pre><code>Synchronizing state for watchdog.service with sysvinit using update-rc.d...
+Executing /usr/sbin/update-rc.d watchdog defaults
+Executing /usr/sbin/update-rc.d watchdog enable
+The unit files have no [Install] section. They are not meant to be enabled using systemctl.
+Possible reasons for having this kind of units are:
+1) A unit may be statically enabled by being symlinked from another unit's
+.wants/ or .requires/ directory.
+2) A unit's purpose may be to act as a helper for some other unit which has
+a requirement dependency on it.
+3) A unit may be started when needed via activation (socket, path, timer,
+D-Bus, udev, scripted systemctl call, ...).
+</code></pre><p>具体原因详见参考文献。解决方法有两种，</p>
+<h3 id="通过rclocal实现开机启动">通过<code>rc.local</code>实现开机启动。</h3>
+<pre><code>sudo vi /etc/rc.local
+</code></pre><p>在<code>exit 0</code>之前加上以下两行内容，就像这样：</p>
+<pre><code>printf &quot;Starting software Watchdog&quot;
+/usr/sbin/service watchdog start &amp;
+
+exit 0
+</code></pre><p>这个&rdquo;&amp;&ldquo;的意思是放入后台运行，不加的话可能出现莫名其妙的问题</p>
+<h3 id="通过crontab实现开机启动">通过<code>Crontab</code>实现开机启动</h3>
+<pre><code>crontab -e
+</code></pre><p>添加这一行：</p>
+<pre><code>@reboot sudo /usr/sbin/service watchdog start
+</code></pre><p>通过上述两种方式，看门狗都可以开机启动，你可以通过<code>dmesg | grep watchdog</code>或者<code>cat /var/log/syslog | grep watchdog</code></p>
+<h1 id="测试">测试</h1>
+<p>在确认看门狗已经开启(很重要！！！)后，我们通过一个逻辑炸弹来检测看门狗是否能起作用。这个炸弹英文名为&rsquo;<a href="https://en.wikipedia.org/wiki/Fork_bomb"target="_blank">Fork Bomb</a>',可以快速耗尽机器内存使机器崩溃。</p>
+<p>在命令行下键入以下内容：</p>
+<pre><code>: (){ :|:&amp; };:
+</code></pre><p>不出意外15秒后，树莓派会自动重启。看门狗成功实现功能！</p>
+<h1 id="参考文献">参考文献</h1>
+<p><a href="https://www.raspberrypi.org/forums/viewtopic.php?t=147501"target="_blank">1</a>
+<a href="https://www.x-try.xyz/rasp-watchdog.html"target="_blank">2</a></p>
+<h1 id="附录">附录</h1>
+<p>附上两个版本的Fork Bomb，均测试通过并能使树莓派重启。</p>
+<h2 id="shell-script">Shell Script</h2>
+<pre><code>#!/bin/bash
+echo &quot;Starting shell fork bomb&quot;
+# prevent swapping to the SD card!
+sudo systemctl stop dphys-swapfile.service
+# start the bomb
+: (){ :|:&amp; };:
+</code></pre><h2 id="python">Python</h2>
+<pre><code>#!/usr/bin/python
+#-------------------------------------------------------------------------------
+# Name:        fork.bomb
+# Purpose:
+#
+# Author:      paulv
+#
+# Created:     09-05-2016
+# Copyright:   (c) paulv 2016
+# Licence:     &lt;your licence&gt;
+#-------------------------------------------------------------------------------
+
+import os
+import subprocess
+
+def main():
+    print &quot;fork bomb starting&quot;
+    # prevent swapping to the SD card!
+    subprocess.call(['sudo systemctl stop dphys-swapfile.service'], shell=True, \
+        stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
+    while True:
+        os.fork()
+
+if __name__ == '__main__':
+    main()
+</code></pre></article><section class="article labels"><a class="tag" href=/localhost/tags/linux/>Linux</a></section><section class="article navigation"><p><a class="link" href="localhost/posts/nginx-foward-websocket/"><span class="li">&larr;</span>Nginx通过http_header分流Websocket</a></p><p><a class="link" href="localhost/posts/how-to-block-ads-on-gateway/"><span class="li">&rarr;</span>树莓派dnsmasq通过Host文件去除广告</a></p></section><section class="article discussion"><div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "ellinia-me" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></section></div><section id="footer" class="footer"><div class="footer-wrap">
+    <p class="copyright">@Bazzi</p>
+    <p class="powerby"><span>Powered by </span><a href="https://gohugo.io" 
+        target="_blank">Hugo</a><span> and the </span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+        target="_blank">Notepadium</a></p>
+</div></section><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/&#43;DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l&#43;B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd&#43;qj&#43;o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body);"></script>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-85751090-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+</div>
+</body>
+
+</html>
