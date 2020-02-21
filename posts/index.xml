@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>@Bazzi</copyright>
-    <lastBuildDate>Sun, 08 Jul 2018 08:46:12 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 21 Feb 2020 15:09:27 +0800</lastBuildDate>
     
         <atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Learn Latex in 30 Minutes</title>
+      <link>/posts/learn-latex-in-30-minutes/</link>
+      <pubDate>Fri, 21 Feb 2020 15:09:27 +0800</pubDate>
+      
+      <guid>/posts/learn-latex-in-30-minutes/</guid>
+      <description>30 分钟入门 LaTex 本文译自Overleaf 内容 [TOC] 什么是 LaTeX？ LaTeX 是用来创建专业外观 ( professional-looking ) 文档的工具。 它基于 WYSIWYM ( 所见即所得 ) 的理念，这意味着你在</description>
+    </item>
     
     <item>
       <title>利用双栈VPS搭建6in4隧道</title>
