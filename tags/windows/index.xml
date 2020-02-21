@@ -2,31 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>windows on Ellinia</title>
-    <link>/tags/windows/</link>
+    <link>ellinia.me/tags/windows/</link>
     <description>Recent content in windows on Ellinia</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>@Bazzi</copyright>
     <lastBuildDate>Sun, 16 Oct 2016 10:13:16 +0000</lastBuildDate>
     
-        <atom:link href="/tags/windows/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="ellinia.me/tags/windows/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Windows任务栏音量电量等图标消失的解决方法</title>
-      <link>/fix-the-problem-of-disappearing-of-volume-icon-on-windows.html</link>
+      <link>ellinia.me/fix-the-problem-of-disappearing-of-volume-icon-on-windows.html</link>
       <pubDate>Sun, 16 Oct 2016 10:13:16 +0000</pubDate>
       
-      <guid>/fix-the-problem-of-disappearing-of-volume-icon-on-windows.html</guid>
+      <guid>ellinia.me/fix-the-problem-of-disappearing-of-volume-icon-on-windows.html</guid>
       <description>前言 在使用windows系统的时候我们可能会在开机之后遇到任务栏中音量，电量等图标消失的情况。有以下两种解决方法：以windows8系统为例</description>
     </item>
     
     <item>
       <title>如何在windows8中进入安全模式</title>
-      <link>/how-to-boot-into-safe-mode-on-window8.html</link>
+      <link>ellinia.me/how-to-boot-into-safe-mode-on-window8.html</link>
       <pubDate>Sun, 16 Oct 2016 10:10:15 +0000</pubDate>
       
-      <guid>/how-to-boot-into-safe-mode-on-window8.html</guid>
+      <guid>ellinia.me/how-to-boot-into-safe-mode-on-window8.html</guid>
       <description>在windows7中，我们在开机时可以按下F8来进入安全模式，但是在win8中并不是次次都能成功。如何能够轻松简单地在开机时出现开机选项呢？</description>
     </item>
     

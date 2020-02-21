@@ -2,167 +2,167 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Linux on Ellinia</title>
-    <link>/tags/Linux/</link>
+    <link>ellinia.me/tags/Linux/</link>
     <description>Recent content in Linux on Ellinia</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>@Bazzi</copyright>
     <lastBuildDate>Sun, 08 Jul 2018 08:46:12 +0000</lastBuildDate>
     
-        <atom:link href="/tags/Linux/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="ellinia.me/tags/Linux/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>利用双栈VPS搭建6in4隧道</title>
-      <link>/Build-6in4-tunnel-on-server.html</link>
+      <link>ellinia.me/Build-6in4-tunnel-on-server.html</link>
       <pubDate>Sun, 08 Jul 2018 08:46:12 +0000</pubDate>
       
-      <guid>/Build-6in4-tunnel-on-server.html</guid>
+      <guid>ellinia.me/Build-6in4-tunnel-on-server.html</guid>
       <description>目的 SERVER1 只支持ipv4, SERVER2 同时支持ipv4和ipv6，构建隧道使SERVER1也能够访问ipv6网站。 部署步骤 SERVER1 ip tunnel add ipv6 mode sit remote IPV4_OF_SERVER2 local IPV4_OF_SERVER2 ttl 255 ip link set</description>
     </item>
     
     <item>
       <title>使用Caddy反向代理Project V (二)</title>
-      <link>/Use_caddy_to_reverse_proxy_project_v_2.html</link>
+      <link>ellinia.me/Use_caddy_to_reverse_proxy_project_v_2.html</link>
       <pubDate>Wed, 04 Jul 2018 09:17:15 +0000</pubDate>
       
-      <guid>/Use_caddy_to_reverse_proxy_project_v_2.html</guid>
+      <guid>ellinia.me/Use_caddy_to_reverse_proxy_project_v_2.html</guid>
       <description>简介 前篇介绍了Caddy反向代理Websocket到Project V的过程，本次介绍反响代理h2到Project V. 来源 白话文教程 配置模板 下载</description>
     </item>
     
     <item>
       <title>使用 Nginx 对 Project V 做负载均衡</title>
-      <link>/Load-balancing-project-v-by-nginx.html</link>
+      <link>ellinia.me/Load-balancing-project-v-by-nginx.html</link>
       <pubDate>Thu, 01 Mar 2018 16:11:00 +0000</pubDate>
       
-      <guid>/Load-balancing-project-v-by-nginx.html</guid>
+      <guid>ellinia.me/Load-balancing-project-v-by-nginx.html</guid>
       <description>前言 在之前的一篇文章中介绍了两种 Project V 的负载均衡的方式：1. 通过 Project V 自带的负载均衡 2. 通过 Haproxy。 今天来介绍第三种方式：Nginx Nginx 简介</description>
     </item>
     
     <item>
       <title>使用Caddy反向代理Project V</title>
-      <link>/Use_caddy_to_reverse_proxy_project_v.html</link>
+      <link>ellinia.me/Use_caddy_to_reverse_proxy_project_v.html</link>
       <pubDate>Tue, 12 Dec 2017 23:12:43 +0000</pubDate>
       
-      <guid>/Use_caddy_to_reverse_proxy_project_v.html</guid>
+      <guid>ellinia.me/Use_caddy_to_reverse_proxy_project_v.html</guid>
       <description>简介 Caddy是一款轻量化的软件，下面记录Caddy反向代理 Project V 的步骤 下载安装 假设使用64位的Linux系统, 并使用systemd管理方式（</description>
     </item>
     
     <item>
       <title>树莓派安装adbyby去除广告</title>
-      <link>/Use_adbyby_to_block_ads_on_raspberry_pi.html</link>
+      <link>ellinia.me/Use_adbyby_to_block_ads_on_raspberry_pi.html</link>
       <pubDate>Sat, 28 Oct 2017 16:11:00 +0000</pubDate>
       
-      <guid>/Use_adbyby_to_block_ads_on_raspberry_pi.html</guid>
+      <guid>ellinia.me/Use_adbyby_to_block_ads_on_raspberry_pi.html</guid>
       <description>在树莓派上安装adbyby来去除广告 Adbyby是一款广告去除软件，被内置在多个著名的路由器系统中。但是由于路由器的性能因素，adbyby常</description>
     </item>
     
     <item>
       <title>Nginx通过http_header分流Websocket</title>
-      <link>/Nginx_forward_websocket.html</link>
+      <link>ellinia.me/Nginx_forward_websocket.html</link>
       <pubDate>Fri, 20 Oct 2017 22:05:50 +0000</pubDate>
       
-      <guid>/Nginx_forward_websocket.html</guid>
+      <guid>ellinia.me/Nginx_forward_websocket.html</guid>
       <description>Nginx 转发 Websocket 今天介绍两种通过http_header分流某V姓软件的Websocket协议的方法： 通过定义两个server分流 只需要在原来配置文件</description>
     </item>
     
     <item>
       <title>树莓派启用看门狗</title>
-      <link>/Set_watchdog_on_raspberrypi.html</link>
+      <link>ellinia.me/Set_watchdog_on_raspberrypi.html</link>
       <pubDate>Mon, 16 Oct 2017 22:34:00 +0000</pubDate>
       
-      <guid>/Set_watchdog_on_raspberrypi.html</guid>
+      <guid>ellinia.me/Set_watchdog_on_raspberrypi.html</guid>
       <description>树莓派启用看门狗防止死机 树莓派是一款性价比不错的设备。它可以当作一台性能够用的Linux主机，其最大额优势是功耗低，大部分人都可以可以接受树</description>
     </item>
     
     <item>
       <title>树莓派dnsmasq通过Host文件去除广告</title>
-      <link>/how_to_block_ads_on_gateway_by_host_file.html</link>
+      <link>ellinia.me/how_to_block_ads_on_gateway_by_host_file.html</link>
       <pubDate>Mon, 02 Oct 2017 14:18:41 +0000</pubDate>
       
-      <guid>/how_to_block_ads_on_gateway_by_host_file.html</guid>
+      <guid>ellinia.me/how_to_block_ads_on_gateway_by_host_file.html</guid>
       <description>dnsmasq通过Host文件去除广告 通过host去除广告是比较原始的一种方式，类似于“从源头阻断这样一个思想”，我们会看到广告，是因为加载</description>
     </item>
     
     <item>
       <title>How to set up transparent gateway</title>
-      <link>/How_to_configure_transparent_gateway.html</link>
+      <link>ellinia.me/How_to_configure_transparent_gateway.html</link>
       <pubDate>Fri, 29 Sep 2017 20:01:26 +0000</pubDate>
       
-      <guid>/How_to_configure_transparent_gateway.html</guid>
+      <guid>ellinia.me/How_to_configure_transparent_gateway.html</guid>
       <description>How to configure transparent gateway on Raspberry Pi Troditional transparent proxy methods like &amp;lsquo;to be AP&amp;rsquo; and &amp;lsquo;to be Gateway&amp;rsquo; are almost as the same performance. However, when there isn&amp;rsquo;t any proxy software installed on your device, or the software inn&amp;rsquo;t compatible with your device, a well-configured transparent AP or gateway on an embedded device in order to reach the world. Here comes the procedures. Before we get started, here&amp;rsquo;re</description>
     </item>
     
     <item>
       <title>NodeBB 搭建教程</title>
-      <link>/nodebb_forum_installation.html</link>
+      <link>ellinia.me/nodebb_forum_installation.html</link>
       <pubDate>Fri, 11 Aug 2017 00:54:18 +0000</pubDate>
       
-      <guid>/nodebb_forum_installation.html</guid>
+      <guid>ellinia.me/nodebb_forum_installation.html</guid>
       <description>NodeBB 教程 简介 NodeBB是一款由NodeJS开发的论坛应用。它神速的单页面设计，它有完善的功能模块，不仅可以用作论坛，还可以用作 CMS，博客，</description>
     </item>
     
     <item>
       <title>Nextcloud 安装教程</title>
-      <link>/nextcloud_installation.html</link>
+      <link>ellinia.me/nextcloud_installation.html</link>
       <pubDate>Thu, 10 Aug 2017 20:39:19 +0000</pubDate>
       
-      <guid>/nextcloud_installation.html</guid>
+      <guid>ellinia.me/nextcloud_installation.html</guid>
       <description>Nextcloud 教程 简介 随着国内多家网盘的陆续关停、百度云盘的严重限速、将小电影替换成8秒教育片等等，国内网盘不是阉割就是残废，真的让人寒心，在找不到能放</description>
     </item>
     
     <item>
       <title>How to compile BBR on CentOS7</title>
-      <link>/how_to_compile_bbr_on_centos7.html</link>
+      <link>ellinia.me/how_to_compile_bbr_on_centos7.html</link>
       <pubDate>Thu, 10 Aug 2017 20:31:30 +0000</pubDate>
       
-      <guid>/how_to_compile_bbr_on_centos7.html</guid>
+      <guid>ellinia.me/how_to_compile_bbr_on_centos7.html</guid>
       <description>TCP_BBR_Modified How to compile tcp_bbr_modified algorithm on CentOS7   Install the latest version of Linux kernel, headers and develoment tools.
 rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org rpm -Uvh http://www.elrepo.org/elrepo-release-7.0-2.el7.elrepo.noarch.rpm yum --enablerepo=elrepo-kernel install kernel-ml -y yum -y remove kernel-headers yum --enablerepo=elrepo-kernel install kernel-ml-headers -y yum --enablerepo=elrepo-kernel install kernel-ml-devel -y Then doegrep ^menuentry /etc/grub2.cfg | cut -f 2 -d \&#39;to see the sequence of alreadly installed kernels and choose the one you&amp;rsquo;ve installed just now.</description>
     </item>
     
     <item>
       <title>Linux shell 剪藏</title>
-      <link>/posts/Linux-shell-fragments/</link>
+      <link>ellinia.me/posts/Linux-shell-fragments/</link>
       <pubDate>Thu, 01 Jun 2017 15:17:15 +0000</pubDate>
       
-      <guid>/posts/Linux-shell-fragments/</guid>
+      <guid>ellinia.me/posts/Linux-shell-fragments/</guid>
       <description>查看linux下python的最高版本 python_ver=$(ls /usr/bin|grep -e &amp;quot;^python[23]\.[1-9]\+$&amp;quot;|tail -1) 删除server.py进程 eval $(ps -ef | grep &amp;quot;[0-9] ${python_ver} server\\.py m&amp;quot; | awk &#39;{print &amp;quot;kill &amp;quot;$2 }&#39;) 或者使用 ps -ef | grep &amp;quot;[0-9] ${python_ver} server\\.py m&amp;quot; | awk &#39;{print $2 }&#39; |</description>
     </item>
     
     <item>
       <title>“在Telegram上实现微信收发”——EHForwarderBot搭建指南</title>
-      <link>/how-to-deploy-ehforwarderbot-on-centos7.html</link>
+      <link>ellinia.me/how-to-deploy-ehforwarderbot-on-centos7.html</link>
       <pubDate>Thu, 18 May 2017 17:06:41 +0000</pubDate>
       
-      <guid>/how-to-deploy-ehforwarderbot-on-centos7.html</guid>
+      <guid>ellinia.me/how-to-deploy-ehforwarderbot-on-centos7.html</guid>
       <description>前言 EHForwarderBot是一个开源项目，利用Telegram中的Bot来实现在Telegram上收发微信消息的效果。本文参考了官方文</description>
     </item>
     
     <item>
       <title>CentOS开启密钥登录的相关设置</title>
-      <link>/posts/log-in-centos-via-ssh-key/</link>
+      <link>ellinia.me/posts/log-in-centos-via-ssh-key/</link>
       <pubDate>Sun, 16 Oct 2016 10:01:37 +0000</pubDate>
       
-      <guid>/posts/log-in-centos-via-ssh-key/</guid>
+      <guid>ellinia.me/posts/log-in-centos-via-ssh-key/</guid>
       <description>前言 使用SSH key 来登录服务器是比较安全的选择之一，本次我想分享给大家一个较为简单的方式来实现Linux服务器的SSH key登录。并且实现禁止</description>
     </item>
     
     <item>
       <title>Privoxy不完全教程——实现自动切换代理(AutoProxy)与广告屏蔽(AdblockPlus)</title>
-      <link>/How_to_configure_privoxy.html</link>
+      <link>ellinia.me/How_to_configure_privoxy.html</link>
       <pubDate>Sun, 16 Oct 2016 09:24:25 +0000</pubDate>
       
-      <guid>/How_to_configure_privoxy.html</guid>
+      <guid>ellinia.me/How_to_configure_privoxy.html</guid>
       <description>缘由 前一段时间，firefox浏览器自动升级了，常常使用的代理拓展工具Forxyproxy也遇到了一些错误，一打开就报json错误，只能选择</description>
     </item>
     
     <item>
       <title>自用VPS存根</title>
-      <link>/posts/vps-log/</link>
+      <link>ellinia.me/posts/vps-log/</link>
       <pubDate>Thu, 11 Aug 2016 18:20:08 +0000</pubDate>
       
-      <guid>/posts/vps-log/</guid>
+      <guid>ellinia.me/posts/vps-log/</guid>
       <description>Dropbox 点此链接注册Dropbox可以获得额外500M的存储空间！Sign up dropbox via this link to get extra 500MB storage. 美国西海岸 DigitalOcean DititalOcean：现未持有 Vultr Vultr :</description>
     </item>
     
