@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.64.1" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>Learn Latex in 30 Minutes&nbsp;&ndash;&nbsp;Ellinia</title><link rel="stylesheet" href="/css/core.min.23cf2408a7bbf383778ab163ca01c615250ed41c122a52c02d83618a440898a34d9584fae91a0a2c0da793b5121359c1.css" integrity="sha384-I88kCKe784N3irFjygHGFSUO1BwSKlLALYNhikQImKNNlYT66RoKLA2nk7USE1nB"><link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/favicons/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/favicons/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/favicons/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/favicons/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/favicons/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/favicons/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/favicons/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/favicons/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicons/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="manifest" href="/favicons/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/favicons/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+<body>
+    <div class="base-body"><section id="header" class="site header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><img class="site logo" src="/images/avatar.png" alt /><span class="site name">Ellinia</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/tags/">Tags</a></nav></div></span></div></section><div id="content"><section class="article header">
+    <h1 class="article title">Learn Latex in 30 Minutes</h1><p class="article date">2020-02-21</p></section><article class="article markdown-body"><h1 id="30-分钟入门-latex">30 分钟入门 LaTex</h1>
+<blockquote>
+<p>本文译自<a href="https:https://www.overleaf.com/learn/latex/Learn_LaTeX_in_30_minutes"target="_blank">Overleaf</a></p>
+</blockquote>
+<h1 id="内容">内容</h1>
+<p>[TOC]</p>
+<h1 id="什么是-latex">什么是 LaTeX？</h1>
+<p>LaTeX 是用来创建专业外观 ( professional-looking ) 文档的工具。 它基于 WYSIWYM  ( 所见即所得 ) 的理念，这意味着你在编辑时只需关注文档的内容，计算机会自动处理字符排版。和 Microsoft Word 或 LibreOffice 类似，用户可以直接输入纯文本并且让 LaTeX 处理后续排版工作。</p>
+<h1 id="为什么要学习-latex">为什么要学习 LaTeX？</h1>
+<p>在全球范围内，LaTeX 被广泛应用于科技文档，书记以及许多其他形式出版物的排版。 它不仅能够创建排版美观的文档，也能够让用户快速地处理排版过程中的的复杂部分，例如输入的数学公式，创建的表格，参考文献的引用和创建文献目录 ( biblographies )。而且，LeTeX 能够在所有部分间保持一致的布局。此外，因为还有大量的开源的程序包 ( <em>packages</em> ) 可供 LaTeX 使用， LaTeX 的潜力无穷。有了这些程序包的加持，用户能大大扩展 LaTeX 的功能。例如添加脚注 ( footnotes )， 绘制原理图 ( schematics )，创建表格等。</p>
+<p>人们使用 LaTeX 的一个重要原因是它将文档的内容和文档的样式剥离开来。这意味着一旦你写好了文档的内容，我们可以简单地改变文档样式。 类似地，你也可以创建样式模板来应用到不同的文档，让它们有相同的现实效果。据此，科技论文可以借助模板来进行版面处理。这些模板 ( templates ) 拥有预置制的布局，这意味着你只需要在其中填入内容。实际上，有成百上千的模板可以供我们使用，从个人简历到PPT。</p>
+<h1 id="编写你的第一支-latex-程序片段">编写你的第一支 LaTeX 程序片段</h1>
+<p>第一步是创建一个新的 LaTex 项目。你可以在本地计算机上通过新建<code>.tex</code> 文件或<a href="https://www.overleaf.com/learn/Creating_a_document_in_Overleaf"target="_blank">在 Overleaf中开始一个新项目</a>。首先，让我们举一个简单的例子：</p>
+<pre><code>\documentclass{article}
+
+\begin{document}
+First document. This is a simple example, with no 
+extra parameters or packages included.
+\end{document}
+</code></pre><p><a target="_blank" rel="noopener noreferrer" 
+  href="/images/latex-1.png"><img  src="/images/latex-1.png"
+        alt/></a></p>
+<p>我们可以看到第一行是有缩进的，这说明 LaTeX 已经对它进行了排版。让我们继续看看它的每一行代码都意味着什么。</p>
+<p>第一行代码声明了文档类型，被称为“<em>类</em>” (<em>class</em>). “类” 决定着文档的整体外观 ( overall appearance ). 不同类型的文档需要定义不同的“类”。例如，个人简历和科技文档需要定义不同的“类”。在此例中，“类”被定义为 <code>article</code>，这是 LaTeX 中最简单最常见的类。面对其他类型的文档，你也许需要为他们定义不同的类比如 <code>book</code> 或者 <code>report</code>.</p>
+<p>在以第一行后，我们写下了文档的内容。内容被包含在 <code>\begin{document}</code> 和 <code>end{document}</code> 标签中。它也被叫做文档的“体” ( <em>body</em> )。你可以尝试在这里进行修改。想要在 PDF 文档中查看结果你需要对文档进行编译。如果在 Overleaf 中，只用点击 <em><strong>Recompile</strong></em>。( 你也可以设置对文档进行更改后进行自动重新编译，点击 <strong>Recompile</strong> 旁的小箭头，点选 <em><strong>Auto Compile</strong></em> 为 <strong>On</strong>。)</p>
+<p>如果你在使用比较基础的文本编辑器比如 gedit， emacs，vim，sublime，notepad 等。 你需要手动进行编译。在计算机终端或命令行界面下键入 <code>pdflatex &lt;your document&gt;</code>。更多手动编译的参考信息见<a href="https://en.wikibooks.org/wiki/LaTeX/Basics#Compilation"target="_blank">此</a>。</p>
+<p>如果你使用的是专业的 LaTeX 编辑器例如 TeXmaker 或 TeXworks，简单地点击 <em><strong>Recompile</strong></em> 按钮即可完成重新编译。有关重新编译的更多内容，请见软件对应的文档。</p>
+<p>现在你已经掌握如何向文档中添加内容，我们的下一步是给文档添加标题 ( title )。在此之前，我们先得简要介绍 <strong>preamble</strong>。</p>
+<h1 id="文档的序--preamble-">文档的序 ( Preamble )</h1>
+<p>在之前的例子里文本被囊括在<code>\begin{document}</code>命令之中。在 <code>.tex</code> 文件中，在 <code>\begin{document}</code> 之前的所有部分被称为“序” （ <strong>preamble</strong> ）。 我们在序中定义文档的类型，语言，所要使用的程序包等。例如，一个普通的文档的序如下所以：</p>
+<pre><code>\documentclass[12pt, letterpaper]{article}
+\usepackage[utf8]{inputenc}
+</code></pre><p>以下是每行代码的细节：</p>
+<p><code>\documentclass[12pt, letterpaper]{article}</code></p>
+<p>如之前所说，该行定义了文档类型。中括号内可以填入不止一个参数，这些参数间用逗号分隔。在本例中，额外的参数是字号 ( <strong>12pt</strong> ) 和 页面尺寸 ( <strong>letterpaper</strong> )。当然，你也可以使用其他字号 ( <strong>9pt,11pt,12pt</strong> )。如果没有指定字号，默认值为 <strong>10pt</strong>。对于页面尺寸而言，我们还可以选择 <strong>a4paper</strong> 和 <strong>legalpaper</strong>; 更多关于页面尺寸的细节可以前往 <a href="https://www.overleaf.com/learn/Page_size_and_margins"target="_blank">Page size and margins</a>。</p>
+<p><code>\usepackage[utf8]{inputenc}</code></p>
+<p>该行代码制定了文档的编码方式。推荐设置为 utf-8。 除非要特意设置为其他编码方式，否则只要你不清楚该设置什么编码方式，最好将此行添加到序中。</p>
+<h1 id="添加标题作者和日期">添加标题，作者和日期</h1>
+<p>想要给文档添加标题，作者和日期。我们可以在 <strong>preamble</strong>  ( 不是在文档的主体 )中，添加三行。它们是：</p>
+<p><code>\title{First document}</code></p>
+<p>这是标题</p>
+<p><code>\author{Hubert Farnsworth}</code></p>
+<p>把作者信息添加在此处。如果需要，也可以在下一行添加致谢信息：</p>
+<p><code>thanks{funded by the Overleaf team}</code></p>
+<p>致谢信息可以被添加在 <code>title</code> 大括号内，显示在作者姓名之后。它将为大括号内的文本添加上角标和脚注。如果你要在文章中感谢某个机构，可以添加此项。</p>
+<p><code>date{February 2014}</code></p>
+<p>你可以手动添加日期。或者使用 <code>\today</code> 来添加，这样日期可以在编译文档时自动更新。</p>
+<p>添加完以上各行后，你的序会像下面这样：</p>
+<pre><code>\documentclass[12pt, letterpaper, twoside]{article}
+\usepackage[utf8]{inputenc}
+
+\title{First document}
+\author{Hubert Farnsworth \thanks{funded by the Overleaf team}}
+\date{February 2017}
+</code></pre><p>现在，你已经为你的文档添加了标题，作者和日期，你可以通过 <code>maketitle</code> 命令将以上信息在文件中显示出来。 <code>\maketitle</code> 命令应该出现在在文档 <strong>body</strong> 内任何需要显示标题的地方。</p>
+<pre><code>\begin{document}
+
+\maketitle
+
+We have now added a title, author and date to our first \LaTeX{} document!
+
+\end{document}
+</code></pre><p><a target="_blank" rel="noopener noreferrer" 
+  href="/images/latex-2.png"><img  src="/images/latex-2.png"
+        alt/></a></p>
+<h1 id="添加注释-comments">添加注释 comments</h1>
+<p>在许多情况下，添加注释 ( <strong>comments</strong> ) 是十分必要且有用的。 注释不会显示在最终文档中，它不会影响文档的最终内容。在 LaTeX 中，注释的前缀是<code>%</code>。</p>
+<pre><code>\begin{document}
+
+\maketitle
+
+We have now added a title, author and date to our first \LaTeX{} document!
+
+% This line here is a comment. It will not be printed in the document.
+
+\end{document}
+</code></pre><p><a target="_blank" rel="noopener noreferrer" 
+  href="/images/latex-3.png"><img  src="/images/latex-3.png"
+        alt/></a></p>
+<h1 id="文字的粗体斜体和下划线">文字的粗体，斜体和下划线</h1>
+<p>现在，我们来了解一些简单的文字格式命令。</p>
+<ul>
+<li><strong>Bold</strong>：LaTeX 中，要显示为粗体文本应被写进 <code>\textbf{...}</code> 命令中。</li>
+<li><em>斜体</em>：斜体文本应被写进 <code>\textit{...}</code> 命令中。</li>
+<li><em>下划线</em> ：下划线文本被写进 <code>\underline{...}</code> 命令中。</li>
+</ul>
+<p>例如：</p>
+<pre><code>Some of the \textbf{greatest}
+discoveries in \underline{science} 
+were made by \textbf{\textit{accident}}.
+</code></pre><p><a target="_blank" rel="noopener noreferrer" 
+  href="/images/latex-4.png"><img  src="/images/latex-4.png"
+        alt/></a></p>
+<p>另一个有用的命令是 <code>emph{...}</code> 命令。<code>emph</code> 命令是否使文本显示为斜体，取决于被<code>emph</code> 包含的文本之外的上下文字体是否是斜体。如果上下文都是斜体，那么谨慎使用 <code>emph</code> 命令。请看以下示例：</p>
+<pre><code>Some of the greatest \emph{discoveries} 
+in science 
+were made by accident.
+
+\textit{Some of the greatest \emph{discoveries} 
+in science 
+were made by accident.}
+
+\textbf{Some of the greatest \emph{discoveries} 
+in science 
+were made by accident.}
+</code></pre><p><a target="_blank" rel="noopener noreferrer" 
+  href="/images/latex-5.png"><img  src="/images/latex-5.png"
+        alt/></a></p>
+<p>此外，一些程序包比如 <a href="https://www.overleaf.com/learn/Beamer"target="_blank">Beamer</a>， 可以更改 <code>\emph</code> 命令的行为。</p>
+<h1 id="添加图片">添加图片</h1>
+<p>我们现在将在 LaTeX 文档中添加图片。在 Overleaf中，我们需要先上传图片。</p>
+<p>以下是插入图片的一个实例：</p>
+<pre><code>\documentclass{article}
+\usepackage{graphicx}
+\graphicspath{ {images/} }
+
+\begin{document}
+The universe is immense and it seems to be homogeneous, 
+in a large scale, everywhere we look at.
+
+\includegraphics{universe}
+
+There's a picture of a galaxy above
+\end{document}
+</code></pre><p><a target="_blank" rel="noopener noreferrer" 
+  href="/images/latex-6.png"><img  src="/images/latex-6.png"
+        alt/></a></p>
+<p>LaTeX 本身不能管理图片，你需要借助程序包来进行管理。程序包可以被用来改变 LaTeX 文档的默认外观或者为 LaTeX 添加更多功能性的内容。在本例中，你需要在文档中引用一张图片，所以你需要用到 <strong>graphicx</strong> 这个程序包。 该程序包提供了以下命令，<code>\includegraphics{...}</code> 和 <code>\graphicspath{...}</code>。想要使用 <strong>graphicx</strong> 程序包，只需要将以下命令插入到 <code>preamble</code> 中：<code>\usepackage{graphicx}</code>。</p>
+<p><code>\graphicspath{ {images/} }</code> 命令告诉 LaTeX 图片保存在名为当前目录下的 <em>images</em> 文件夹中。</p>
+<p><code>\includegraphics{universe}</code> 是向文档插入图片的命令。其中，<em>universe</em> 是不带拓展名的图片的文件名。图片的文件名不应该包含空格和多个西文点号。</p>
+<p>注意：文件的扩展名可以被引用，但是我们最好省略扩展名。如果我们省略扩展名，LaTeX 会寻找所有它支持的图片格式。另外，我们也建议文件后缀名都是用使用小写英文字符。更多系列请移步<a href="https://www.overleaf.com/learn/latex/Learn_LaTeX_in_30_minutes#Generating_high-res_and_low-res_images"target="_blank">generating high resolution and low resolution images</a>。</p>
+<h1 id="captions-labels-and-references">Captions, labels and references</h1>
+<p>图片可以通过 <strong>figure</strong> 命令来设置图片的下标，标签和参考：</p>
+<pre><code>\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.25\textwidth]{mesh}
+    \caption{a nice plot}
+    \label{fig:mesh1}
+\end{figure}
+
+As you can see in the figure \ref{fig:mesh1}, the 
+function grows near 0. Also, in the page \pageref{fig:mesh1} 
+is the same example.
+</code></pre><p><a target="_blank" rel="noopener noreferrer" 
+  href="/images/latex-7.png"><img  src="/images/latex-7.png"
+        alt/></a></p>
+<p>在例子中包含了许多重要的命令：</p>
+<ul>
+<li><code>\caption{a nice plot}</code>: 该命令设置图片的标题。标题可以在图片的上方，也可在图片下方</li>
+<li><code>\label{fig:mesh}</code>:如果你要在文档中引用该图片，那么通过该命令给图片设置一个标签。标签命令将为图片编号并且与下面要介绍的命令一起搭配后可使图片能够被你引用</li>
+<li><code>\ref{fig:mesh1}</code>: 该代码将被与被引用图片相关的数字所替代。</li>
+</ul>
+<p>当我们将图片放置到 LaTeX 文档中后，我们应该始终将其放置在 <strong>figure</strong> 或其他相似环境下。这样， LaTeX 才能更好的对图片及后续文本进行排版。</p>
+<p>注意：<em>如果你在本机上调用了图片标题和引用，你需要对文档编译两次使得文件成功引用图片。但在 Overleaf 上会自动完成这一过程。</em></p>
+<h1 id="在-latex-中创建列表">在 LaTeX 中创建列表</h1>
+<p>在 LaTeX 中创建列表很简单。你可以使用不同的列表环境 ( <em>environments</em> ) 来创建列表。环境是文档中的一个片段，片段中的显示效果不同于剩余文本。环境开始于 <code>\begin{...}</code> , 结束于 <code>\end{...}</code>。</p>
+<p>LaTeX 中有两类列表，有序列表和无序列表。两种类型的列表使用不同的环境。</p>
+<h2 id="无序列表">无序列表</h2>
+<p>无序列表通过 <code>itemize</code> 环境来产生。列表中每个条目前必须有前缀 <code>\item</code>。</p>
+<pre><code>\begin{itemize}
+  \item The individual entries are indicated with a black dot, a so-called bullet.
+  \item The text in the entries may be of any length.
+\end{itemize}
+</code></pre><p><a target="_blank" rel="noopener noreferrer" 
+  href="/images/latex-8.png"><img  src="/images/latex-8.png"
+        alt/></a></p>
+<p>默认情况下列表的每个条目都以黑点开头，这就是所谓的 bullet。条目中，文本的长度任意。</p>
+<h2 id="有序列表">有序列表</h2>
+<p>有序列表在不同的环境中有相同的语法。我们通过使用 <code>enumerate</code> 环境来生成有序列表：</p>
+<pre><code>\begin{enumerate}
+  \item This is the first entry in our list
+  \item The list numbers increase with each entry we add
+\end{enumerate}
+</code></pre><p><a target="_blank" rel="noopener noreferrer" 
+  href="/images/latex-9.png"><img  src="/images/latex-9.png"
+        alt/></a></p>
+<p>同无序列表一样，有序列表每个条目前需要以 <code>\item</code> 开头。有序列表的序号从 1 开始。</p>
+<h1 id="向-latex-添加数学模块">向 LaTeX 添加数学模块</h1>
+<p>LaTeX 的主要优点之一就是简便的公式输入。 LaTeX 提供了数学公式的两种输入模式：“内联模式” ( <strong>inline</strong> ) 和“外显模式” ( <strong>display</strong> )。第一个模式中，我们把公式写入文本中的一部分。第二种模式中，公式不作为文本中的一部分，它们会被置于单独的行中，让我们来看看<strong>内联</strong>模式：</p>
+<pre><code>In physics, the mass-energy equivalence is stated 
+by the equation $E=mc^2$, discovered in 1905 by Albert Einstein.
+</code></pre><p><a target="_blank" rel="noopener noreferrer" 
+  href="/images/latex-10.png"><img  src="/images/latex-10.png"
+        alt/></a></p>
+<p>我们可以使用以下三种分隔符在内联模式下引入公式：<code>\( ... \)</code>，<code>$ ... $</code> 或者 <code>\begin{math} ... \end{math}</code>。三种方法都可以，选哪个取决于个人喜好。</p>
+<p>外显模式 ( <em>displayed</em> mode ) 有两种版本：有序号版和无序号版。</p>
+<pre><code>choice is a matter of taste
+</code></pre><p><a target="_blank" rel="noopener noreferrer" 
+  href="/images/latex-11.png"><img  src="/images/latex-11.png"
+        alt/></a></p>
+<p>我们可以使用以下三种分隔符在外显模式下引入公式：<code>\[ ... \]</code>，<code>\begin{displaymath} ... \end{displaymath}</code> 或者 <code>\begin{equation} ... \end{equation}</code>。<strong>不推荐使用</strong> <code>$$ ... $$</code>， 该命令会产生不一致的空格，在某些数学程序包中可能出问题。</p>
+<p>重要提示：equation* 环境由外部程序包提供，详见<a href="https://www.overleaf.com/learn/Aligning_equations"target="_blank"><em><strong>amsmath</strong> article</em></a>。</p>
+<p>许多数学相关的命令都需要 <strong>amsmath</strong> 程序包，在写数学相关内容前务必记得引用该程序包。下面给出一个基本数学模块命令的例子。</p>
+<pre><code>Subscripts in math mode are written as $a_b$ and superscripts are written as $a^b$. These can be combined an nested to write expressions such as
+
+\[ T^{i_1 i_2 \dots i_p}_{j_1 j_2 \dots j_q} = T(x^{i_1},\dots,x^{i_p},e_{j_1},\dots,e_{j_q}) \]
+ 
+We write integrals using $\int$ and fractions using $\frac{a}{b}$. Limits are placed on integrals using superscripts and subscripts:
+
+\[ \int_0^1 \frac{1}{e^x} =  \frac{e-1}{e} \]
+
+Lower case Greek letters are written as $\omega$ $\delta$ etc. while upper case Greek letters are written as $\Omega$ $\Delta$.
+
+Mathematical operators are prefixed with a backslash as $\sin(\beta)$, $\cos(\alpha)$, $\log(x)$ etc.
+</code></pre><p><a target="_blank" rel="noopener noreferrer" 
+  href="/images/latex-12.png"><img  src="/images/latex-12.png"
+        alt/></a></p>
+<p>LaTeX 的数学模块蕴含无限可能。我们尽可能列出其中一些常用模块。想要了解更多可以点击以下链接。</p>
+<ul>
+<li><a href="https://www.overleaf.com/learn/Mathematical_expressions"target="_blank">Mathematical expressions</a></li>
+<li><a href="https://www.overleaf.com/learn/Subscripts_and_superscripts"target="_blank">Subscripts and superscripts</a></li>
+<li><a href="https://www.overleaf.com/learn/Brackets_and_Parentheses"target="_blank">Brackets and Parentheses</a></li>
+<li><a href="https://www.overleaf.com/learn/Fractions_and_Binomials"target="_blank">Fractions and Binomials</a></li>
+<li><a href="https://www.overleaf.com/learn/Aligning_equations_with_amsmath"target="_blank">Aligning Equations</a></li>
+<li><a href="https://www.overleaf.com/learn/Operators"target="_blank">Operators</a></li>
+<li><a href="https://www.overleaf.com/learn/Spacing_in_math_mode"target="_blank">Spacing in math mode</a></li>
+<li><a href="https://www.overleaf.com/learn/Integrals,_sums_and_limits"target="_blank">Integrals, sums and limits</a></li>
+<li><a href="https://www.overleaf.com/learn/Display_style_in_math_mode"target="_blank">Display style in math mode</a></li>
+<li><a href="https://www.overleaf.com/learn/List_of_Greek_letters_and_math_symbols"target="_blank">List of Greek letters and math symbols</a></li>
+<li><a href="https://www.overleaf.com/learn/Mathematical_fonts"target="_blank">Mathematical fonts</a></li>
+</ul>
+<h1 id="基本排版--formatting-">基本排版 ( Formatting )</h1>
+<p>我们现在来看如何写摘要 ( abstracts ) 和如何将 LaTeX 文档排版输出成不同章，小节和段落。</p>
+<h2 id="摘要--abstracts-">摘要 ( Abstracts )</h2>
+<p>在科技文档中，将文章主题进行简要的概括是常见的做法。在 LaTeX 中，<code>abstract</code> 环境专门用来处理摘要。<code>abstract</code> 环境将会把特定格式的文本置于文档的顶部。</p>
+<pre><code>\begin{document}
+
+\begin{abstract}
+This is a simple paragraph at the beginning of the 
+document. A brief introduction about the main subject.
+\end{abstract}
+\end{document}
+
+Abstractsmall.PNG
+</code></pre><p><a target="_blank" rel="noopener noreferrer" 
+  href="/images/latex-13.png"><img  src="/images/latex-13.png"
+        alt/></a></p>
+<h2 id="段落--paragraphs--和新行--newlines-">段落 ( Paragraphs ) 和新行 ( newlines )</h2>
+<pre><code>\begin{document}
+
+\begin{abstract}
+This is a simple paragraph at the beginning of the 
+document. A brief introduction about the main subject.
+\end{abstract}
+ 
+Now that we have written our abstract, we can begin writing our first paragraph.
+ 
+This line will start a second Paragraph.
+\end{document}
+</code></pre><p><a target="_blank" rel="noopener noreferrer" 
+  href="/images/latex-14.png"><img  src="/images/latex-14.png"
+        alt/></a></p>
+<p>当我们撰写文档内容的时候，如果你需要新起一个段落，你必须按两下 &ldquo;Enter&rdquo; 键 ( 来插入一个双空白行 )。值得一提的是 LaTeX 会自动处理段落缩进。</p>
+<p>要新起一行而不新起一段，插入一个 <em>break line</em> 点，我们可以通过两根反斜杠 <code>\\</code> 或者 <code>\newline</code> 命令来实现。</p>
+<p>⚠️ 不能通过 <code>\\</code> 和 <code>\newlines</code> 并且在之间添加大量空格来“模拟”段落，因为这可能与 LaTeX 排版算法相冲突。推荐做法是使用双空白行来建立新段落，并且最好不要包含任何 <code>\\</code>,然后在 <strong>preamble</strong> 中添加 <code>\usepackage{parskip}</code>。</p>
+<p>你可以在 <a href="https://www.overleaf.com/learn/Paragraphs_and_new_lines"target="_blank">Paragraphs and new lines</a> 中得到更多信息。</p>
+<h2 id="章节--chapters-and-sections-">章节 ( Chapters and Sections )</h2>
+<p>用来组织文档的命令随着文档格式的变化而变化，组织文档的最简单形式是分节 ( sectioning )，分节功能在所有文档格式中都可用。</p>
+<pre><code>\chapter{First Chapter}
+
+\section{Introduction}
+
+This is the first section.
+
+Lorem  ipsum  dolor  sit  amet,  consectetuer  adipiscing  
+elit.   Etiam  lobortisfacilisis sem.  Nullam nec mi et 
+neque pharetra sollicitudin.  Praesent imperdietmi nec ante. 
+Donec ullamcorper, felis non sodales...
+
+\section{Second Section}
+
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit.  
+Etiam lobortis facilisissem.  Nullam nec mi et neque pharetra 
+sollicitudin.  Praesent imperdiet mi necante...
+
+\subsection{First Subsection}
+Praesent imperdietmi nec ante. Donec ullamcorper, felis non sodales...
+
+\section*{Unnumbered Section}
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit.  
+Etiam lobortis facilisissem
+</code></pre><p><a target="_blank" rel="noopener noreferrer" 
+  href="/images/latex-15.png"><img  src="/images/latex-15.png"
+        alt/></a></p>
+<p><code>\section{}</code> 命令标记着新章节的开始，章节名要写在大括号中。章节编号会自动进行，你可以通过在命令和大括号之间中添加 <code>*</code> 来关闭章节自动编号功能，就像这样 <code>\section*{}</code>。我们也可以添加子章节 <code>\subsection{}</code> ，子子章节也是可行的 <code>\subsubsection{}</code>。基本的章节层级划分如下：</p>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">-1</td>
+<td align="center"><code>\part{part}</code></td>
+</tr>
+<tr>
+<td align="center">0</td>
+<td align="center"><code>\chapter{chapter}</code></td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td align="center"><code>\section{section}</code></td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center"><code>\subsection{subsection}</code></td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center"><code>\subsubsection{subsubsection}</code></td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center"><code>\paragraph{paragraph}</code></td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td align="center"><code>\subparagraph{subparagraph}</code></td>
+</tr>
+</tbody>
+</table>
+<p>⚠️ <code>\part</code> 和 <code>\chapter</code> 只在 <em>report</em> 和 <em>book</em> 中生效。</p>
+<p>更多关于文档结构的讨论详见<a href="https://www.overleaf.com/learn/Sections_and_chapters"target="_blank">article about sections and chapters</a>。</p>
+<h1 id="创建表格">创建表格</h1>
+<h2 id="在-latex-中创建一个简答的表格">在 LaTeX 中创建一个简答的表格</h2>
+<p>下面是一个最简单的表格的例子:</p>
+<pre><code>\begin{center}
+\begin{tabular}{ c c c }
+ cell1 &amp; cell2 &amp; cell3 \\ 
+ cell4 &amp; cell5 &amp; cell6 \\  
+ cell7 &amp; cell8 &amp; cell9    
+\end{tabular}
+\end{center}
+</code></pre><p><a target="_blank" rel="noopener noreferrer" 
+  href="/images/latex-16.png"><img  src="/images/latex-16.png"
+        alt/></a></p>
+<p>LaTeX 中，默认的创建表格的方法是利用 <strong>tabular</strong> 环境。你必须为它指定参数，在本例中是 <strong>{c c c}</strong>。这个参数告诉 LaTeX 表格将会是 3 列，表格中每个项目的内容都会居中。可以使用 <strong>r</strong> 来对文本进行右对齐，使用 <strong>l</strong> 来左对齐。符号 <strong>&amp;</strong> 用来每个表格项的分隔符。每行的对齐符号必须少于列数。我们使用 <strong>\</strong> 作为表格的换行符。我们将整个表格打包在 <strong>center</strong> 环境中因此我们的表格能够显示在页面中部。</p>
+<h2 id="添加边界">添加边界</h2>
+<p><em>tabular</em> 环境非常灵活，你可以在每列之间放许多分割线</p>
+<pre><code>\begin{center}
+\begin{tabular}{ |c|c|c| } 
+ \hline
+ cell1 &amp; cell2 &amp; cell3 \\ 
+ cell4 &amp; cell5 &amp; cell6 \\ 
+ cell7 &amp; cell8 &amp; cell9 \\ 
+ \hline
+\end{tabular}
+\end{center}
+
+TablesEx2.png
+</code></pre><p><a target="_blank" rel="noopener noreferrer" 
+  href="/images/latex-17.png"><img  src="/images/latex-17.png"
+        alt/></a></p>
+<p>你可以通过 <code>\hline</code> 为列添加水平边界，通过 <code>|</code> 添加数值边界。</p>
+<ul>
+<li><strong>{ |c|c|c| }</strong>: 这声明了列表有三列，三列被垂直线分隔。</li>
+<li><strong>\hline</strong>: 该命令将插入水平线。我们已经在顶部和底部设置了水平分隔符。事实上，你可以多次使用 <strong>\hline</strong>。</li>
+</ul>
+<p>以下是第二个例子：</p>
+<pre><code>\begin{center}
+ \begin{tabular}{||c c c c||} 
+ \hline
+ Col1 &amp; Col2 &amp; Col2 &amp; Col3 \\ [0.5ex] 
+ \hline\hline
+ 1 &amp; 6 &amp; 87837 &amp; 787 \\ 
+ \hline
+ 2 &amp; 7 &amp; 78 &amp; 5415 \\
+ \hline
+ 3 &amp; 545 &amp; 778 &amp; 7507 \\
+ \hline
+ 4 &amp; 545 &amp; 18744 &amp; 7560 \\
+ \hline
+ 5 &amp; 88 &amp; 788 &amp; 6344 \\ [1ex] 
+ \hline
+\end{tabular}
+\end{center}
+</code></pre><p><a target="_blank" rel="noopener noreferrer" 
+  href="/images/latex-18.png"><img  src="/images/latex-18.png"
+        alt/></a></p>
+<p>有时候，创建表格非常需要技巧。你可以去 <a href="https://www.tablesgenerator.com/"target="_blank">TablesGenerator.com</a> 创建并导出 LaTeX 中 tabulars值的代码。</p>
+<h2 id="表标题标签和引用--captions-labels-and-references-">表标题，标签和引用 ( Captions, labels and references )</h2>
+<p>你能为表设置标题和引用。与对图片的处理相似。唯一的不同是我们使用 <strong>table</strong> 环境而非 <strong>figure</strong>。</p>
+<pre><code>Table \ref{table:data} is an example of referenced \LaTeX{} elements.
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{||c c c c||} 
+ \hline
+ Col1 &amp; Col2 &amp; Col2 &amp; Col3 \\ [0.5ex] 
+ \hline\hline
+ 1 &amp; 6 &amp; 87837 &amp; 787 \\ 
+ 2 &amp; 7 &amp; 78 &amp; 5415 \\
+ 3 &amp; 545 &amp; 778 &amp; 7507 \\
+ 4 &amp; 545 &amp; 18744 &amp; 7560 \\
+ 5 &amp; 88 &amp; 788 &amp; 6344 \\ [1ex] 
+ \hline
+\end{tabular}
+\caption{Table to test captions and labels}
+\label{table:data}
+\end{table}
+</code></pre><p><a target="_blank" rel="noopener noreferrer" 
+  href="/images/latex-19.png"><img  src="/images/latex-19.png"
+        alt/></a></p>
+<p>⚠️ <em>If you are using captions and references on your own computer, you will have to compile the document twice for the references to work. Overleaf will do this for you automatically.</em></p>
+<h2 id="添加目录--table-of-contents-">添加目录 ( Table of Contents )</h2>
+<p>要创建一个有内容的表是非常简单直观的，命令是<code>\tableofcontents</code>。</p>
+<pre><code>\documentclass{article}
+\usepackage[utf8]{inputenc}
+ 
+\title{Sections and Chapters}
+\author{Gubert Farnsworth}
+\date{ }
+  
+\begin{document}
+  
+\maketitle
+  
+\tableofcontents
+
+\section{Introduction}
+   
+This is the first section.
+      
+Lorem  ipsum  dolor  sit  amet,  consectetuer  adipiscing  
+elit.   Etiam  lobortisfacilisis sem.  Nullam nec mi et 
+neque pharetra sollicitudin.  Praesent imperdietmi nec ante. 
+Donec ullamcorper, felis non sodales...
+       
+\addcontentsline{toc}{section}{Unnumbered Section}
+\section*{Unnumbered Section}
+
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit.  
+Etiam lobortis facilisissem.  Nullam nec mi et neque pharetra 
+sollicitudin.  Praesent imperdiet mi necante...
+
+\section{Second Section}
+       
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit.  
+Etiam lobortis facilisissem.  Nullam nec mi et neque pharetra 
+sollicitudin.  Praesent imperdiet mi necante...
+         
+\end{document}
+</code></pre><p><a target="_blank" rel="noopener noreferrer" 
+  href="/images/latex-20.png"><img  src="/images/latex-20.png"
+        alt/></a></p>
+<p>所有的章节，子章节会自动进行编排并把页面显示在目录中。手动添加目录，比如你要添加一个未编号的章节，可以使用 <code>\addcontentsline</code>就像实例中那样。</p>
+</article><section class="article navigation"><p><a class="link" href="/Build-6in4-tunnel-on-server.html"><span class="li">&rarr;</span>利用双栈VPS搭建6in4隧道</a></p></section><section class="article discussion"><div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "ellinia-me" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></section></div><section id="footer" class="footer"><div class="footer-wrap">
+    <p class="copyright">@Bazzi</p>
+    <p class="powerby"><span>Powered by </span><a href="https://gohugo.io" 
+        target="_blank">Hugo</a><span> and the </span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+        target="_blank">Notepadium</a></p>
+</div></section><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/&#43;DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l&#43;B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd&#43;qj&#43;o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body);"></script>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-85751090-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+</div>
+</body>
+
+</html>
