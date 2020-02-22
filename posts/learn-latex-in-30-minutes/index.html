@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.64.1" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
-<meta name="supported-color-schemes" content="light dark"><title>Learn Latex in 30 Minutes&nbsp;&ndash;&nbsp;Ellinia</title><link rel="stylesheet" href="/css/core.min.23cf2408a7bbf383778ab163ca01c615250ed41c122a52c02d83618a440898a34d9584fae91a0a2c0da793b5121359c1.css" integrity="sha384-I88kCKe784N3irFjygHGFSUO1BwSKlLALYNhikQImKNNlYT66RoKLA2nk7USE1nB"><link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-icon-57x57.png">
+<meta name="supported-color-schemes" content="light dark"><title>Learn LaTeX in 30 Minutes&nbsp;&ndash;&nbsp;Ellinia</title><link rel="stylesheet" href="/css/core.min.23cf2408a7bbf383778ab163ca01c615250ed41c122a52c02d83618a440898a34d9584fae91a0a2c0da793b5121359c1.css" integrity="sha384-I88kCKe784N3irFjygHGFSUO1BwSKlLALYNhikQImKNNlYT66RoKLA2nk7USE1nB"><link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-icon-57x57.png">
 <link rel="apple-touch-icon" sizes="60x60" href="/favicons/apple-icon-60x60.png">
 <link rel="apple-touch-icon" sizes="72x72" href="/favicons/apple-icon-72x72.png">
 <link rel="apple-touch-icon" sizes="76x76" href="/favicons/apple-icon-76x76.png">
@@ -22,7 +22,7 @@
     <div class="base-body"><section id="header" class="site header">
     <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><img class="site logo" src="/images/avatar.png" alt /><span class="site name">Ellinia</span></a></span>
         <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/tags/">Tags</a></nav></div></span></div></section><div id="content"><section class="article header">
-    <h1 class="article title">Learn Latex in 30 Minutes</h1><p class="article date">2020-02-21</p></section><article class="article markdown-body"><h1 id="30-分钟入门-latex">30 分钟入门 LaTex</h1>
+    <h1 class="article title">Learn LaTeX in 30 Minutes</h1><p class="article date">2020-02-21</p></section><article class="article markdown-body"><h1 id="30-分钟入门-latex">30 分钟入门 LaTeX</h1>
 <blockquote>
 <p>本文译自<a href="https:https://www.overleaf.com/learn/latex/Learn_LaTeX_in_30_minutes"target="_blank">Overleaf</a></p>
 </blockquote>
@@ -32,9 +32,9 @@
 <p>LaTeX 是用来创建专业外观 ( professional-looking ) 文档的工具。 它基于 WYSIWYM  ( 所见即所得 ) 的理念，这意味着你在编辑时只需关注文档的内容，计算机会自动处理字符排版。和 Microsoft Word 或 LibreOffice 类似，用户可以直接输入纯文本并且让 LaTeX 处理后续排版工作。</p>
 <h1 id="为什么要学习-latex">为什么要学习 LaTeX？</h1>
 <p>在全球范围内，LaTeX 被广泛应用于科技文档，书记以及许多其他形式出版物的排版。 它不仅能够创建排版美观的文档，也能够让用户快速地处理排版过程中的的复杂部分，例如输入的数学公式，创建的表格，参考文献的引用和创建文献目录 ( biblographies )。而且，LeTeX 能够在所有部分间保持一致的布局。此外，因为还有大量的开源的程序包 ( <em>packages</em> ) 可供 LaTeX 使用， LaTeX 的潜力无穷。有了这些程序包的加持，用户能大大扩展 LaTeX 的功能。例如添加脚注 ( footnotes )， 绘制原理图 ( schematics )，创建表格等。</p>
-<p>人们使用 LaTeX 的一个重要原因是它将文档的内容和文档的样式剥离开来。这意味着一旦你写好了文档的内容，我们可以简单地改变文档样式。 类似地，你也可以创建样式模板来应用到不同的文档，让它们有相同的现实效果。据此，科技论文可以借助模板来进行版面处理。这些模板 ( templates ) 拥有预置制的布局，这意味着你只需要在其中填入内容。实际上，有成百上千的模板可以供我们使用，从个人简历到PPT。</p>
+<p>人们使用 LaTeX 的一个重要原因是它将文档的内容和文档的样式剥离开来。这意味着一旦你写好了文档的内容，我们可以简单地改变文档样式。 类似地，你也可以创建样式模板来应用到不同的文档，让它们有相同的现实效果。据此，科技论文可以借助模板来进行版面处理。这些模板 ( templates ) 拥有预置制的布局，这意味着你只需要在其中填入内容。实际上，有成百上千的模板可以供我们使用，从个人简历到PPT，几乎涵盖方方面面。</p>
 <h1 id="编写你的第一支-latex-程序片段">编写你的第一支 LaTeX 程序片段</h1>
-<p>第一步是创建一个新的 LaTex 项目。你可以在本地计算机上通过新建<code>.tex</code> 文件或<a href="https://www.overleaf.com/learn/Creating_a_document_in_Overleaf"target="_blank">在 Overleaf中开始一个新项目</a>。首先，让我们举一个简单的例子：</p>
+<p>第一步是创建一个新的 LaTeX 项目。你可以在本地计算机上通过新建<code>.tex</code> 文件或<a href="https://www.overleaf.com/learn/Creating_a_document_in_Overleaf"target="_blank">在 Overleaf中开始一个新项目</a>。首先，让我们举一个简单的例子：</p>
 <pre><code>\documentclass{article}
 
 \begin{document}
@@ -151,10 +151,10 @@ There's a picture of a galaxy above
         alt/></a></p>
 <p>LaTeX 本身不能管理图片，你需要借助程序包来进行管理。程序包可以被用来改变 LaTeX 文档的默认外观或者为 LaTeX 添加更多功能性的内容。在本例中，你需要在文档中引用一张图片，所以你需要用到 <strong>graphicx</strong> 这个程序包。 该程序包提供了以下命令，<code>\includegraphics{...}</code> 和 <code>\graphicspath{...}</code>。想要使用 <strong>graphicx</strong> 程序包，只需要将以下命令插入到 <code>preamble</code> 中：<code>\usepackage{graphicx}</code>。</p>
 <p><code>\graphicspath{ {images/} }</code> 命令告诉 LaTeX 图片保存在名为当前目录下的 <em>images</em> 文件夹中。</p>
-<p><code>\includegraphics{universe}</code> 是向文档插入图片的命令。其中，<em>universe</em> 是不带拓展名的图片的文件名。图片的文件名不应该包含空格和多个西文点号。</p>
+<p><code>\includegraphics{universe}</code> 是向文档插入图片的命令。其中，<em>universe</em> 是不带拓展名的图片的文件名 ( <em>universe</em> 的实际格式是 PNG )。图片的文件名不应该包含空格和多个西文点号。</p>
 <p>注意：文件的扩展名可以被引用，但是我们最好省略扩展名。如果我们省略扩展名，LaTeX 会寻找所有它支持的图片格式。另外，我们也建议文件后缀名都是用使用小写英文字符。更多系列请移步<a href="https://www.overleaf.com/learn/latex/Learn_LaTeX_in_30_minutes#Generating_high-res_and_low-res_images"target="_blank">generating high resolution and low resolution images</a>。</p>
-<h1 id="captions-labels-and-references">Captions, labels and references</h1>
-<p>图片可以通过 <strong>figure</strong> 命令来设置图片的下标，标签和参考：</p>
+<h1 id="图片的标题标签和引用--captions-labels-and-references-">图片的标题，标签和引用 ( Captions, labels and references )</h1>
+<p>图片可以通过 <strong>figure</strong> 命令来设置图片的标题，标签和引用：</p>
 <pre><code>\begin{figure}[h]
     \centering
     \includegraphics[width=0.25\textwidth]{mesh}
@@ -243,8 +243,8 @@ Mathematical operators are prefixed with a backslash as $\sin(\beta)$, $\cos(\al
 <li><a href="https://www.overleaf.com/learn/List_of_Greek_letters_and_math_symbols"target="_blank">List of Greek letters and math symbols</a></li>
 <li><a href="https://www.overleaf.com/learn/Mathematical_fonts"target="_blank">Mathematical fonts</a></li>
 </ul>
-<h1 id="基本排版--formatting-">基本排版 ( Formatting )</h1>
-<p>我们现在来看如何写摘要 ( abstracts ) 和如何将 LaTeX 文档排版输出成不同章，小节和段落。</p>
+<h1 id="基本编排--formatting-">基本编排 ( Formatting )</h1>
+<p>我们现在来看如何写摘要 ( abstracts ) 和如何将 LaTeX 文档编排成不同章，小节和段落。</p>
 <h2 id="摘要--abstracts-">摘要 ( Abstracts )</h2>
 <p>在科技文档中，将文章主题进行简要的概括是常见的做法。在 LaTeX 中，<code>abstract</code> 环境专门用来处理摘要。<code>abstract</code> 环境将会把特定格式的文本置于文档的顶部。</p>
 <pre><code>\begin{document}
