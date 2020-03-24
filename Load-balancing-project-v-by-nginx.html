@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.64.1" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.68.1" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
 <meta name="supported-color-schemes" content="light dark"><title>使用 Nginx 对 Project V 做负载均衡&nbsp;&ndash;&nbsp;Ellinia</title><link rel="stylesheet" href="/css/core.min.23cf2408a7bbf383778ab163ca01c615250ed41c122a52c02d83618a440898a34d9584fae91a0a2c0da793b5121359c1.css" integrity="sha384-I88kCKe784N3irFjygHGFSUO1BwSKlLALYNhikQImKNNlYT66RoKLA2nk7USE1nB"><link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-icon-57x57.png">
 <link rel="apple-touch-icon" sizes="60x60" href="/favicons/apple-icon-60x60.png">
@@ -107,15 +107,15 @@ tasklist|find /i &quot;nginx.exe&quot; &amp;&amp; taskkill /im  nginx.exe /f &am
 <p>启用了TLS后，Project V 的配置文件如下：</p>
 <div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
   <span class="nt">&#34;inbound&#34;</span><span class="p">:</span> <span class="p">{</span>
-  <span class="err">.</span><span class="err">.</span><span class="err">.</span>
-  <span class="p">}</span><span class="p">,</span>
+  <span class="err">...</span>
+  <span class="p">},</span>
   <span class="nt">&#34;outbound&#34;</span><span class="p">:</span> <span class="p">{</span>
     <span class="nt">&#34;protocol&#34;</span><span class="p">:</span> <span class="s2">&#34;vmess&#34;</span><span class="p">,</span>
     <span class="nt">&#34;settings&#34;</span><span class="p">:</span> <span class="p">{</span>
       <span class="nt">&#34;vnext&#34;</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">{</span>
-          <span class="nt">&#34;address&#34;</span><span class="p">:</span> <span class="s2">&#34;0.0.0.0&#34;</span><span class="p">,</span> <span class="err">/</span><span class="err">/</span><span class="err">N</span><span class="err">g</span><span class="err">i</span><span class="err">n</span><span class="err">x</span> <span class="err">监</span><span class="err">听</span><span class="err">的</span><span class="err">地</span><span class="err">址</span>
-          <span class="nt">&#34;port&#34;</span><span class="p">:</span> <span class="mi">10000</span><span class="p">,</span>         <span class="err">/</span><span class="err">/</span><span class="err">N</span><span class="err">g</span><span class="err">i</span><span class="err">n</span><span class="err">x</span> <span class="err">监</span><span class="err">听</span><span class="err">的</span><span class="err">端</span><span class="err">口</span>
+          <span class="nt">&#34;address&#34;</span><span class="p">:</span> <span class="s2">&#34;0.0.0.0&#34;</span><span class="p">,</span> <span class="err">//Nginx</span> <span class="err">监听的地址</span>
+          <span class="nt">&#34;port&#34;</span><span class="p">:</span> <span class="mi">10000</span><span class="p">,</span>         <span class="err">//Nginx</span> <span class="err">监听的端口</span>
           <span class="nt">&#34;users&#34;</span><span class="p">:</span> <span class="p">[</span>
             <span class="p">{</span>
               <span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="s2">&#34;1ce383ea-13e9-4939-9b1d-20d67135969a&#34;</span><span class="p">,</span>
@@ -124,17 +124,17 @@ tasklist|find /i &quot;nginx.exe&quot; &amp;&amp; taskkill /im  nginx.exe /f &am
           <span class="p">]</span>
         <span class="p">}</span>
       <span class="p">]</span>
-    <span class="p">}</span><span class="p">,</span>
+    <span class="p">},</span>
     <span class="nt">&#34;streamSettings&#34;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="nt">&#34;tlsSettings&#34;</span><span class="p">:</span><span class="p">{</span>
+        <span class="nt">&#34;tlsSettings&#34;</span><span class="p">:{</span>
                 <span class="nt">&#34;serverName&#34;</span><span class="p">:</span><span class="s2">&#34;TLS证书对应的域名&#34;</span><span class="p">,</span>
                 <span class="nt">&#34;allowInsecure&#34;</span><span class="p">:</span><span class="kc">true</span>
-        <span class="p">}</span><span class="p">,</span>
+        <span class="p">},</span>
 
-    <span class="err">.</span><span class="err">.</span><span class="err">.</span>
+    <span class="err">...</span>
     <span class="p">}</span>
-  <span class="p">}</span><span class="p">,</span>
-  <span class="err">.</span><span class="err">.</span><span class="err">.</span>
+  <span class="p">},</span>
+  <span class="err">...</span>
 <span class="p">}</span>
 </code></pre></div><p>此时，Nginx 配置中的,服务器端口应指定为443，即：</p>
 <pre><code>···

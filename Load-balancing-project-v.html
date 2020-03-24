@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.64.1" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.68.1" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
 <meta name="supported-color-schemes" content="light dark"><title>Project V 负载均衡的两种方法&nbsp;&ndash;&nbsp;Ellinia</title><link rel="stylesheet" href="/css/core.min.23cf2408a7bbf383778ab163ca01c615250ed41c122a52c02d83618a440898a34d9584fae91a0a2c0da793b5121359c1.css" integrity="sha384-I88kCKe784N3irFjygHGFSUO1BwSKlLALYNhikQImKNNlYT66RoKLA2nk7USE1nB"><link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-icon-57x57.png">
 <link rel="apple-touch-icon" sizes="60x60" href="/favicons/apple-icon-60x60.png">
@@ -41,8 +41,8 @@ data ====&gt; Project V  ====&gt; server2
 </code></pre><h2 id="project-v-配置">Project V 配置</h2>
 <div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
   <span class="nt">&#34;inbound&#34;</span><span class="p">:</span> <span class="p">{</span>
-  <span class="err">.</span><span class="err">.</span><span class="err">.</span>
-  <span class="p">}</span><span class="p">,</span>
+  <span class="err">...</span>
+  <span class="p">},</span>
   <span class="nt">&#34;outbound&#34;</span><span class="p">:</span> <span class="p">{</span>
     <span class="nt">&#34;protocol&#34;</span><span class="p">:</span> <span class="s2">&#34;vmess&#34;</span><span class="p">,</span>
     <span class="nt">&#34;settings&#34;</span><span class="p">:</span> <span class="p">{</span>
@@ -56,7 +56,7 @@ data ====&gt; Project V  ====&gt; server2
               <span class="nt">&#34;alterId&#34;</span><span class="p">:</span> <span class="mi">64</span>
             <span class="p">}</span>
           <span class="p">]</span>
-        <span class="p">}</span><span class="p">,</span>
+        <span class="p">},</span>
         <span class="p">{</span>
           <span class="nt">&#34;address&#34;</span><span class="p">:</span> <span class="s2">&#34;address_of_vps2&#34;</span><span class="p">,</span>
           <span class="nt">&#34;port&#34;</span><span class="p">:</span> <span class="mi">4822</span><span class="p">,</span>
@@ -67,14 +67,14 @@ data ====&gt; Project V  ====&gt; server2
             <span class="p">}</span>
           <span class="p">]</span>
         <span class="p">}</span>
-        <span class="err">/</span><span class="err">/</span><span class="err">如</span><span class="err">果</span><span class="err">还</span><span class="err">有</span><span class="err">更</span><span class="err">多</span><span class="err">服</span><span class="err">务</span><span class="err">器</span><span class="err">可</span><span class="err">继</span><span class="err">续</span><span class="err">添</span><span class="err">加</span>
+        <span class="err">//如果还有更多服务器可继续添加</span>
       <span class="p">]</span>
-    <span class="p">}</span><span class="p">,</span>
+    <span class="p">},</span>
     <span class="nt">&#34;streamSettings&#34;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="err">.</span><span class="err">.</span><span class="err">.</span>
+    <span class="err">...</span>
     <span class="p">}</span>
-  <span class="p">}</span><span class="p">,</span>
-  <span class="err">.</span><span class="err">.</span><span class="err">.</span>
+  <span class="p">},</span>
+  <span class="err">...</span>
 <span class="p">}</span>
 </code></pre></div><blockquote>
 <p>如端口、id 这些在 vnext 数组内的配置项可以各不相同，但是它们的传输层配置（streamSettings）必须一致。如果有配置 TLS 的需求，只需申请一个 TLS 证书，然后把证书和密钥复制到所有的 VPS 并配置好 TLS，接着客户端配置里 address 填各个服务器的 IP，在 tlsSettings 的 serverName 填证书的域名。</p>
@@ -158,15 +158,15 @@ backend v2ray
 <p>启用了TLS后，Project V 的配置文件如下：</p>
 <div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
   <span class="nt">&#34;inbound&#34;</span><span class="p">:</span> <span class="p">{</span>
-  <span class="err">.</span><span class="err">.</span><span class="err">.</span>
-  <span class="p">}</span><span class="p">,</span>
+  <span class="err">...</span>
+  <span class="p">},</span>
   <span class="nt">&#34;outbound&#34;</span><span class="p">:</span> <span class="p">{</span>
     <span class="nt">&#34;protocol&#34;</span><span class="p">:</span> <span class="s2">&#34;vmess&#34;</span><span class="p">,</span>
     <span class="nt">&#34;settings&#34;</span><span class="p">:</span> <span class="p">{</span>
       <span class="nt">&#34;vnext&#34;</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">{</span>
-          <span class="nt">&#34;address&#34;</span><span class="p">:</span> <span class="s2">&#34;0.0.0.0&#34;</span><span class="p">,</span> <span class="err">/</span><span class="err">/</span><span class="err">H</span><span class="err">a</span><span class="err">p</span><span class="err">r</span><span class="err">o</span><span class="err">x</span><span class="err">y</span><span class="err">监</span><span class="err">听</span><span class="err">的</span><span class="err">地</span><span class="err">址</span>
-          <span class="nt">&#34;port&#34;</span><span class="p">:</span> <span class="mi">7777</span><span class="p">,</span>         <span class="err">/</span><span class="err">/</span><span class="err">H</span><span class="err">a</span><span class="err">p</span><span class="err">r</span><span class="err">o</span><span class="err">x</span><span class="err">y</span><span class="err">监</span><span class="err">听</span><span class="err">的</span><span class="err">端</span><span class="err">口</span>
+          <span class="nt">&#34;address&#34;</span><span class="p">:</span> <span class="s2">&#34;0.0.0.0&#34;</span><span class="p">,</span> <span class="err">//Haproxy监听的地址</span>
+          <span class="nt">&#34;port&#34;</span><span class="p">:</span> <span class="mi">7777</span><span class="p">,</span>         <span class="err">//Haproxy监听的端口</span>
           <span class="nt">&#34;users&#34;</span><span class="p">:</span> <span class="p">[</span>
             <span class="p">{</span>
               <span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="s2">&#34;1ce383ea-13e9-4939-9b1d-20d67135969a&#34;</span><span class="p">,</span>
@@ -175,17 +175,17 @@ backend v2ray
           <span class="p">]</span>
         <span class="p">}</span>
       <span class="p">]</span>
-    <span class="p">}</span><span class="p">,</span>
+    <span class="p">},</span>
     <span class="nt">&#34;streamSettings&#34;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="nt">&#34;tlsSettings&#34;</span><span class="p">:</span><span class="p">{</span>
+        <span class="nt">&#34;tlsSettings&#34;</span><span class="p">:{</span>
                 <span class="nt">&#34;serverName&#34;</span><span class="p">:</span><span class="s2">&#34;TLS证书对应的域名&#34;</span><span class="p">,</span>
                 <span class="nt">&#34;allowInsecure&#34;</span><span class="p">:</span><span class="kc">true</span>
-        <span class="p">}</span><span class="p">,</span>
+        <span class="p">},</span>
 
-    <span class="err">.</span><span class="err">.</span><span class="err">.</span>
+    <span class="err">...</span>
     <span class="p">}</span>
-  <span class="p">}</span><span class="p">,</span>
-  <span class="err">.</span><span class="err">.</span><span class="err">.</span>
+  <span class="p">},</span>
+  <span class="err">...</span>
 <span class="p">}</span>
 </code></pre></div><p>此时，Haproxy 配置中的,服务器端口应指定为443，即：</p>
 <pre><code>···

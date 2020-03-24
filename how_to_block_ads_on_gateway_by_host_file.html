@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.64.1" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.68.1" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
 <meta name="supported-color-schemes" content="light dark"><title>树莓派dnsmasq通过Host文件去除广告&nbsp;&ndash;&nbsp;Ellinia</title><link rel="stylesheet" href="/css/core.min.23cf2408a7bbf383778ab163ca01c615250ed41c122a52c02d83618a440898a34d9584fae91a0a2c0da793b5121359c1.css" integrity="sha384-I88kCKe784N3irFjygHGFSUO1BwSKlLALYNhikQImKNNlYT66RoKLA2nk7USE1nB"><link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-icon-57x57.png">
 <link rel="apple-touch-icon" sizes="60x60" href="/favicons/apple-icon-60x60.png">
@@ -49,7 +49,7 @@ rm /etc/dnsmasq.d/adblock.conf
 </span><span class="se"></span>	<span class="s2">&#34;https://easylist.to/easylist/easylist.txt&#34;</span>
 <span class="k">do</span> 
 
-wget -4 --no-check-certificate -qO - <span class="s2">&#34;</span><span class="si">${</span><span class="nv">URL</span><span class="si">}</span><span class="s2">&#34;</span> <span class="p">|</span> grep ^<span class="se">\|</span><span class="se">\|</span><span class="o">[</span>^<span class="se">\*</span><span class="o">]</span>*<span class="se">\^</span>$ <span class="p">|</span>sed -e <span class="s1">&#39;s:||:address\=\/:&#39;</span> -e <span class="s1">&#39;s:\^:/127\.0\.0\.1:&#39;</span> &gt;&gt; <span class="si">${</span><span class="nv">TMP_ADBLOCK</span><span class="si">}</span>
+wget -4 --no-check-certificate -qO - <span class="s2">&#34;</span><span class="si">${</span><span class="nv">URL</span><span class="si">}</span><span class="s2">&#34;</span> <span class="p">|</span> grep ^<span class="se">\|\|</span><span class="o">[</span>^<span class="se">\*</span><span class="o">]</span>*<span class="se">\^</span>$ <span class="p">|</span>sed -e <span class="s1">&#39;s:||:address\=\/:&#39;</span> -e <span class="s1">&#39;s:\^:/127\.0\.0\.1:&#39;</span> &gt;&gt; <span class="si">${</span><span class="nv">TMP_ADBLOCK</span><span class="si">}</span>
 
 <span class="c1">#wget -4 --no-check-certificate -qO- &#34;${URL}&#34; | grep -v -e &#34;^#&#34; -e &#34;^\s*$&#34; -e &#34;localhost&#34; -e &#34;^;&#34; -e &#34;^@&#34; -e &#34;^:&#34; -e &#34;^[a-zA-Z]&#34; \</span>
 <span class="c1">#| sed -E -e &#34;s/#.*$//&#34; -e &#34;s/[[:space:]]*//g&#34; -e &#34;/^$/d&#34; \</span>
