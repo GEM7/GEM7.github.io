@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.68.1" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.70.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
 <meta name="supported-color-schemes" content="light dark"><title>使用 Nginx 对 Project V 做负载均衡&nbsp;&ndash;&nbsp;Ellinia</title><link rel="stylesheet" href="/css/core.min.23cf2408a7bbf383778ab163ca01c615250ed41c122a52c02d83618a440898a34d9584fae91a0a2c0da793b5121359c1.css" integrity="sha384-I88kCKe784N3irFjygHGFSUO1BwSKlLALYNhikQImKNNlYT66RoKLA2nk7USE1nB"><link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-icon-57x57.png">
 <link rel="apple-touch-icon" sizes="60x60" href="/favicons/apple-icon-60x60.png">
@@ -25,7 +25,7 @@
     <h1 class="article title">使用 Nginx 对 Project V 做负载均衡</h1><p class="article date">2018-03-01</p></section><article class="article markdown-body"><h1 id="前言">前言</h1>
 <p>在之前的一篇<a href="https://ellinia.me/Load-balancing-project-v/"target="_blank">文章</a>中介绍了两种 Project V 的负载均衡的方式：1. 通过 Project V 自带的负载均衡 2. 通过 Haproxy。 今天来介绍第三种方式：<strong>Nginx</strong></p>
 <h1 id="nginx-简介">Nginx 简介</h1>
-<p>Nginx 是一款可以托管 Http 的软件，很多朋友使用 Nginx 来配合 PHP, Mysql 等来组成经典的&rsquo;LENP'环境用于搭建网站。Nginx 除了简单的网页托管和反向代理的功能之外，还可以对 TCP 流量进行负载均衡，性能亦十分优秀。 Nginx 所支持的平台也十分全面，即使在 Windows 系统也可以找到官方提供的分发包；而 Windows 的用户若是想要使用 Haproxy 则不得不借助 <code>cygwin</code> 这一软件来提供类 Linux 环境来编译 Haproxy。</p>
+<p>Nginx 是一款可以托管 Http 的软件，很多朋友使用 Nginx 来配合 PHP, Mysql 等来组成经典的&rsquo;LENP&rsquo;环境用于搭建网站。Nginx 除了简单的网页托管和反向代理的功能之外，还可以对 TCP 流量进行负载均衡，性能亦十分优秀。 Nginx 所支持的平台也十分全面，即使在 Windows 系统也可以找到官方提供的分发包；而 Windows 的用户若是想要使用 Haproxy 则不得不借助 <code>cygwin</code> 这一软件来提供类 Linux 环境来编译 Haproxy。</p>
 <p>但 Nginx 有一个缺点: 那就是主动后端检测的功能需要付费版才能提供，免费版只有被动检测的功能。</p>
 <p>不过，这并不妨碍我们试一试</p>
 <h2 id="拓扑结构">拓扑结构</h2>

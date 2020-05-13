@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.68.1" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.70.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
 <meta name="supported-color-schemes" content="light dark"><title>树莓派启用看门狗&nbsp;&ndash;&nbsp;Ellinia</title><link rel="stylesheet" href="/css/core.min.23cf2408a7bbf383778ab163ca01c615250ed41c122a52c02d83618a440898a34d9584fae91a0a2c0da793b5121359c1.css" integrity="sha384-I88kCKe784N3irFjygHGFSUO1BwSKlLALYNhikQImKNNlYT66RoKLA2nk7USE1nB"><link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-icon-57x57.png">
 <link rel="apple-touch-icon" sizes="60x60" href="/favicons/apple-icon-60x60.png">
@@ -40,7 +40,7 @@
 </ul>
 <pre><code>activating the hardware watchdog
 dtparam=watchdog=on
-</code></pre><p>添加完成以后保存，并退出。然后重启树莓派，待重启完成后，查看设备列表会发现里面多出两个名字分别是&rsquo;watchdog'和&rsquo;watchdog0'的看门狗设备，这代表硬件已经启用成功</p>
+</code></pre><p>添加完成以后保存，并退出。然后重启树莓派，待重启完成后，查看设备列表会发现里面多出两个名字分别是&rsquo;watchdog&rsquo;和&rsquo;watchdog0&rsquo;的看门狗设备，这代表硬件已经启用成功</p>
 <pre><code>pi@raspi-tst:~ $ ls -al /dev/watchdog*
 crw------- 1 root root  10, 130 May 19 07:09 /dev/watchdog
 crw------- 1 root root 253,   0 May 19 07:09 /dev/watchdog0
