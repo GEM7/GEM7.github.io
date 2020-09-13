@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.70.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.74.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
 <meta name="supported-color-schemes" content="light dark"><title>Learn LaTeX in 30 Minutes&nbsp;&ndash;&nbsp;Ellinia</title><link rel="stylesheet" href="/css/core.min.23cf2408a7bbf383778ab163ca01c615250ed41c122a52c02d83618a440898a34d9584fae91a0a2c0da793b5121359c1.css" integrity="sha384-I88kCKe784N3irFjygHGFSUO1BwSKlLALYNhikQImKNNlYT66RoKLA2nk7USE1nB"><link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-icon-57x57.png">
 <link rel="apple-touch-icon" sizes="60x60" href="/favicons/apple-icon-60x60.png">
@@ -50,7 +50,7 @@ extra parameters or packages included.
 <p>如果你在使用比较基础的文本编辑器比如 gedit， emacs，vim，sublime，notepad 等。 你需要手动进行编译。在计算机终端或命令行界面下键入 <code>pdflatex &lt;your document&gt;</code>。更多手动编译的参考信息见<a href="https://en.wikibooks.org/wiki/LaTeX/Basics#Compilation"target="_blank">此</a>。</p>
 <p>如果你使用的是专业的 LaTeX 编辑器例如 TeXmaker 或 TeXworks，简单地点击 <em><strong>Recompile</strong></em> 按钮即可完成重新编译。有关重新编译的更多内容，请见软件对应的文档。</p>
 <p>现在你已经掌握如何向文档中添加内容，我们的下一步是给文档添加标题 ( title )。在此之前，我们先得简要介绍 <strong>preamble</strong>。</p>
-<h1 id="文档的序--preamble-">文档的序 ( Preamble )</h1>
+<h1 id="文档的导言--preamble-">文档的导言 ( Preamble )</h1>
 <p>在之前的例子里文本被囊括在<code>\begin{document}</code>命令之中。在 <code>.tex</code> 文件中，在 <code>\begin{document}</code> 之前的所有部分被称为“序” （ <strong>preamble</strong> ）。 我们在序中定义文档的类型，语言，所要使用的程序包等。例如，一个普通的文档的序如下所以：</p>
 <pre><code>\documentclass[12pt, letterpaper]{article}
 \usepackage[utf8]{inputenc}
