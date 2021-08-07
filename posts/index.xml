@@ -193,5 +193,14 @@ rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org rpm -Uvh http://www.e
       <description>缘由 前一段时间，firefox浏览器自动升级了，常常使用的代理拓展工具Forxyproxy也遇到了一些错误，一打开就报json错误，只能选择</description>
     </item>
     
+    <item>
+      <title>自用VPS存根</title>
+      <link>/posts/vps-log/</link>
+      <pubDate>Sun, 07 Aug 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/vps-log/</guid>
+      <description>Dropbox 点此链接注册Dropbox可以获得额外500M的存储空间！Sign up dropbox via this link to get extra 500MB storage. 北美洲 美国 DigitalOcean DititalOcean Vultr Vultr : 两台AlphaRacks Alpharacks BandwagonHost BandwagonHost UltraVPS</description>
+    </item>
+    
   </channel>
 </rss>
