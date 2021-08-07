@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.74.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.87.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
-<meta name="supported-color-schemes" content="light dark"><title>树莓派dnsmasq通过Host文件去除广告&nbsp;&ndash;&nbsp;Ellinia</title><link rel="stylesheet" href="/css/core.min.23cf2408a7bbf383778ab163ca01c615250ed41c122a52c02d83618a440898a34d9584fae91a0a2c0da793b5121359c1.css" integrity="sha384-I88kCKe784N3irFjygHGFSUO1BwSKlLALYNhikQImKNNlYT66RoKLA2nk7USE1nB"><link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-icon-57x57.png">
+<meta name="supported-color-schemes" content="light dark"><title>树莓派dnsmasq通过Host文件去除广告&nbsp;&ndash;&nbsp;Ellinia</title><link rel="stylesheet" href="/css/core.min.530ac39b094101cfd2827e6795611f2446174f0dbbe4f43ce471da520fc9f9aca8c46ed3e2ef79cbd7027142742f7aef.css" integrity="sha384-UwrDmwlBAc/Sgn5nlWEfJEYXTw275PQ85HHaUg/J&#43;ayoxG7T4u95y9cCcUJ0L3rv"><link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-icon-57x57.png">
 <link rel="apple-touch-icon" sizes="60x60" href="/favicons/apple-icon-60x60.png">
 <link rel="apple-touch-icon" sizes="72x72" href="/favicons/apple-icon-72x72.png">
 <link rel="apple-touch-icon" sizes="76x76" href="/favicons/apple-icon-76x76.png">
@@ -26,7 +26,7 @@
 <p>通过host去除广告是比较原始的一种方式，类似于“从源头阻断这样一个思想”，我们会看到广告，是因为加载了广告的地址，那么我们只要找出属于广告的地址把它屏蔽掉，不就看不到广告了吗。而dnsmasq这一款具有dns功能的软件就能够做到这些，它把被界定为广告的网页的域名或者IP地址强制解析到<code>localhost</code>也就是<code>127.0.0.1</code>，这样的话我们就加载不出广告来。这一做法的好处是不怎么吃资源，但是坏处也很明显。阻断的很生硬。这个生硬感就好像墙上有个贴纸就直接把墙的那一块直接挖掉一样。不如PC端的adblock来的效果好，但是胜在方便。</p>
 <p>以下我目前在使用的一个脚本，它可以生成去除了广告的hosts文件并写入dnsmasq所设置的dns缓存文件中,每次在dnsmasq启动后都会优先读取缓存文件（前提是你已经设置好了），这样的话即使解析到了正确地址也会强制解析到<code>127.0.0.1</code>,达到一种类似于DNS劫持的效果。</p>
 <p>仅个人记录，酌情参考。</p>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="cp">#!/bin/bash
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="cp">#!/bin/bash
 </span><span class="cp"></span>
 <span class="nv">TMP_ADBLOCK</span><span class="o">=</span>/tmp/dnsmasq_adblock_unsorted
 <span class="nv">ADBLOCK</span><span class="o">=</span>/etc/dnsmasq.d/adblock.conf

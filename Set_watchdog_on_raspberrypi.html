@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.74.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.87.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
-<meta name="supported-color-schemes" content="light dark"><title>树莓派启用看门狗&nbsp;&ndash;&nbsp;Ellinia</title><link rel="stylesheet" href="/css/core.min.23cf2408a7bbf383778ab163ca01c615250ed41c122a52c02d83618a440898a34d9584fae91a0a2c0da793b5121359c1.css" integrity="sha384-I88kCKe784N3irFjygHGFSUO1BwSKlLALYNhikQImKNNlYT66RoKLA2nk7USE1nB"><link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-icon-57x57.png">
+<meta name="supported-color-schemes" content="light dark"><title>树莓派启用看门狗&nbsp;&ndash;&nbsp;Ellinia</title><link rel="stylesheet" href="/css/core.min.530ac39b094101cfd2827e6795611f2446174f0dbbe4f43ce471da520fc9f9aca8c46ed3e2ef79cbd7027142742f7aef.css" integrity="sha384-UwrDmwlBAc/Sgn5nlWEfJEYXTw275PQ85HHaUg/J&#43;ayoxG7T4u95y9cCcUJ0L3rv"><link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-icon-57x57.png">
 <link rel="apple-touch-icon" sizes="60x60" href="/favicons/apple-icon-60x60.png">
 <link rel="apple-touch-icon" sizes="72x72" href="/favicons/apple-icon-72x72.png">
 <link rel="apple-touch-icon" sizes="76x76" href="/favicons/apple-icon-76x76.png">
@@ -185,7 +185,7 @@ exit 0
 <pre><code>@reboot sudo /usr/sbin/service watchdog start
 </code></pre><p>通过上述两种方式，看门狗都可以开机启动，你可以通过<code>dmesg | grep watchdog</code>或者<code>cat /var/log/syslog | grep watchdog</code></p>
 <h1 id="测试">测试</h1>
-<p>在确认看门狗已经开启(很重要！！！)后，我们通过一个逻辑炸弹来检测看门狗是否能起作用。这个炸弹英文名为&rsquo;<a href="https://en.wikipedia.org/wiki/Fork_bomb"target="_blank">Fork Bomb</a>',可以快速耗尽机器内存使机器崩溃。</p>
+<p>在确认看门狗已经开启(很重要！！！)后，我们通过一个逻辑炸弹来检测看门狗是否能起作用。这个炸弹英文名为'<a href="https://en.wikipedia.org/wiki/Fork_bomb"target="_blank">Fork Bomb</a>',可以快速耗尽机器内存使机器崩溃。</p>
 <p>在命令行下键入以下内容：</p>
 <pre><code>: (){ :|:&amp; };:
 </code></pre><p>不出意外15秒后，树莓派会自动重启。看门狗成功实现功能！</p>

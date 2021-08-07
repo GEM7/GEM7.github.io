@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.74.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.87.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
-<meta name="supported-color-schemes" content="light dark"><title>树莓派安装adbyby去除广告&nbsp;&ndash;&nbsp;Ellinia</title><link rel="stylesheet" href="/css/core.min.23cf2408a7bbf383778ab163ca01c615250ed41c122a52c02d83618a440898a34d9584fae91a0a2c0da793b5121359c1.css" integrity="sha384-I88kCKe784N3irFjygHGFSUO1BwSKlLALYNhikQImKNNlYT66RoKLA2nk7USE1nB"><link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-icon-57x57.png">
+<meta name="supported-color-schemes" content="light dark"><title>树莓派安装adbyby去除广告&nbsp;&ndash;&nbsp;Ellinia</title><link rel="stylesheet" href="/css/core.min.530ac39b094101cfd2827e6795611f2446174f0dbbe4f43ce471da520fc9f9aca8c46ed3e2ef79cbd7027142742f7aef.css" integrity="sha384-UwrDmwlBAc/Sgn5nlWEfJEYXTw275PQ85HHaUg/J&#43;ayoxG7T4u95y9cCcUJ0L3rv"><link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-icon-57x57.png">
 <link rel="apple-touch-icon" sizes="60x60" href="/favicons/apple-icon-60x60.png">
 <link rel="apple-touch-icon" sizes="72x72" href="/favicons/apple-icon-72x72.png">
 <link rel="apple-touch-icon" sizes="76x76" href="/favicons/apple-icon-76x76.png">
@@ -29,19 +29,19 @@
 <h1 id="下载和安装">下载和安装</h1>
 <p>这里是adbyby的<a href="www.adbyby.com">官方网站</a>,<a href="https://github.com/adbyby/Files/blob/master/ar71xx.tar.gz"target="_blank">点击这里</a>来下载与树莓派兼容的二进制文件。下载完成后可以通过软件上传到树莓派中或者直接在树莓派中操作：</p>
 <p>登入树莓派中，定位到<code>usr/local</code>中,并创建文件夹<code>adbyby</code></p>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="nb">cd</span> /usr/local
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="nb">cd</span> /usr/local
 mkdir adbyby
 </code></pre></div><h2 id="下载并解压">下载并解压</h2>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="nb">cd</span> /usr/local/adbyby
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="nb">cd</span> /usr/local/adbyby
 apt-get install wget -y
 wget https://github.com/adbyby/Files/blob/master/arm.tar.gz
 tar zxvf tar.tar.gz
 </code></pre></div><p>解压完成后，<code>adbyby</code>文件夹内会有一个名为<code>bin</code>的文件夹，我们进入</p>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="nb">cd</span> /cd /usr/local/adbyby/bin
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="nb">cd</span> /cd /usr/local/adbyby/bin
 </code></pre></div><h2 id="给可执行文件赋权">给可执行文件赋权</h2>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">chmod <span class="m">777</span> adbyby
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">chmod <span class="m">777</span> adbyby
 </code></pre></div><h2 id="编辑配置文件">编辑配置文件</h2>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">vim adhook.ini
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">vim adhook.ini
 </code></pre></div><p>下面给出配置范本,对照修改：</p>
 <pre><code>[info]
 id=ar71xx
@@ -63,9 +63,9 @@ stack_size=200
 auto_restart=1
 debug=0
 </code></pre><h1 id="创建systemd文件">创建systemd文件</h1>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">vim /lib/systemd/system/adbyby.service
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">vim /lib/systemd/system/adbyby.service
 </code></pre></div><p>填入以下内容</p>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="o">[</span>Unit<span class="o">]</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="o">[</span>Unit<span class="o">]</span>
 <span class="nv">Description</span><span class="o">=</span>Adbyby Service
 <span class="nv">After</span><span class="o">=</span>network.target
 <span class="nv">Wants</span><span class="o">=</span>network.target
@@ -81,17 +81,17 @@ debug=0
 </code></pre></div><p>然后执行<code>systemctl daemon-reload</code>。</p>
 <h1 id="启动adbyby">启动adbyby</h1>
 <h2 id="键入以下命令以运行adbyby">键入以下命令以运行adbyby</h2>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">systemctl start adbyby
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">systemctl start adbyby
 </code></pre></div><h2 id="设置开机启动">设置开机启动</h2>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">systemctl <span class="nb">enable</span> adbyby
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">systemctl <span class="nb">enable</span> adbyby
 </code></pre></div><h2 id="添加iptables规则">添加iptables规则</h2>
 <p>为了让所有局域网下的设备的http流量都能成功被处理</p>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">iptables -t nat -I PREROUTING -p tcp --dport <span class="m">80</span> -j REDIRECT --to-ports <span class="m">8118</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">iptables -t nat -I PREROUTING -p tcp --dport <span class="m">80</span> -j REDIRECT --to-ports <span class="m">8118</span>
 </code></pre></div><h1 id="自动更新规则">自动更新规则</h1>
 <h2 id="制作一个脚本来自动更新常用的adbyby规则">制作一个脚本来自动更新常用的adbyby规则</h2>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">vim adbyby_rules_update.sh
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">vim adbyby_rules_update.sh
 </code></pre></div><p>以下是脚本内容，酌情修改</p>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="cp">#!/bin/bash
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="cp">#!/bin/bash
 </span><span class="cp"></span><span class="nv">LAZY_RULES</span><span class="o">=</span>/usr/local/adbyby/bin/data/lazy.txt
 <span class="nv">VIDEO_RULES</span><span class="o">=</span>/usr/local/adbyby/bin/data/video.txt
 
@@ -107,11 +107,11 @@ wget -O- https://raw.githubusercontent.com/adbyby/xwhyc-rules/master/video.txt &
 dos2unix <span class="si">${</span><span class="nv">LAZY_RULES</span><span class="si">}</span>
 dos2unix <span class="si">${</span><span class="nv">VIDEO_RULES</span><span class="si">}</span>
 </code></pre></div><h2 id="赋权">赋权</h2>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">chmod +x adbyby_rules_update.sh
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">chmod +x adbyby_rules_update.sh
 </code></pre></div><h2 id="写入自动更新">写入自动更新</h2>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">crontab -e
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">crontab -e
 </code></pre></div><p>在底下加入一行,效果是每12小时自动更新规则</p>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">* */12 * * * /root/adbyby_rules_update.sh
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">* */12 * * * /root/adbyby_rules_update.sh
 </code></pre></div><h1 id="后记">后记</h1>
 <p>adbyby在路由器上的主要问题就是非常吃资源，配置较低的路由器运行起来容易崩溃，并且adbyby现阶段只能处理http流量。</p>
 <h1 id="参考文献">参考文献</h1>
