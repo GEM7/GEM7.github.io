@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.87.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.88.1" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
 <meta name="supported-color-schemes" content="light dark"><title>How to set up transparent gateway&nbsp;&ndash;&nbsp;Ellinia</title><link rel="stylesheet" href="/css/core.min.530ac39b094101cfd2827e6795611f2446174f0dbbe4f43ce471da520fc9f9aca8c46ed3e2ef79cbd7027142742f7aef.css" integrity="sha384-UwrDmwlBAc/Sgn5nlWEfJEYXTw275PQ85HHaUg/J&#43;ayoxG7T4u95y9cCcUJ0L3rv"><link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-icon-57x57.png">
 <link rel="apple-touch-icon" sizes="60x60" href="/favicons/apple-icon-60x60.png">
@@ -38,7 +38,7 @@
 <p>one for redirecting requests, another one for DNS querying. Dokodemo-door is a very convenient function of v2ray that can drive your traffic to where you want to visit through your foreign server with v2ray installed. You would need <a href="https://github.com/darkk/redsocks"target="_blank">redsocks</a> to receive those traffics that are redirected to it and convert them from protocol http to pro socks, then the proxy softwares will be able to handle the requests. But dokodemo-door has been combained the two parts mentioned privious into one part. Which means you don&rsquo;t have to care about the protocol convertion, the only thing you need to do is to write iptables rules. For more about dokodemo-door, go to <a href="https://www.v2ray.com/chapter_02/protocols/dokodemo.html"target="_blank">here</a>.</p>
 <p>Add code blocks to your <code>config.json</code> like the following，The first one is to be set as transparent proxy, you can see it will listen to port 1111, which means you will send your traffic to this port by iptables to go aboard.</p>
 <p>The second one which listen to port 5353 localhost is uesd to handle DNS query requests sent by dnsmasq, important ditto.</p>
-<pre><code>{
+<pre tabindex="0"><code>{
 	&quot;domainOverride&quot;: [&quot;http&quot;, &quot;tls&quot;],
 	&quot;protocol&quot;:&quot;dokodemo-door&quot;,
 	&quot;port&quot;:1111,
@@ -63,13 +63,13 @@
 </code></pre><h2 id="install-dnsmasq">Install dnsmasq</h2>
 <p>dnsmasq is a self-managed dns software which can prevent DNS Pollution, it has been highly recommended by many of those professionals.</p>
 <p>type two commands listed below to install dnsmasq.</p>
-<pre><code>sudo apt install dnsmasq
+<pre tabindex="0"><code>sudo apt install dnsmasq
 mkdir -p /etc/dnsmasq.d
 </code></pre><p>add this line<code>conf-dir=/etc/dnsmasq.d</code> to tail of dnsmasq configuration file at <code>/etc/dnsmasq.conf</code> to set another directory to store those who are needed to query via google public DNS.</p>
-<pre><code>cat 'conf-dir=/etc/dnsmasq.d' &gt;&gt; /etc/dnsmasq.conf
+<pre tabindex="0"><code>cat 'conf-dir=/etc/dnsmasq.d' &gt;&gt; /etc/dnsmasq.conf
 </code></pre><h2 id="configure-query-rules">Configure query rules</h2>
 <p>gfwlist2dnsmasq is a tool that can transfer gfwlist to dnsmasq related configuration file. Do the following to install that.</p>
-<pre><code>git clone https://github.com/cokebar/gfwlist2dnsmasq.git
+<pre tabindex="0"><code>git clone https://github.com/cokebar/gfwlist2dnsmasq.git
 cd gfwlist2dnsmasq
 chmod +x gfwlist2dnsmasq.sh
 ./gfwlist2dnsmasq.sh -o gfwlist.conf -s gfwlist
@@ -77,13 +77,13 @@ cp gfwlist.conf /etc/dnsmasq.d/
 </code></pre><p>This will make gfwlist&rsquo;s domain be queried at 127.0.0.1:5353,as same as quering at 8.8.8.8 directly，which means it can prevent getting wrong results.</p>
 <h2 id="install-ipset">Install ipset</h2>
 <p>IP sets are a framework inside the Linux kernel, which can be administered by the ipset utility. Depending on the type, an IP set may store IP addresses, networks, (TCP/UDP) port numbers, MAC addresses, interface names or combinations of them in a way, which ensures lightning speed when matching an entry against a set.</p>
-<pre><code>apt-get install ipset -y
+<pre tabindex="0"><code>apt-get install ipset -y
 </code></pre><h3 id="set-blacklist">Set blacklist</h3>
 <p>Blacklist is so called gfwlist. It&rsquo;s a list maintained by volunteers which include websites blocked in China.</p>
-<pre><code> ipset -N gfwlist iphash
+<pre tabindex="0"><code> ipset -N gfwlist iphash
 </code></pre><h3 id="set-whitelist">Set whitelist</h3>
 <p>Whitelist includes all China IP address blocks.</p>
-<pre><code> ipset -N chnroute hash:net maxelem 65536
+<pre tabindex="0"><code> ipset -N chnroute hash:net maxelem 65536
 
  curl 'http://ftp.apnic.net/apnic/stats/apnic/delegated-apnic-latest' | grep ipv4 | grep CN | awk -F\| '{ printf(&quot;%s/%d\n&quot;, $4, 32-log($5)/log(2)) }' &gt; chnroute.txt
 
@@ -93,14 +93,14 @@ cp gfwlist.conf /etc/dnsmasq.d/
  ipset add chnroute 1.0.32.0/19
  ipset add chnroute 1.1.0.0/24
 </code></pre><p>Then write a shell script to import IP address from chnroute.txt to <code>chnroute</code> set in ipset.</p>
-<pre><code>vim set-ipset.sh
+<pre tabindex="0"><code>vim set-ipset.sh
 </code></pre><p>paste these into set-ipset.sh</p>
-<pre><code> #!/bin/bash
+<pre tabindex="0"><code> #!/bin/bash
  for ip in $(cat '/root/chnroute.txt'); do
     ipset add chnroute $ip
  done
 </code></pre><p>Then do</p>
-<pre><code>chmod +x set-ipset.sh
+<pre tabindex="0"><code>chmod +x set-ipset.sh
 ./set-ipset.sh
 </code></pre><h1 id="ready-to-run">Ready to run</h1>
 <p>Now one last step to finish, you have two choices. Running as blacklist mode is for one, in which the server will be able to match the blocked IP addresses and visit them via proxy automatically. For another is the mode of whitelist, it offten could be smoothly then previous one, the traffic will be return to the default route, once non-china IP address are matched, traffic to this IP address will be driven to proxy port.</p>
@@ -108,31 +108,31 @@ cp gfwlist.conf /etc/dnsmasq.d/
 <li>WARNING: YOU CAN ONLY CHOOSE ONE OF TWO OPTIONS!</li>
 </ul>
 <h2 id="option-1-running-as-blacklist-mode">OPTION 1: Running as blacklist mode</h2>
-<pre><code>  iptables -t nat -A PREROUTING -p tcp -m set --match-set gfwlist dst -j REDIRECT --to-port 1111
+<pre tabindex="0"><code>  iptables -t nat -A PREROUTING -p tcp -m set --match-set gfwlist dst -j REDIRECT --to-port 1111
   iptables -t nat -A OUTPUT -p tcp -m set --match-set gfwlist dst -j REDIRECT --to-port 1111
 </code></pre><h2 id="option-2-running-as-whitelist-mode">OPTION 2: Running as whitelist mode</h2>
-<pre><code>  iptables -t nat -A PREROUTING -p udp --dport 53 -j RETURN
+<pre tabindex="0"><code>  iptables -t nat -A PREROUTING -p udp --dport 53 -j RETURN
   iptables -t nat -A PREROUTING -p tcp -m set ! --match-set chnroute dst -j REDIRECT --to-port 1111
   iptables -t nat -A OUTPUT -p udp --dport 53 -j RETURN
   iptables -t nat -A OUTPUT -p tcp -d  Your proxy IP address -j RETURN
   iptables -t nat -A OUTPUT -p tcp -m set ! --match-set chnroute dst -j REDIRECT --to-port 1111
 </code></pre><h2 id="check-out-and-flush-iptables-settings">Check out and flush iptables settings</h2>
 <p>To check out current iptables settings, do</p>
-<pre><code>iptables -t nat -L
+<pre tabindex="0"><code>iptables -t nat -L
 </code></pre><p>If you set iptables by wrong, just type there to flush it.</p>
-<pre><code>iptables -t nat -F
+<pre tabindex="0"><code>iptables -t nat -F
 </code></pre><h1 id="backup-and-restore-ipsets-and-iptables">Backup and restore ipsets and iptables</h1>
 <p>ipset and iptables will be flushed automatically by default, if you want to restore it everytime after reboot finished. Do as the following</p>
 <ul>
 <li><strong>backup</strong></li>
 </ul>
-<pre><code>iptables-save &gt; /etc/iptables-backup
+<pre tabindex="0"><code>iptables-save &gt; /etc/iptables-backup
 ipset-save &gt; /etc/ipset-backup
 </code></pre><ul>
 <li><strong>restore</strong>
 You must restore ipset after reboot</li>
 </ul>
-<pre><code>iptables-restore &lt; /etc/iptables-backup
+<pre tabindex="0"><code>iptables-restore &lt; /etc/iptables-backup
 ipset-restore &lt; /etc/ipset-backup
 </code></pre><ul>
 <li><strong>All done</strong></li>
@@ -141,7 +141,7 @@ ipset-restore &lt; /etc/ipset-backup
 <h1 id="extra-settings-if-needed">Extra Settings if needed</h1>
 <h2 id="set-a-static-ip-address-for-gateway">Set a static IP address for gateway</h2>
 <p>if you want to set a static ip address for PI, edit <code>/etc/dhcpcd.conf</code> the append the following scripts and save.</p>
-<pre><code>interface eth0
+<pre tabindex="0"><code>interface eth0
 static ip_address=192.168.1.100/24
 static routers=192.168.1.1
 static domain_name_servers=192.168.1.1

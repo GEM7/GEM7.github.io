@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.87.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.88.1" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
 <meta name="supported-color-schemes" content="light dark"><title>How to compile BBR on CentOS7&nbsp;&ndash;&nbsp;Ellinia</title><link rel="stylesheet" href="/css/core.min.530ac39b094101cfd2827e6795611f2446174f0dbbe4f43ce471da520fc9f9aca8c46ed3e2ef79cbd7027142742f7aef.css" integrity="sha384-UwrDmwlBAc/Sgn5nlWEfJEYXTw275PQ85HHaUg/J&#43;ayoxG7T4u95y9cCcUJ0L3rv"><link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-icon-57x57.png">
 <link rel="apple-touch-icon" sizes="60x60" href="/favicons/apple-icon-60x60.png">
@@ -27,7 +27,7 @@
 <ul>
 <li>
 <p><strong>Install the latest version of Linux kernel, headers and develoment tools.</strong></p>
-<pre><code>rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org
+<pre tabindex="0"><code>rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org
 rpm -Uvh http://www.elrepo.org/elrepo-release-7.0-2.el7.elrepo.noarch.rpm
 yum --enablerepo=elrepo-kernel install kernel-ml -y
 yum -y remove kernel-headers
@@ -35,12 +35,12 @@ yum --enablerepo=elrepo-kernel install kernel-ml-headers -y
 yum --enablerepo=elrepo-kernel install kernel-ml-devel -y
 </code></pre><p>Then do<code>egrep ^menuentry /etc/grub2.cfg | cut -f 2 -d \'</code>to see the sequence of alreadly installed kernels and choose the one you&rsquo;ve installed just now.</p>
 <p>For instance, if you want choose the first one to boot by dedault then do <code>grub2-set-default 0</code> The sceond one, do <code>grub2-set-default 1</code>, so on and so forth.</p>
-<pre><code>grub2-set-default 0 
+<pre tabindex="0"><code>grub2-set-default 0 
 reboot
 </code></pre></li>
 <li>
 <p><strong>Install GCC with version number grater than 4.9 via CentOS Software Collections</strong></p>
-<pre><code>yum -y install centos-release-scl
+<pre tabindex="0"><code>yum -y install centos-release-scl
 yum -y install devtoolset-4-gcc*
 scl enable devtoolset-4 bash
 </code></pre><p>After installing GCC via scl, do<code>which gcc</code>to check if is was already installed correctly, it will return real path of GCC generally
@@ -48,24 +48,24 @@ scl enable devtoolset-4 bash
 </li>
 <li>
 <p><strong>Download source code of tcp_bbr_modified and generate the Makefile</strong></p>
-<pre><code>wget https://raw.githubusercontent.com/GEM7/TCP_BBR_Modified/master/tcp_bbr_modified.c
+<pre tabindex="0"><code>wget https://raw.githubusercontent.com/GEM7/TCP_BBR_Modified/master/tcp_bbr_modified.c
 echo &quot;obj-m:=tcp_bbr_Modified.o&quot; &gt; Makefile
 </code></pre></li>
 <li>
 <p><strong>Compile it and initialization</strong></p>
-<pre><code>make -s -C /lib/modules/$(uname -r)/build M=`pwd` modules CC=`which gcc`
+<pre tabindex="0"><code>make -s -C /lib/modules/$(uname -r)/build M=`pwd` modules CC=`which gcc`
 cp -rf ./tcp_bbr_modified.ko /lib/modules/$(uname -r)/kernel/net/ipv4
 depmod -a 
 modprobe tcp_bbr_modified
 </code></pre></li>
 <li>
 <p><strong>Set it as the default TCP congestion control algorithm</strong></p>
-<pre><code>echo &quot;net.core.default_qdisc = fq&quot; &gt;&gt;/etc/sysctl.conf
+<pre tabindex="0"><code>echo &quot;net.core.default_qdisc = fq&quot; &gt;&gt;/etc/sysctl.conf
 echo &quot;net.ipv4.tcp_congestion_control = bbr_modified&quot; &gt;&gt;/etc/sysctl.conf
 </code></pre></li>
 <li>
 <p><strong>Check if bbr_modified works</strong></p>
-<pre><code>lsmod | grep bbr
+<pre tabindex="0"><code>lsmod | grep bbr
 </code></pre><p>if you see words including bbr_modified, then it works.</p>
 </li>
 </ul>

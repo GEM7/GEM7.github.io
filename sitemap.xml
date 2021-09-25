@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml"><url>
-    <loc>https://gem7.hithub.io/</loc><lastmod>2021-08-08T00:00:00+00:00</lastmod></url><url>
+    <loc>https://gem7.hithub.io/</loc><lastmod>2021-09-25T17:26:41+08:00</lastmod></url><url>
+    <loc>https://gem7.hithub.io/posts/</loc><lastmod>2021-09-25T17:26:41+08:00</lastmod></url><url>
+    <loc>https://gem7.hithub.io/tags/</loc><lastmod>2021-09-25T17:26:41+08:00</lastmod></url><url>
+    <loc>https://gem7.hithub.io/tags/windows/</loc><lastmod>2021-09-25T17:26:41+08:00</lastmod></url><url>
+    <loc>https://gem7.hithub.io/posts/deploy_bginfo_for_multi_user/</loc><lastmod>2021-09-25T17:26:41+08:00</lastmod></url><url>
     <loc>https://gem7.hithub.io/posts/change-homebrew-mirrors/</loc><lastmod>2021-08-07T19:11:31+08:00</lastmod></url><url>
-    <loc>https://gem7.hithub.io/posts/</loc><lastmod>2021-08-08T00:00:00+00:00</lastmod></url><url>
     <loc>https://gem7.hithub.io/posts/learn-latex-in-30-minutes/</loc><lastmod>2020-02-21T15:09:27+08:00</lastmod></url><url>
     <loc>https://gem7.hithub.io/tags/linux/</loc><lastmod>2021-08-08T00:00:00+00:00</lastmod></url><url>
-    <loc>https://gem7.hithub.io/tags/</loc><lastmod>2021-08-08T00:00:00+00:00</lastmod></url><url>
     <loc>https://gem7.hithub.io/Build-6in4-tunnel-on-server.html</loc><lastmod>2018-07-08T08:46:12+00:00</lastmod></url><url>
     <loc>https://gem7.hithub.io/Use_caddy_to_reverse_proxy_project_v_2.html</loc><lastmod>2018-07-04T09:17:15+00:00</lastmod></url><url>
     <loc>https://gem7.hithub.io/Load-balancing-project-v-by-nginx.html</loc><lastmod>2018-03-01T16:11:00+00:00</lastmod></url><url>
@@ -22,7 +24,6 @@
     <loc>https://gem7.hithub.io/how_to_compile_bbr_on_centos7.html</loc><lastmod>2017-08-10T20:31:30+00:00</lastmod></url><url>
     <loc>https://gem7.hithub.io/posts/linux-shell-fragments/</loc><lastmod>2017-06-01T15:17:15+00:00</lastmod></url><url>
     <loc>https://gem7.hithub.io/how-to-deploy-ehforwarderbot-on-centos7.html</loc><lastmod>2017-05-18T17:06:41+00:00</lastmod></url><url>
-    <loc>https://gem7.hithub.io/tags/windows/</loc><lastmod>2016-10-16T10:13:16+00:00</lastmod></url><url>
     <loc>https://gem7.hithub.io/fix-the-problem-of-disappearing-of-volume-icon-on-windows.html</loc><lastmod>2016-10-16T10:13:16+00:00</lastmod></url><url>
     <loc>https://gem7.hithub.io/how-to-boot-into-safe-mode-on-window8.html</loc><lastmod>2016-10-16T10:10:15+00:00</lastmod></url><url>
     <loc>https://gem7.hithub.io/posts/log-in-centos-via-ssh-key/</loc><lastmod>2016-10-16T10:01:37+00:00</lastmod></url><url>

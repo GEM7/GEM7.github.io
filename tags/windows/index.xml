@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>@Bazzi</copyright>
-    <lastBuildDate>Sun, 16 Oct 2016 10:13:16 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 25 Sep 2021 17:26:41 +0800</lastBuildDate>
     
         <atom:link href="/tags/windows/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>在Windows Server上为多用户部署Bginfo</title>
+      <link>/posts/deploy_bginfo_for_multi_user/</link>
+      <pubDate>Sat, 25 Sep 2021 17:26:41 +0800</pubDate>
+      
+      <guid>/posts/deploy_bginfo_for_multi_user/</guid>
+      <description>前言 Bginfo 是一款实用工具，可以在桌面显示当前系统信息。对于多用户场景，普遍流行的方法是通过域进行分发。本次采用脚本分发的方法，更加简单。 下载安装</description>
+    </item>
     
     <item>
       <title>Windows任务栏音量电量等图标消失的解决方法</title>

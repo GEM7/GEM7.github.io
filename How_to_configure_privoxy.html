@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.87.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.88.1" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
 <meta name="supported-color-schemes" content="light dark"><title>Privoxy不完全教程——实现自动切换代理(AutoProxy)与广告屏蔽(AdblockPlus)&nbsp;&ndash;&nbsp;Ellinia</title><link rel="stylesheet" href="/css/core.min.530ac39b094101cfd2827e6795611f2446174f0dbbe4f43ce471da520fc9f9aca8c46ed3e2ef79cbd7027142742f7aef.css" integrity="sha384-UwrDmwlBAc/Sgn5nlWEfJEYXTw275PQ85HHaUg/J&#43;ayoxG7T4u95y9cCcUJ0L3rv"><link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-icon-57x57.png">
 <link rel="apple-touch-icon" sizes="60x60" href="/favicons/apple-icon-60x60.png">
@@ -33,31 +33,31 @@
 <p>首先我们需要搞到AutoProxy的规则文件并设法将其转换成为Privoxy文件，这里我在网上找到了解决方案，需要在Linux环境下才能够成功，另外，那些PAC的地址很可能都无法直接连接成功，所以即使你有Linux虚拟机的话最好能够连接国际互联网保证能够顺利下载下来先，如果你有一台VPS那就再好不过了。我现在在Ubuntu环境下示范。按照作者给的步骤autoproxy2privoxy</p>
 <p>连上服务器并下载该脚本：请按顺序执行以下指令，Ubuntu的指令用橙色来表示，CentOS的指令用紫色来表示。Ubuntu用户复制橙色指令，CentOS用户复制紫色指令。以root身份执行。</p>
 <h1 id="脚本安装">脚本安装</h1>
-<pre><code>sudo apt-get install git -y
+<pre tabindex="0"><code>sudo apt-get install git -y
 yum install git -y
 </code></pre><h2 id="下载源码">下载源码</h2>
-<pre><code>sudo git clone https://github.com/cckpg/autoproxy2privoxy.git
+<pre tabindex="0"><code>sudo git clone https://github.com/cckpg/autoproxy2privoxy.git
 git clone https://github.com/cckpg/autoproxy2privoxy.git
 </code></pre><h2 id="定义下载地址">定义下载地址</h2>
-<pre><code>gfwlist=https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt
+<pre tabindex="0"><code>gfwlist=https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt
 </code></pre><h2 id="下载规则文件">下载规则文件</h2>
-<pre><code>sudo wget -qO- &quot;${gfwlist}&quot; | base64 -d &gt; gfwlist.txt
+<pre tabindex="0"><code>sudo wget -qO- &quot;${gfwlist}&quot; | base64 -d &gt; gfwlist.txt
 wget -qO- &quot;${gfwlist}&quot; | base64 -d &gt; gfwlist.txt
 </code></pre><h2 id="提前设置代理信息">提前设置代理信息</h2>
 <p>这个地方没有限制，取决于你用什么样的工具和你的工具监听在什么样的端口，比如说你使用Gae并且使用http方式监听在本机的8080端口，那么你的PROXY_ADDR就应该等于<code>127.0.0.1:8080</code> ;PROXY_TYPE这一栏就应填写HTTP；如果你使用的是代理类型是SOCKS5并且监听的本地的7000端口，你的下列字段就应该分别改成<code>PROXY_ADDR=127.0.0.1:1080 PROXY_TYPE=SOCKS5</code>;值得注意的是，如果你使用TOR的话PROXY_TYPE那一行最好的是填写SOCKS5T。据说这是专门为TOR优化后的选择。</p>
-<pre><code>sudo export PROXY_ADDR=127.0.0.1:1080 PROXY_TYPE=SOCKS5
+<pre tabindex="0"><code>sudo export PROXY_ADDR=127.0.0.1:1080 PROXY_TYPE=SOCKS5
 export PROXY_ADDR=127.0.0.1:1080 PROXY_TYPE=SOCKS5
 </code></pre><h2 id="给脚本赋权">给脚本赋权</h2>
-<pre><code>sudo chmod +x autoproxy2privoxy
+<pre tabindex="0"><code>sudo chmod +x autoproxy2privoxy
 chmod +x autoproxy2privoxy
 </code></pre><h2 id="执行命令生成文件">执行命令生成文件</h2>
 <p>先执行一下命令进入脚本目录中：</p>
-<pre><code>cd autoproxy2privoxy
+<pre tabindex="0"><code>cd autoproxy2privoxy
 </code></pre><p>然后执行以下指令生成文件：</p>
-<pre><code>sudo bash autoproxy2privoxy gfwlist.txt &gt; gfw.action
+<pre tabindex="0"><code>sudo bash autoproxy2privoxy gfwlist.txt &gt; gfw.action
 bash autoproxy2privoxy gfwlist.txt &gt; gfw.action
 </code></pre><p>如果成功，你会在该脚本的目录里面看到一个名为gfw.action的文件(如果你试了多次没成功，这里有已经生成好的文件)，此时利用工具把这个文件下载到电脑上来，并放到privoxy的安装路径下，然后进入config.txt里面在最下面添加一行：</p>
-<pre><code>actionsfile gfw.action
+<pre tabindex="0"><code>actionsfile gfw.action
 </code></pre><p>然后重新启动privoxy，此时你应该能够实现自动切换代理。</p>
 </article><section class="article labels"><a class="tag" href=/tags/linux/>linux</a></section><section class="article navigation"><p><a class="link" href="/posts/log-in-centos-via-ssh-key/"><span class="li">&larr;</span>CentOS开启密钥登录的相关设置</a></p><p><a class="link" href="/posts/vps-log/"><span class="li">&rarr;</span>自用VPS存根</a></p></section><section class="article discussion"><div id="disqus_thread"></div>
 <script type="application/javascript">

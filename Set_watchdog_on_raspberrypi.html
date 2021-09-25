@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.87.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.88.1" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
 <meta name="supported-color-schemes" content="light dark"><title>树莓派启用看门狗&nbsp;&ndash;&nbsp;Ellinia</title><link rel="stylesheet" href="/css/core.min.530ac39b094101cfd2827e6795611f2446174f0dbbe4f43ce471da520fc9f9aca8c46ed3e2ef79cbd7027142742f7aef.css" integrity="sha384-UwrDmwlBAc/Sgn5nlWEfJEYXTw275PQ85HHaUg/J&#43;ayoxG7T4u95y9cCcUJ0L3rv"><link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-icon-57x57.png">
 <link rel="apple-touch-icon" sizes="60x60" href="/favicons/apple-icon-60x60.png">
@@ -34,14 +34,14 @@
 <ul>
 <li>编辑系统配置文件</li>
 </ul>
-<pre><code>sudo vi /boot/config.txt
+<pre tabindex="0"><code>sudo vi /boot/config.txt
 </code></pre><ul>
 <li>把下面这一行加到整个文件的底部</li>
 </ul>
-<pre><code>activating the hardware watchdog
+<pre tabindex="0"><code>activating the hardware watchdog
 dtparam=watchdog=on
 </code></pre><p>添加完成以后保存，并退出。然后重启树莓派，待重启完成后，查看设备列表会发现里面多出两个名字分别是&rsquo;watchdog&rsquo;和&rsquo;watchdog0&rsquo;的看门狗设备，这代表硬件已经启用成功</p>
-<pre><code>pi@raspi-tst:~ $ ls -al /dev/watchdog*
+<pre tabindex="0"><code>pi@raspi-tst:~ $ ls -al /dev/watchdog*
 crw------- 1 root root  10, 130 May 19 07:09 /dev/watchdog
 crw------- 1 root root 253,   0 May 19 07:09 /dev/watchdog0
 </code></pre><p>看起来似乎有两个看门狗，但是实际上只有一个可以用，不过他们彼此之间有关联，不过这不影响。我们进入下一步。</p>
@@ -49,20 +49,20 @@ crw------- 1 root root 253,   0 May 19 07:09 /dev/watchdog0
 <ul>
 <li>输入以下命令来安装看门狗</li>
 </ul>
-<pre><code>sudo apt-get install watchdog -y 
+<pre tabindex="0"><code>sudo apt-get install watchdog -y 
 </code></pre><p>在以前的版本中，看门狗的配置文件位于<code>/etc/modprobe.d/watchdog.conf) </code>，但是现在今非昔比，一些老教程中已经过时，目前的配置文件在这个位置<code>/etc/watchdog.conf </code></p>
 <ul>
 <li>编辑配置文件</li>
 </ul>
-<pre><code>vi /etc/watchdog.conf
+<pre tabindex="0"><code>vi /etc/watchdog.conf
 </code></pre><p>因为我使用树莓派当作网关，我的需求就是ping不通路由器时自动重启，此时的设置应该是添加一条<code>ping 192.168.1.1</code>, 另外我还需要在内存沾满时自动重启，机器同时开启的进程太多时也重启。并且还要保证以上时间发生后15秒钟执行。于是我的配置可以是这样</p>
-<pre><code>ping=192.168.1.1
+<pre tabindex="0"><code>ping=192.168.1.1
 max-load-1 = 24
 min-memory = 1
 watchdog-device = /dev/watchdog
 watchdog-timeout=15
 </code></pre><p>如果你还有其他的需求，请对照以下这个表来选择，需要的功能就取消在其开头的注释符（&quot;#&ldquo;号），不需要的功能就在前面添加上井号来注释掉</p>
-<pre><code>#以下是一些默认的配置范例
+<pre tabindex="0"><code>#以下是一些默认的配置范例
 
 #ping                   = 172.31.14.1
 #ping                   = 172.26.1.255
@@ -127,12 +127,12 @@ priority                = 1
 <h1 id="启用看门狗">启用看门狗</h1>
 <h2 id="启动">启动</h2>
 <p>看门狗有多种启动方式，这里使用systemd来启动</p>
-<pre><code>sudo systemctl start watchdog
+<pre tabindex="0"><code>sudo systemctl start watchdog
 </code></pre><h2 id="查询状态">查询状态</h2>
 <p>在启动完成后键入以下命令来查询状态：</p>
-<pre><code>sudo systemctl status watchdog
+<pre tabindex="0"><code>sudo systemctl status watchdog
 </code></pre><p>正常情况可以看到以下内容：</p>
-<pre><code>pi@raspi-server:~ $ sudo systemctl status watchdog
+<pre tabindex="0"><code>pi@raspi-server:~ $ sudo systemctl status watchdog
 ● watchdog.service - watchdog daemon
 Loaded: loaded (/lib/systemd/system/watchdog.service; static)
 Active: active (running) since Thu 2016-05-19 21:04:47 CEST; 33min ago
@@ -154,12 +154,12 @@ May 19 21:04:47 raspi-server watchdog[632]: hardware watchdog identity: Broadcom
 May 19 21:04:47 raspi-server systemd[1]: Started watchdog daemon.
 Hint: Some lines were ellipsized, use -l to show in full.
 </code></pre><h2 id="停止看门狗">停止看门狗</h2>
-<pre><code>sudo systemctl stop watchdog
+<pre tabindex="0"><code>sudo systemctl stop watchdog
 </code></pre><h2 id="设置开机启动">设置开机启动</h2>
 <p>在设置开机启动时如果你使用systemd中的方式：</p>
-<pre><code>sudo systemctl enable watchdog
+<pre tabindex="0"><code>sudo systemctl enable watchdog
 </code></pre><p>你会看到以下内容，并且启动不成功</p>
-<pre><code>Synchronizing state for watchdog.service with sysvinit using update-rc.d...
+<pre tabindex="0"><code>Synchronizing state for watchdog.service with sysvinit using update-rc.d...
 Executing /usr/sbin/update-rc.d watchdog defaults
 Executing /usr/sbin/update-rc.d watchdog enable
 The unit files have no [Install] section. They are not meant to be enabled using systemctl.
@@ -172,22 +172,22 @@ a requirement dependency on it.
 D-Bus, udev, scripted systemctl call, ...).
 </code></pre><p>具体原因详见参考文献。解决方法有两种，</p>
 <h3 id="通过rclocal实现开机启动">通过<code>rc.local</code>实现开机启动。</h3>
-<pre><code>sudo vi /etc/rc.local
+<pre tabindex="0"><code>sudo vi /etc/rc.local
 </code></pre><p>在<code>exit 0</code>之前加上以下两行内容，就像这样：</p>
-<pre><code>printf &quot;Starting software Watchdog&quot;
+<pre tabindex="0"><code>printf &quot;Starting software Watchdog&quot;
 /usr/sbin/service watchdog start &amp;
 
 exit 0
 </code></pre><p>这个&rdquo;&amp;&ldquo;的意思是放入后台运行，不加的话可能出现莫名其妙的问题</p>
 <h3 id="通过crontab实现开机启动">通过<code>Crontab</code>实现开机启动</h3>
-<pre><code>crontab -e
+<pre tabindex="0"><code>crontab -e
 </code></pre><p>添加这一行：</p>
-<pre><code>@reboot sudo /usr/sbin/service watchdog start
+<pre tabindex="0"><code>@reboot sudo /usr/sbin/service watchdog start
 </code></pre><p>通过上述两种方式，看门狗都可以开机启动，你可以通过<code>dmesg | grep watchdog</code>或者<code>cat /var/log/syslog | grep watchdog</code></p>
 <h1 id="测试">测试</h1>
 <p>在确认看门狗已经开启(很重要！！！)后，我们通过一个逻辑炸弹来检测看门狗是否能起作用。这个炸弹英文名为'<a href="https://en.wikipedia.org/wiki/Fork_bomb"target="_blank">Fork Bomb</a>',可以快速耗尽机器内存使机器崩溃。</p>
 <p>在命令行下键入以下内容：</p>
-<pre><code>: (){ :|:&amp; };:
+<pre tabindex="0"><code>: (){ :|:&amp; };:
 </code></pre><p>不出意外15秒后，树莓派会自动重启。看门狗成功实现功能！</p>
 <h1 id="参考文献">参考文献</h1>
 <p><a href="https://www.raspberrypi.org/forums/viewtopic.php?t=147501"target="_blank">1</a>
@@ -195,14 +195,14 @@ exit 0
 <h1 id="附录">附录</h1>
 <p>附上两个版本的Fork Bomb，均测试通过并能使树莓派重启。</p>
 <h2 id="shell-script">Shell Script</h2>
-<pre><code>#!/bin/bash
+<pre tabindex="0"><code>#!/bin/bash
 echo &quot;Starting shell fork bomb&quot;
 # prevent swapping to the SD card!
 sudo systemctl stop dphys-swapfile.service
 # start the bomb
 : (){ :|:&amp; };:
 </code></pre><h2 id="python">Python</h2>
-<pre><code>#!/usr/bin/python
+<pre tabindex="0"><code>#!/usr/bin/python
 #-------------------------------------------------------------------------------
 # Name:        fork.bomb
 # Purpose:

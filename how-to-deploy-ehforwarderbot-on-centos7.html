@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.87.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.88.1" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
 <meta name="supported-color-schemes" content="light dark"><title>“在Telegram上实现微信收发”——EHForwarderBot搭建指南&nbsp;&ndash;&nbsp;Ellinia</title><link rel="stylesheet" href="/css/core.min.530ac39b094101cfd2827e6795611f2446174f0dbbe4f43ce471da520fc9f9aca8c46ed3e2ef79cbd7027142742f7aef.css" integrity="sha384-UwrDmwlBAc/Sgn5nlWEfJEYXTw275PQ85HHaUg/J&#43;ayoxG7T4u95y9cCcUJ0L3rv"><link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-icon-57x57.png">
 <link rel="apple-touch-icon" sizes="60x60" href="/favicons/apple-icon-60x60.png">
@@ -30,16 +30,16 @@
 <p>此程序会调用Telegram中的BOT，因此你需要在telegram中事先申请一个BOT，具体教程详见<a href="https://blog.1a23.com/2017/01/09/EFB-How-to-Send-and-Receive-Messages-from-WeChat-on-Telegram-zh-CN/"target="_blank">作者博文</a>的0x030章节</p>
 <h1 id="设置目录并安装">设置目录并安装</h1>
 <p>首先安装git，并进入到你想要安装EHForwarderBot的目录，当然可以在~目录下直接安装，此处我选择把它放在/usr/local目录下</p>
-<pre><code>yum install git -y
+<pre tabindex="0"><code>yum install git -y
 cd /usr/local
 git clone https://github.com/blueset/ehForwarderBot.git
 cd ehForwarderBot
 </code></pre><p>进入该目录后再新建一个文件夹来存放日后运行EFB时所要处理的信息</p>
-<pre><code>mkdir storage
+<pre tabindex="0"><code>mkdir storage
 chmod +rw /usr/local/storage
 </code></pre><h1 id="安装依赖">安装依赖</h1>
 <h2 id="安装python36">安装Python3.6</h2>
-<pre><code>cd ~
+<pre tabindex="0"><code>cd ~
 yum install -y https://centos7.iuscommunity.org/ius-release.rpm
 yum update -y
 yum install -y python36u python36u-libs python36u-devel python36u-pip python36u-setuptools
@@ -47,16 +47,16 @@ which -a python3.6
 
 </code></pre><p>运行完成后再shell中键入python3.6看能否进入python，如果能则进入下一步，如果显示路径错误则编辑~/bashrc文件<code>vi ~/.bashrc</code>在其中键入<code>python3.6='/usr/bin/python3.6'</code>退出vi编辑器并在shell下键入<code>source ~/.bashrc</code>保存更改</p>
 <h2 id="安装非python依赖项">安装非Python依赖项</h2>
-<pre><code>sudo rpm --import http://li.nux.ro/download/nux/RPM-GPG-KEY-nux.ro
-</code></pre><pre><code>sudo rpm -Uvh http://li.nux.ro/download/nux/dextop/el7/x86_64/nux-dextop-release-0-5.el7.nux.noarch.rpm
-</code></pre><pre><code>yum install -y libwebp-devel file-devel ffmpeg 
+<pre tabindex="0"><code>sudo rpm --import http://li.nux.ro/download/nux/RPM-GPG-KEY-nux.ro
+</code></pre><pre tabindex="0"><code>sudo rpm -Uvh http://li.nux.ro/download/nux/dextop/el7/x86_64/nux-dextop-release-0-5.el7.nux.noarch.rpm
+</code></pre><pre tabindex="0"><code>yum install -y libwebp-devel file-devel ffmpeg 
 </code></pre><h2 id="后续配置">后续配置</h2>
-<pre><code>cd /usr/local/ehForwarderBot/ 
+<pre tabindex="0"><code>cd /usr/local/ehForwarderBot/ 
 pip3.6 install -r requirements.txt
 cp config.sample.py config.py
 vi config.py
 </code></pre><p>配置文件援引<a href="https://blog.1a23.com/2017/01/09/EFB-How-to-Send-and-Receive-Messages-from-WeChat-on-Telegram-zh-CN/"target="_blank">作者博客</a>0x31的内容。其中token填写刚刚申请到的BOT密钥。admins填写你的telegramID。ID的获取可以<a href="https://t.me/get_id_bot"target="_blank">@get_id_bot</a> 发送 /start来获得。</p>
-<pre><code># ##############################
+<pre tabindex="0"><code># ##############################
 #  Configs for EH Forwarder Bot
 # ##############################
 #
@@ -90,7 +90,7 @@ eh_telegram_master = {
 }
 </code></pre><h1 id="启动服务">启动服务</h1>
 <p>进入EHB的目录，键入以下命令以开启服务</p>
-<pre><code>python3.6 daemon.py start
+<pre tabindex="0"><code>python3.6 daemon.py start
 </code></pre><p>然后会弹出二维码，扫码即可。</p>
 <h1 id="参考文献">参考文献</h1>
 <p><a href="https://ehforwarderbot.readthedocs.io/en/latest/"target="_blank">https://ehforwarderbot.readthedocs.io/en/latest/</a>

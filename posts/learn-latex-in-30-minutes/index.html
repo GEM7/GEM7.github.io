@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.87.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.88.1" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
 <meta name="supported-color-schemes" content="light dark"><title>Learn LaTeX in 30 Minutes&nbsp;&ndash;&nbsp;Ellinia</title><link rel="stylesheet" href="/css/core.min.530ac39b094101cfd2827e6795611f2446174f0dbbe4f43ce471da520fc9f9aca8c46ed3e2ef79cbd7027142742f7aef.css" integrity="sha384-UwrDmwlBAc/Sgn5nlWEfJEYXTw275PQ85HHaUg/J&#43;ayoxG7T4u95y9cCcUJ0L3rv"><link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-icon-57x57.png">
 <link rel="apple-touch-icon" sizes="60x60" href="/favicons/apple-icon-60x60.png">
@@ -35,7 +35,7 @@
 <p>人们使用 LaTeX 的一个重要原因是它将文档的内容和文档的样式剥离开来。这意味着一旦你写好了文档的内容，我们可以简单地改变文档样式。 类似地，你也可以创建样式模板来应用到不同的文档，让它们有相同的现实效果。据此，科技论文可以借助模板来进行版面处理。这些模板 ( templates ) 拥有预置制的布局，这意味着你只需要在其中填入内容。实际上，有成百上千的模板可以供我们使用，从个人简历到PPT，几乎涵盖方方面面。</p>
 <h1 id="编写你的第一支-latex-程序片段">编写你的第一支 LaTeX 程序片段</h1>
 <p>第一步是创建一个新的 LaTeX 项目。你可以在本地计算机上通过新建<code>.tex</code> 文件或<a href="https://www.overleaf.com/learn/Creating_a_document_in_Overleaf"target="_blank">在 Overleaf中开始一个新项目</a>。首先，让我们举一个简单的例子：</p>
-<pre><code>\documentclass{article}
+<pre tabindex="0"><code>\documentclass{article}
 
 \begin{document}
 First document. This is a simple example, with no 
@@ -52,7 +52,7 @@ extra parameters or packages included.
 <p>现在你已经掌握如何向文档中添加内容，我们的下一步是给文档添加标题 ( title )。在此之前，我们先得简要介绍 <strong>preamble</strong>。</p>
 <h1 id="文档的导言--preamble-">文档的导言 ( Preamble )</h1>
 <p>在之前的例子里文本被囊括在<code>\begin{document}</code>命令之中。在 <code>.tex</code> 文件中，在 <code>\begin{document}</code> 之前的所有部分被称为“序” （ <strong>preamble</strong> ）。 我们在序中定义文档的类型，语言，所要使用的程序包等。例如，一个普通的文档的序如下所以：</p>
-<pre><code>\documentclass[12pt, letterpaper]{article}
+<pre tabindex="0"><code>\documentclass[12pt, letterpaper]{article}
 \usepackage[utf8]{inputenc}
 </code></pre><p>以下是每行代码的细节：</p>
 <p><code>\documentclass[12pt, letterpaper]{article}</code></p>
@@ -70,14 +70,14 @@ extra parameters or packages included.
 <p><code>date{February 2014}</code></p>
 <p>你可以手动添加日期。或者使用 <code>\today</code> 来添加，这样日期可以在编译文档时自动更新。</p>
 <p>添加完以上各行后，你的序会像下面这样：</p>
-<pre><code>\documentclass[12pt, letterpaper, twoside]{article}
+<pre tabindex="0"><code>\documentclass[12pt, letterpaper, twoside]{article}
 \usepackage[utf8]{inputenc}
 
 \title{First document}
 \author{Hubert Farnsworth \thanks{funded by the Overleaf team}}
 \date{February 2017}
 </code></pre><p>现在，你已经为你的文档添加了标题，作者和日期，你可以通过 <code>maketitle</code> 命令将以上信息在文件中显示出来。 <code>\maketitle</code> 命令应该出现在在文档 <strong>body</strong> 内任何需要显示标题的地方。</p>
-<pre><code>\begin{document}
+<pre tabindex="0"><code>\begin{document}
 
 \maketitle
 
@@ -89,7 +89,7 @@ We have now added a title, author and date to our first \LaTeX{} document!
         alt/></a></p>
 <h1 id="添加注释--comments-">添加注释 ( comments )</h1>
 <p>在许多情况下，添加注释 ( <strong>comments</strong> ) 是十分必要且有用的。 注释不会显示在最终文档中，它不会影响文档的最终内容。在 LaTeX 中，注释的前缀是<code>%</code>。</p>
-<pre><code>\begin{document}
+<pre tabindex="0"><code>\begin{document}
 
 \maketitle
 
@@ -109,14 +109,14 @@ We have now added a title, author and date to our first \LaTeX{} document!
 <li><em>下划线</em> ：下划线文本被写进 <code>\underline{...}</code> 命令中。</li>
 </ul>
 <p>例如：</p>
-<pre><code>Some of the \textbf{greatest}
+<pre tabindex="0"><code>Some of the \textbf{greatest}
 discoveries in \underline{science} 
 were made by \textbf{\textit{accident}}.
 </code></pre><p><a target="_blank" rel="noopener noreferrer" 
   href="/images/latex-4.png"><img  src="/images/latex-4.png"
         alt/></a></p>
 <p>另一个有用的命令是 <code>emph{...}</code> 命令。<code>emph</code> 命令是否使文本显示为斜体，取决于被<code>emph</code> 包含的文本之外的上下文字体是否是斜体。如果上下文都是斜体，那么谨慎使用 <code>emph</code> 命令。请看以下示例：</p>
-<pre><code>Some of the greatest \emph{discoveries} 
+<pre tabindex="0"><code>Some of the greatest \emph{discoveries} 
 in science 
 were made by accident.
 
@@ -134,7 +134,7 @@ were made by accident.}
 <h1 id="添加图片">添加图片</h1>
 <p>我们现在将在 LaTeX 文档中添加图片。在 Overleaf中，我们需要先上传图片。</p>
 <p>以下是插入图片的一个实例：</p>
-<pre><code>\documentclass{article}
+<pre tabindex="0"><code>\documentclass{article}
 \usepackage{graphicx}
 \graphicspath{ {images/} }
 
@@ -155,7 +155,7 @@ There's a picture of a galaxy above
 <p>注意：文件的扩展名可以被引用，但是我们最好省略扩展名。如果我们省略扩展名，LaTeX 会寻找所有它支持的图片格式。另外，我们也建议文件后缀名都是用使用小写英文字符。更多系列请移步<a href="https://www.overleaf.com/learn/latex/Learn_LaTeX_in_30_minutes#Generating_high-res_and_low-res_images"target="_blank">generating high resolution and low resolution images</a>。</p>
 <h1 id="图片的标题标签和引用--captions-labels-and-references-">图片的标题，标签和引用 ( Captions, labels and references )</h1>
 <p>图片可以通过 <strong>figure</strong> 命令来设置图片的标题，标签和引用：</p>
-<pre><code>\begin{figure}[h]
+<pre tabindex="0"><code>\begin{figure}[h]
     \centering
     \includegraphics[width=0.25\textwidth]{mesh}
     \caption{a nice plot}
@@ -181,7 +181,7 @@ is the same example.
 <p>LaTeX 中有两类列表，有序列表和无序列表。两种类型的列表使用不同的环境。</p>
 <h2 id="无序列表">无序列表</h2>
 <p>无序列表通过 <code>itemize</code> 环境来产生。列表中每个条目前必须有前缀 <code>\item</code>。</p>
-<pre><code>\begin{itemize}
+<pre tabindex="0"><code>\begin{itemize}
   \item The individual entries are indicated with a black dot, a so-called bullet.
   \item The text in the entries may be of any length.
 \end{itemize}
@@ -191,7 +191,7 @@ is the same example.
 <p>默认情况下列表的每个条目都以黑点开头，这就是所谓的 bullet。条目中，文本的长度任意。</p>
 <h2 id="有序列表">有序列表</h2>
 <p>有序列表在不同的环境中有相同的语法。我们通过使用 <code>enumerate</code> 环境来生成有序列表：</p>
-<pre><code>\begin{enumerate}
+<pre tabindex="0"><code>\begin{enumerate}
   \item This is the first entry in our list
   \item The list numbers increase with each entry we add
 \end{enumerate}
@@ -201,21 +201,21 @@ is the same example.
 <p>同无序列表一样，有序列表每个条目前需要以 <code>\item</code> 开头。有序列表的序号从 1 开始。</p>
 <h1 id="向-latex-添加数学模块">向 LaTeX 添加数学模块</h1>
 <p>LaTeX 的主要优点之一就是简便的公式输入。 LaTeX 提供了数学公式的两种输入模式：“内联模式” ( <strong>inline</strong> ) 和“外显模式” ( <strong>display</strong> )。第一个模式中，我们把公式写入文本中的一部分。第二种模式中，公式不作为文本中的一部分，它们会被置于单独的行中，让我们来看看<strong>内联</strong>模式：</p>
-<pre><code>In physics, the mass-energy equivalence is stated 
+<pre tabindex="0"><code>In physics, the mass-energy equivalence is stated 
 by the equation $E=mc^2$, discovered in 1905 by Albert Einstein.
 </code></pre><p><a target="_blank" rel="noopener noreferrer" 
   href="/images/latex-10.png"><img  src="/images/latex-10.png"
         alt/></a></p>
 <p>我们可以使用以下三种分隔符在内联模式下引入公式：<code>\( ... \)</code>，<code>$ ... $</code> 或者 <code>\begin{math} ... \end{math}</code>。三种方法都可以，选哪个取决于个人喜好。</p>
 <p>外显模式 ( <em>displayed</em> mode ) 有两种版本：有序号版和无序号版。</p>
-<pre><code>choice is a matter of taste
+<pre tabindex="0"><code>choice is a matter of taste
 </code></pre><p><a target="_blank" rel="noopener noreferrer" 
   href="/images/latex-11.png"><img  src="/images/latex-11.png"
         alt/></a></p>
 <p>我们可以使用以下三种分隔符在外显模式下引入公式：<code>\[ ... \]</code>，<code>\begin{displaymath} ... \end{displaymath}</code> 或者 <code>\begin{equation} ... \end{equation}</code>。<strong>不推荐使用</strong> <code>$$ ... $$</code>， 该命令会产生不一致的空格，在某些数学程序包中可能出问题。</p>
 <p>重要提示：equation* 环境由外部程序包提供，详见<a href="https://www.overleaf.com/learn/Aligning_equations"target="_blank"><em><strong>amsmath</strong> article</em></a>。</p>
 <p>许多数学相关的命令都需要 <strong>amsmath</strong> 程序包，在写数学相关内容前务必记得引用该程序包。下面给出一个基本数学模块命令的例子。</p>
-<pre><code>Subscripts in math mode are written as $a_b$ and superscripts are written as $a^b$. These can be combined an nested to write expressions such as
+<pre tabindex="0"><code>Subscripts in math mode are written as $a_b$ and superscripts are written as $a^b$. These can be combined an nested to write expressions such as
 
 \[ T^{i_1 i_2 \dots i_p}_{j_1 j_2 \dots j_q} = T(x^{i_1},\dots,x^{i_p},e_{j_1},\dots,e_{j_q}) \]
  
@@ -247,7 +247,7 @@ Mathematical operators are prefixed with a backslash as $\sin(\beta)$, $\cos(\al
 <p>我们现在来看如何写摘要 ( abstracts ) 和如何将 LaTeX 文档编排成不同章，小节和段落。</p>
 <h2 id="摘要--abstracts-">摘要 ( Abstracts )</h2>
 <p>在科技文档中，将文章主题进行简要的概括是常见的做法。在 LaTeX 中，<code>abstract</code> 环境专门用来处理摘要。<code>abstract</code> 环境将会把特定格式的文本置于文档的顶部。</p>
-<pre><code>\begin{document}
+<pre tabindex="0"><code>\begin{document}
 
 \begin{abstract}
 This is a simple paragraph at the beginning of the 
@@ -260,7 +260,7 @@ Abstractsmall.PNG
   href="/images/latex-13.png"><img  src="/images/latex-13.png"
         alt/></a></p>
 <h2 id="段落--paragraphs--和新行--newlines-">段落 ( Paragraphs ) 和新行 ( newlines )</h2>
-<pre><code>\begin{document}
+<pre tabindex="0"><code>\begin{document}
 
 \begin{abstract}
 This is a simple paragraph at the beginning of the 
@@ -280,7 +280,7 @@ This line will start a second Paragraph.
 <p>你可以在 <a href="https://www.overleaf.com/learn/Paragraphs_and_new_lines"target="_blank">Paragraphs and new lines</a> 中得到更多信息。</p>
 <h2 id="章节--chapters-and-sections-">章节 ( Chapters and Sections )</h2>
 <p>用来组织文档的命令随着文档格式的变化而变化，组织文档的最简单形式是分节 ( sectioning )，分节功能在所有文档格式中都可用。</p>
-<pre><code>\chapter{First Chapter}
+<pre tabindex="0"><code>\chapter{First Chapter}
 
 \section{Introduction}
 
@@ -350,7 +350,7 @@ Etiam lobortis facilisissem
 <h1 id="创建表格">创建表格</h1>
 <h2 id="在-latex-中创建一个简单的表格">在 LaTeX 中创建一个简单的表格</h2>
 <p>下面是一个最简单的表格的例子:</p>
-<pre><code>\begin{center}
+<pre tabindex="0"><code>\begin{center}
 \begin{tabular}{ c c c }
  cell1 &amp; cell2 &amp; cell3 \\ 
  cell4 &amp; cell5 &amp; cell6 \\  
@@ -363,7 +363,7 @@ Etiam lobortis facilisissem
 <p>LaTeX 中，默认的创建表格的方法是利用 <strong>tabular</strong> 环境。你必须为它指定参数，在本例中是 <strong>{c c c}</strong>。这个参数告诉 LaTeX 表格将会是 3 列，表格中每个项目的内容都会居中。可以使用 <strong>r</strong> 来对文本进行右对齐，使用 <strong>l</strong> 来左对齐。符号 <strong>&amp;</strong> 用来每个表格项的分隔符。每行的对齐符号必须少于列数。我们使用 <strong>\</strong> 作为表格的换行符。我们将整个表格打包在 <strong>center</strong> 环境中因此我们的表格能够显示在页面中部。</p>
 <h2 id="添加边界">添加边界</h2>
 <p><em>tabular</em> 环境非常灵活，你可以在每列之间放许多分割线</p>
-<pre><code>\begin{center}
+<pre tabindex="0"><code>\begin{center}
 \begin{tabular}{ |c|c|c| } 
  \hline
  cell1 &amp; cell2 &amp; cell3 \\ 
@@ -383,7 +383,7 @@ TablesEx2.png
 <li><strong>\hline</strong>: 该命令将插入水平线。我们已经在顶部和底部设置了水平分隔符。事实上，你可以多次使用 <strong>\hline</strong>。</li>
 </ul>
 <p>以下是第二个例子：</p>
-<pre><code>\begin{center}
+<pre tabindex="0"><code>\begin{center}
  \begin{tabular}{||c c c c||} 
  \hline
  Col1 &amp; Col2 &amp; Col2 &amp; Col3 \\ [0.5ex] 
@@ -406,7 +406,7 @@ TablesEx2.png
 <p>有时候，创建表格非常需要技巧。你可以去 <a href="https://www.tablesgenerator.com/"target="_blank">TablesGenerator.com</a> 创建并导出 LaTeX 中 tabulars值的代码。</p>
 <h2 id="表标题标签和引用--captions-labels-and-references-">表标题，标签和引用 ( Captions, labels and references )</h2>
 <p>你能为表设置标题和引用。与对图片的处理相似。唯一的不同是我们使用 <strong>table</strong> 环境而非 <strong>figure</strong>。</p>
-<pre><code>Table \ref{table:data} is an example of referenced \LaTeX{} elements.
+<pre tabindex="0"><code>Table \ref{table:data} is an example of referenced \LaTeX{} elements.
 
 \begin{table}[h!]
 \centering
@@ -430,7 +430,7 @@ TablesEx2.png
 <p>⚠️ <em>If you are using captions and references on your own computer, you will have to compile the document twice for the references to work. Overleaf will do this for you automatically.</em></p>
 <h2 id="添加目录--table-of-contents-">添加目录 ( Table of Contents )</h2>
 <p>要创建一个有内容的表是非常简单直观的，命令是<code>\tableofcontents</code>。</p>
-<pre><code>\documentclass{article}
+<pre tabindex="0"><code>\documentclass{article}
 \usepackage[utf8]{inputenc}
  
 \title{Sections and Chapters}

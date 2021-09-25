@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.87.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.88.1" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
 <meta name="supported-color-schemes" content="light dark"><title>使用 Nginx 对 Project V 做负载均衡&nbsp;&ndash;&nbsp;Ellinia</title><link rel="stylesheet" href="/css/core.min.530ac39b094101cfd2827e6795611f2446174f0dbbe4f43ce471da520fc9f9aca8c46ed3e2ef79cbd7027142742f7aef.css" integrity="sha384-UwrDmwlBAc/Sgn5nlWEfJEYXTw275PQ85HHaUg/J&#43;ayoxG7T4u95y9cCcUJ0L3rv"><link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-icon-57x57.png">
 <link rel="apple-touch-icon" sizes="60x60" href="/favicons/apple-icon-60x60.png">
@@ -29,7 +29,7 @@
 <p>但 Nginx 有一个缺点: 那就是主动后端检测的功能需要付费版才能提供，免费版只有被动检测的功能。</p>
 <p>不过，这并不妨碍我们试一试</p>
 <h2 id="拓扑结构">拓扑结构</h2>
-<pre><code>                                ====&gt; server1
+<pre tabindex="0"><code>                                ====&gt; server1
                                 |
 data ===&gt; Project V ====&gt; Nginx ====&gt; server2
                                 |
@@ -40,7 +40,7 @@ data ===&gt; Project V ====&gt; Nginx ====&gt; server2
 <h2 id="配置文件">配置文件</h2>
 <p>以下贴出主要的配置：</p>
 <p>直接打开默认的配置文件<code>nginx.conf</code>, 键入以下内容：</p>
-<pre><code>worker_processes  auto;
+<pre tabindex="0"><code>worker_processes  auto;
 
 events {
     worker_connections  1024;
@@ -66,7 +66,7 @@ stream{
 <p>Nginx 支持三种负载均衡的方式：Round Robin(简单轮询)，Least Connections(最少连接) 和 Least Time(最少时间)</p>
 <p>· Round Robin 是默认的方式，不需要在配置文件中特意写出来，可根据权重在后端服务器中依次选择</p>
 <p>· <a href="https://nginx.org/en/docs/stream/ngx_stream_upstream_module.html#least_conn"target="_blank">Least Connections</a> 最少连接，Nginx 会选择当前活动连接数最少的服务器进行连接，设置如下：</p>
-<pre><code>upstream stream_backend {
+<pre tabindex="0"><code>upstream stream_backend {
     least_conn;
     server backend1.example.com:12345;
     server backend2.example.com:12345;
@@ -74,13 +74,13 @@ stream{
 }
 </code></pre><p>· <a href="http://nginx.org/en/docs/stream/ngx_stream_upstream_module.html#least_time"target="_blank">Least Time</a> 最少时间，这个是收费版才有的功能，可以选择当前平均延迟低并且活动连接最少的服务器。因为是收费功能所以不再赘述。</p>
 <h3 id="其他主要的配置介绍">其他主要的配置介绍</h3>
-<pre><code>proxy_timeout 10m
+<pre tabindex="0"><code>proxy_timeout 10m
 </code></pre><p><a href="https://nginx.org/en/docs/stream/ngx_stream_proxy_module.html#proxy_timeout"target="_blank">proxy_timeout</a>表示成功与后端建立连接后的超时时间，一旦超过这个时间没有数据传送连接就会关闭。这里设置为10分钟</p>
-<pre><code>proxy_connect_timeout 5m
+<pre tabindex="0"><code>proxy_connect_timeout 5m
 </code></pre><p><a href="https://nginx.org/en/docs/stream/ngx_stream_proxy_module.html#proxy_connect_timeout"target="_blank">proxy_connect_timeout</a>表示Nginx与后端服务器连接所需的延迟，根据 Nginx 所在的机器和后端服务器的延迟来设置。当然也可以设置的大一些，来容纳一些小幅度的网络波动</p>
-<pre><code>max_fails=3 fail_timeout=30s
+<pre tabindex="0"><code>max_fails=3 fail_timeout=30s
 </code></pre><p>这个就是<a href="https://docs.nginx.com/nginx/admin-guide/load-balancer/tcp-udp-load-balancer/#passive-health-monitoring"target="_blank">被动检测</a>的设置项了，它的意思是在30秒内如果连接失败或者超时3次，那么该服务器就被忽略30秒。看起来的确有些不智能，但是实测下来还是可以接受的。<a href="https://docs.nginx.com/nginx/admin-guide/load-balancer/tcp-udp-load-balancer/#active-health-monitoring"target="_blank">主动检测</a>和 Haproxy 很相似，但是这个功能是付费版才有，在此不做讨论。</p>
-<pre><code>weight=1
+<pre tabindex="0"><code>weight=1
 </code></pre><p>和 Haproxy 相似，这个是权重的意思，不赘述。</p>
 <h2 id="注意事项">注意事项</h2>
 <p>Unix类系统的用户可以方便的开启和关闭 Nginx，Windows的用户需要注意，软件开启后会有黑窗一闪而过，并不会有图形界面。要想知道是否正确运行的话有两种方便的方法：</p>
@@ -93,7 +93,7 @@ stream{
 </ul>
 <p>打开任务管理器，成功的话里面会有名叫nginx的进程存在</p>
 <p>另外 Windows 用户可以使用<code>bat</code>脚本来快速关闭Nginx，将以下内容保存成后缀为<code>.bat</code>的文件即可。需要关闭Nginx的时候直接双击它:</p>
-<pre><code>@echo off
+<pre tabindex="0"><code>@echo off
 tasklist|find /i &quot;nginx.exe&quot; &amp;&amp; taskkill /im  nginx.exe /f &amp;&amp; taskkill /im cmd.exe || taskkill /im cmd.exe
 </code></pre><h1 id="project-v-配置">Project V 配置</h1>
 <ul>
@@ -137,7 +137,7 @@ tasklist|find /i &quot;nginx.exe&quot; &amp;&amp; taskkill /im  nginx.exe /f &am
   <span class="err">...</span>
 <span class="p">}</span>
 </code></pre></div><p>此时，Nginx 配置中的,服务器端口应指定为443，即：</p>
-<pre><code>···
+<pre tabindex="0"><code>···
   upstream v2ray_backend{
       server  服务器1的IP:443      max_fails=3 fail_timeout=30s    weight=1;
       server  服务器2的IP:443      max_fails=3 fail_timeout=30s    weight=1;

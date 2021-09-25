@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.88.1" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
-<meta name="supported-color-schemes" content="light dark"><title>如何在windows8中进入安全模式&nbsp;&ndash;&nbsp;Ellinia</title><link rel="stylesheet" href="/css/core.min.530ac39b094101cfd2827e6795611f2446174f0dbbe4f43ce471da520fc9f9aca8c46ed3e2ef79cbd7027142742f7aef.css" integrity="sha384-UwrDmwlBAc/Sgn5nlWEfJEYXTw275PQ85HHaUg/J&#43;ayoxG7T4u95y9cCcUJ0L3rv"><link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-icon-57x57.png">
+<meta name="supported-color-schemes" content="light dark"><title>在Windows Server上为多用户部署Bginfo&nbsp;&ndash;&nbsp;Ellinia</title><link rel="stylesheet" href="/css/core.min.530ac39b094101cfd2827e6795611f2446174f0dbbe4f43ce471da520fc9f9aca8c46ed3e2ef79cbd7027142742f7aef.css" integrity="sha384-UwrDmwlBAc/Sgn5nlWEfJEYXTw275PQ85HHaUg/J&#43;ayoxG7T4u95y9cCcUJ0L3rv"><link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-icon-57x57.png">
 <link rel="apple-touch-icon" sizes="60x60" href="/favicons/apple-icon-60x60.png">
 <link rel="apple-touch-icon" sizes="72x72" href="/favicons/apple-icon-72x72.png">
 <link rel="apple-touch-icon" sizes="76x76" href="/favicons/apple-icon-76x76.png">
@@ -22,14 +22,25 @@
     <div class="base-body"><section id="header" class="site header">
     <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><img class="site logo" src="/images/avatar.png" alt /><span class="site name">Ellinia</span></a></span>
         <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/tags/">Tags</a></nav></div></span></div></section><div id="content"><section class="article header">
-    <h1 class="article title">如何在windows8中进入安全模式</h1><p class="article date">2016-10-16</p></section><article class="article markdown-body"><p>在windows7中，我们在开机时可以按下F8来进入安全模式，但是在win8中并不是次次都能成功。如何能够轻松简单地在开机时出现开机选项呢？</p>
-<h1 id="0x01">0X01</h1>
-<pre tabindex="0"><code>按下Windows+X,选择命令提示符（管理员）
-</code></pre><h1 id="0x02">0X02</h1>
-<p>输入</p>
-<p><code>Bcdedit /set {bootmgr} displaybootmenu yes</code> ，输入完成后按 Enter 鍵。（如果需要取消开机出现开机选项：只需要将指令中的yes 改为no）</p>
-<p>完成之后重启电脑 在出现windows徽标之前按下F8就会看到开机设定画面，然后按下F4就可以进入安全模式。</p>
-</article><section class="article labels"><a class="tag" href=/tags/windows/>windows</a></section><section class="article navigation"><p><a class="link" href="/fix-the-problem-of-disappearing-of-volume-icon-on-windows.html"><span class="li">&larr;</span>Windows任务栏音量电量等图标消失的解决方法</a></p><p><a class="link" href="/posts/log-in-centos-via-ssh-key/"><span class="li">&rarr;</span>CentOS开启密钥登录的相关设置</a></p></section><section class="article discussion"><div id="disqus_thread"></div>
+    <h1 class="article title">在Windows Server上为多用户部署Bginfo</h1><p class="article date">2021-09-25</p></section><article class="article markdown-body"><h1 id="前言">前言</h1>
+<p>Bginfo 是一款实用工具，可以在桌面显示当前系统信息。对于多用户场景，普遍流行的方法是通过域进行分发。本次采用脚本分发的方法，更加简单。</p>
+<h1 id="下载安装">下载安装</h1>
+<p>Bginfo可以在<a href="http://docs.microsoft.com/en-us/sysinternals/downloads/bginfo"target="_blank">此处</a>进行下载，软件为免安装版本，可以直接移动到软件目录内。首次打开后会显示软件设置界面，在界面内可以对显示项进行自定义修改，主要修改项为：</p>
+<ul>
+<li>
+<p><code>Position</code> 中选择右上角</p>
+</li>
+<li>
+<p><code>Desktops</code>，<code>Logon Desktop for Remote Desktop Users</code> 中选择 <code>Update this wallpaper</code></p>
+</li>
+</ul>
+<p>修改完成后另存一份配置文件(后缀名为<code>.bgi</code>)，与程序放在同一文件夹中。</p>
+<h1 id="部署分发">部署分发</h1>
+<p>此处以64位版本为例，假设软件和配置文件分别为<code>Bginfo64.exe</code>和<code>bginfo.bgi</code>，路径为<code>C:\Program Files\Bginfo</code>。新建一个bat脚本，其内容如下</p>
+<pre tabindex="0"><code>@echo off
+&quot;C:\Program Files\Bginfo\Bginfo64.exe&quot; &quot;C:\Program Files\Bginfo\bginfo.bgi&quot; /timer:0 /silent /nolicprompt
+</code></pre><p>将此bat文件放置在<code>C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp</code>文件夹中，用户登录时桌面即可显示系统信息。</p>
+</article><section class="article labels"><a class="tag" href=/tags/windows/>windows</a></section><section class="article navigation"><p><a class="link" href="/posts/change-homebrew-mirrors/"><span class="li">&rarr;</span>Homebrew 更换镜像源</a></p></section><section class="article discussion"><div id="disqus_thread"></div>
 <script type="application/javascript">
     var disqus_config = function () {
     

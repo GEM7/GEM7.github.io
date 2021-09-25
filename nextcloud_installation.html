@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.87.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.88.1" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
 <meta name="supported-color-schemes" content="light dark"><title>Nextcloud 安装教程&nbsp;&ndash;&nbsp;Ellinia</title><link rel="stylesheet" href="/css/core.min.530ac39b094101cfd2827e6795611f2446174f0dbbe4f43ce471da520fc9f9aca8c46ed3e2ef79cbd7027142742f7aef.css" integrity="sha384-UwrDmwlBAc/Sgn5nlWEfJEYXTw275PQ85HHaUg/J&#43;ayoxG7T4u95y9cCcUJ0L3rv"><link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-icon-57x57.png">
 <link rel="apple-touch-icon" sizes="60x60" href="/favicons/apple-icon-60x60.png">
@@ -36,7 +36,7 @@
 <ul>
 <li>首先打开HyperApp找到Mysql安装，填写相关配置：</li>
 </ul>
-<pre><code>	 &quot;Version&quot;             选择&quot;latest&quot;
+<pre tabindex="0"><code>	 &quot;Version&quot;             选择&quot;latest&quot;
 	 &quot;Root Password&quot;       设置一个Mysql的&quot;Root密码&quot;
 	 &quot;Database&quot;            设置一个数据库名,此处示例为&quot;nextcloud&quot;
 	 &quot;User&quot;                设置一个数据库用户,此处示例为&quot;nextcloud&quot;
@@ -58,20 +58,20 @@
 <ul>
 <li>首先打开HyperApp在应用中找到Nextcloud,填写相关配置：</li>
 </ul>
-<pre><code>	 &quot;Version&quot;             &quot;latest&quot;
+<pre tabindex="0"><code>	 &quot;Version&quot;             &quot;latest&quot;
 	 &quot;Port&quot;                此处&quot;留空&quot;
 	 &quot;Data dir&quot;            保持默认
 	 &quot;Link Containers&quot;     选择&quot;Mysql&quot;
 </code></pre><ul>
 <li>再展开&quot;Show Nginx and SSL options&quot;选项</li>
 </ul>
-<pre><code>	 &quot;Custom Domain&quot;       填写&quot;你的域名&quot;
+<pre tabindex="0"><code>	 &quot;Custom Domain&quot;       填写&quot;你的域名&quot;
 	 &quot;Port&quot;                此处&quot;留空&quot;
 	 &quot;HTTPS&quot;               推荐选择&quot;Redirect http to https&quot;
 </code></pre><ul>
 <li>再来到&quot;Nginx SSL Support&quot;选项(如果你之前已经通过HyperApp申请好证书则此步骤不需要填写)</li>
 </ul>
-<pre><code>	 &quot;Domain&quot;      填写你的&quot;域名&quot;
+<pre tabindex="0"><code>	 &quot;Domain&quot;      填写你的&quot;域名&quot;
 	 &quot;Email&quot;       填写你的&quot;邮箱&quot;
 </code></pre><ul>
 <li>填写完成之后点击最下方的&quot;保存&quot;</li>
@@ -82,20 +82,20 @@
 <ul>
 <li>CentOS</li>
 </ul>
-<pre><code>	firewall-cmd --add-port=80/tcp --permanent
+<pre tabindex="0"><code>	firewall-cmd --add-port=80/tcp --permanent
 	firewall-cmd --add-port=443/tcp --permanent
 	firewall-cmd --reload
 </code></pre><ul>
 <li>Ubuntu</li>
 </ul>
-<pre><code>	sudo ufw allow 80
+<pre tabindex="0"><code>	sudo ufw allow 80
 	sudo ufw allow 443
 </code></pre><h2 id="使用nextcloud">使用Nextcloud</h2>
 <p>打开浏览器，键入你的域名，回车即可看到nextcloud的页面,首先我们需要初始化</p>
 <ul>
 <li>首先要点击屏幕上的&quot;存储&amp;数据库&quot;待其菜单展开后依次配置以下内容</li>
 </ul>
-<pre><code>数据目录                          保持默认
+<pre tabindex="0"><code>数据目录                          保持默认
 配置数据库                        选择Mysql/MariaDB
 数据库用户                        填写在Mysql中设置的数据库用户，本教程中为&quot;nextcloud&quot;
 数据库密码                        填写在Mysql中设置的数据库密码，本教程中为&quot;nextcloud&quot;
@@ -129,7 +129,7 @@
 <p><!-- raw HTML omitted --></p>
 <h2 id="后续配置">后续配置</h2>
 <p>如果你想要自己配置相关参数，在右下角通知栏打开Nextcloud然后进行设置即可，这里贴上一个设置代理的方法。</p>
-<pre><code>打开Nextcloud
+<pre tabindex="0"><code>打开Nextcloud
 选项卡选择&quot;Network&quot;
 在代理设置(Proxy Settings)中 选择&quot;手动指定代理&quot;(Specify proxy manually as)为 &quot;socks5&quot;
 &quot;Host&quot;填写&quot;127.0.0.1&quot;，右侧的方框是填写端口的，一般填写&quot;1080&quot;

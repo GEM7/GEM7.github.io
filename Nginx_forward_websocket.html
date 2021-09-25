@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.87.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.88.1" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
 <meta name="supported-color-schemes" content="light dark"><title>Nginx通过http_header分流Websocket&nbsp;&ndash;&nbsp;Ellinia</title><link rel="stylesheet" href="/css/core.min.530ac39b094101cfd2827e6795611f2446174f0dbbe4f43ce471da520fc9f9aca8c46ed3e2ef79cbd7027142742f7aef.css" integrity="sha384-UwrDmwlBAc/Sgn5nlWEfJEYXTw275PQ85HHaUg/J&#43;ayoxG7T4u95y9cCcUJ0L3rv"><link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-icon-57x57.png">
 <link rel="apple-touch-icon" sizes="60x60" href="/favicons/apple-icon-60x60.png">
@@ -28,7 +28,7 @@
 </blockquote>
 <h1 id="通过定义两个server分流">通过定义两个server分流</h1>
 <p>只需要在原来配置文件的基础上在底部再添加一个<code>server</code>块，同样监听在443端口，同样地，也共用前者的证书来认证，第一处不同就是在第二者的<code>server</code>块内的<code>server_name</code>处填写自定义的<code>Host</code>值，通过此值来分流;第二处不同就是需要将传入到后端的数据的Host值改回正常值，以保证连接成功。</p>
-<pre><code>server{
+<pre tabindex="0"><code>server{
        listen  443;
        server_name     &quot;伪装域名&quot;;
         ssl on;
@@ -50,7 +50,7 @@
 
 </code></pre><h1 id="通过条件语句进行分流">通过条件语句进行分流</h1>
 <p>这种方式比上一种要更加灵活，上一种方式不仅需要手动填入用于伪装的<code>server_name</code>，客户端只要填入非域名的任何域名都可以被分流；对配置文件的改动也是最小的。</p>
-<pre><code>location / {
+<pre tabindex="0"><code>location / {
        if ( $http_host != $server_name ){
                proxy_pass      http://127.0.0.1:10000;
                 }

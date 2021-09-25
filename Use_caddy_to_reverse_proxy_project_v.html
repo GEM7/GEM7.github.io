@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.87.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.88.1" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
 <meta name="supported-color-schemes" content="light dark"><title>使用Caddy反向代理Project V&nbsp;&ndash;&nbsp;Ellinia</title><link rel="stylesheet" href="/css/core.min.530ac39b094101cfd2827e6795611f2446174f0dbbe4f43ce471da520fc9f9aca8c46ed3e2ef79cbd7027142742f7aef.css" integrity="sha384-UwrDmwlBAc/Sgn5nlWEfJEYXTw275PQ85HHaUg/J&#43;ayoxG7T4u95y9cCcUJ0L3rv"><link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-icon-57x57.png">
 <link rel="apple-touch-icon" sizes="60x60" href="/favicons/apple-icon-60x60.png">
@@ -28,15 +28,15 @@
 </blockquote>
 <h1 id="下载安装">下载安装</h1>
 <p>假设使用64位的Linux系统, 并使用<code>systemd</code>管理方式（Centos7+,Debian8+）管理软件的启动，输入以下命令即可安装成功：</p>
-<pre><code>curl https://getcaddy.com | bash -s personal http.filemanager,http.forwardproxy,http.proxyprotocol
+<pre tabindex="0"><code>curl https://getcaddy.com | bash -s personal http.filemanager,http.forwardproxy,http.proxyprotocol
 curl -s https://raw.githubusercontent.com/GEM7/My_scripts/master/caddy/caddy.service -o /etc/systemd/system/caddy.service
 </code></pre><h1 id="生成配置文件">生成配置文件</h1>
 <p>因为启动管理器中固化的配置文件路径是<code>/etc/Caddyfile</code>，所以我们直接创建这个文件：</p>
-<pre><code>touch   /etc/Caddyfile
+<pre tabindex="0"><code>touch   /etc/Caddyfile
 </code></pre><h1 id="编辑caddyfile">编辑Caddyfile</h1>
 <p>Caddyfile 是 Caddy 的配置文件，编辑它来寻求我们需要的功能。主要要实现以下两种分流方式,<strong>二选一即可</strong>。</p>
 <h2 id="路径分流">路径分流</h2>
-<pre><code>yourdomain.com:443 {
+<pre tabindex="0"><code>yourdomain.com:443 {
 root /www
 gzip
 index index.html
@@ -53,7 +53,7 @@ proxy /ws localhost:9999 {
 <code>/ws</code> 改成自己的路径，（无须追求复杂，不容易猜出来即可）
 <code>9999</code> 改成 Project V 的 WS 监听的内网地址</p>
 <h2 id="host-分流">Host 分流</h2>
-<pre><code>yourdomain.com:443 {
+<pre tabindex="0"><code>yourdomain.com:443 {
 root /www
 gzip
 index index.html
@@ -76,27 +76,27 @@ proxy / localhost:9999 {
 <ul>
 <li>启动</li>
 </ul>
-<pre><code>systemctl start caddy
+<pre tabindex="0"><code>systemctl start caddy
 </code></pre><ul>
 <li>停止</li>
 </ul>
-<pre><code>systemctl stop caddy
+<pre tabindex="0"><code>systemctl stop caddy
 </code></pre><ul>
 <li>重启</li>
 </ul>
-<pre><code>systemctl restart caddy
+<pre tabindex="0"><code>systemctl restart caddy
 </code></pre><ul>
 <li>开机启动</li>
 </ul>
-<pre><code>systemctl enable caddy
+<pre tabindex="0"><code>systemctl enable caddy
 </code></pre><hr>
 <h1 id="附加玩法非必须">附加玩法（非必须）</h1>
 <p>Caddy自身可以实现 http2 代理，只需要在上述配置中<code>tls</code>那一行下添加以下内容即可开启HTTP2 代理，HTTP2 代理性能不差并且可以与Project V 共存。</p>
-<pre><code>forwardproxy {
+<pre tabindex="0"><code>forwardproxy {
         basicauth       PROXY_USER      PROXY_PASS
 }
 </code></pre><p>例如：第一个路径分流的配置添加HTTP2代理后全部配置如下：</p>
-<pre><code>yourdomain.com:443 {
+<pre tabindex="0"><code>yourdomain.com:443 {
 root /www
 gzip
 index index.html

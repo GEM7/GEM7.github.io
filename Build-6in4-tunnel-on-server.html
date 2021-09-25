@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.87.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.88.1" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
 <meta name="supported-color-schemes" content="light dark"><title>利用双栈VPS搭建6in4隧道&nbsp;&ndash;&nbsp;Ellinia</title><link rel="stylesheet" href="/css/core.min.530ac39b094101cfd2827e6795611f2446174f0dbbe4f43ce471da520fc9f9aca8c46ed3e2ef79cbd7027142742f7aef.css" integrity="sha384-UwrDmwlBAc/Sgn5nlWEfJEYXTw275PQ85HHaUg/J&#43;ayoxG7T4u95y9cCcUJ0L3rv"><link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-icon-57x57.png">
 <link rel="apple-touch-icon" sizes="60x60" href="/favicons/apple-icon-60x60.png">
@@ -26,22 +26,22 @@
 <p>SERVER1 只支持ipv4, SERVER2 同时支持ipv4和ipv6，构建隧道使SERVER1也能够访问ipv6网站。</p>
 <h1 id="部署步骤">部署步骤</h1>
 <h2 id="server1">SERVER1</h2>
-<pre><code>ip tunnel add ipv6 mode sit remote IPV4_OF_SERVER2 local IPV4_OF_SERVER2 ttl 255
+<pre tabindex="0"><code>ip tunnel add ipv6 mode sit remote IPV4_OF_SERVER2 local IPV4_OF_SERVER2 ttl 255
 ip link set ipv6 up
 ip addr add 2604:xxxx:xxxx:xxxx::xxxx:2/128 dev ipv6
 ip route add ::/0 dev ipv6
 </code></pre><h2 id="server2">SERVER2</h2>
-<pre><code>ip tunnel add provideipv6 mode sit remote IP_OF_SERVER1 local IP_OF_SERVER2 ttl 255
+<pre tabindex="0"><code>ip tunnel add provideipv6 mode sit remote IP_OF_SERVER1 local IP_OF_SERVER2 ttl 255
 ip link set proviceipv6 up
 ip addr add 2604:xxxx:xxxx:xxxx::xxxx:1/128 dev provideipv6
 ip6tables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 </code></pre><h1 id="删除步骤">删除步骤</h1>
 <h2 id="server1-1">SERVER1</h2>
-<pre><code>ip route del ::/0 dev ipv6
+<pre tabindex="0"><code>ip route del ::/0 dev ipv6
 ip link set ipv6 down
 ip tunnel del ipv6 mode
 </code></pre><h2 id="server2-1">SERVER2</h2>
-<pre><code>ip6tables -t nat -D POSTROUTING -o eth0 -j MASQUERADE
+<pre tabindex="0"><code>ip6tables -t nat -D POSTROUTING -o eth0 -j MASQUERADE
 ip link set proviceipv6 down
 ip tunnel del provideipv6 mode sit remote IP_OF_SERVER1 local IP_OF_SERVER2 ttl 255
 </code></pre><h1 id="后记">后记</h1>

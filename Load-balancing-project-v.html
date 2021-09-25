@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.87.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.88.1" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
 <meta name="supported-color-schemes" content="light dark"><title>Project V 负载均衡的两种方法&nbsp;&ndash;&nbsp;Ellinia</title><link rel="stylesheet" href="/css/core.min.530ac39b094101cfd2827e6795611f2446174f0dbbe4f43ce471da520fc9f9aca8c46ed3e2ef79cbd7027142742f7aef.css" integrity="sha384-UwrDmwlBAc/Sgn5nlWEfJEYXTw275PQ85HHaUg/J&#43;ayoxG7T4u95y9cCcUJ0L3rv"><link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-icon-57x57.png">
 <link rel="apple-touch-icon" sizes="60x60" href="/favicons/apple-icon-60x60.png">
@@ -33,7 +33,7 @@
 <p>但还是值得一试</p>
 </blockquote>
 <h2 id="拓扑结构">拓扑结构</h2>
-<pre><code>                      ====&gt; server1
+<pre tabindex="0"><code>                      ====&gt; server1
                       |
 data ====&gt; Project V  ====&gt; server2
                       |
@@ -84,14 +84,14 @@ data ====&gt; Project V  ====&gt; server2
 <p>通过之前的分析，我们可以知道，内置负载均衡的一个很大的缺点，就是不能自动排除已掉线的服务器。那么我们可以换一种思路，利用著名的负载均衡软件 Haproxy 来协助我们完成这项工作。它的优势有很多：1. 它拥有更多的轮询方式，2. 它可以自动排除掉线的服务器。3.拥有WEB管理页面方便我们的管理。</p>
 <p>Haproxy的介绍暂不赘述，它的详细使用方法在<a href="https://xstarcd.github.io/wiki/sysadmin/haproxy_confs.html"target="_blank">这里</a></p>
 <h2 id="拓扑结构-1">拓扑结构</h2>
-<pre><code>                                    ====&gt; server1
+<pre tabindex="0"><code>                                    ====&gt; server1
                                     |
 data ====&gt; Project V  ====&gt; Haproxy ====&gt; server2
                                     |
                                     ====&gt; server3
 </code></pre><h2 id="haproxy-配置">Haproxy 配置</h2>
 <p>以下贴出简单的配置：</p>
-<pre><code>global
+<pre tabindex="0"><code>global
 	ulimit-n 51200
 	log /dev/log local0
 	log /dev/log local1 notice
@@ -188,7 +188,7 @@ backend v2ray
   <span class="err">...</span>
 <span class="p">}</span>
 </code></pre></div><p>此时，Haproxy 配置中的,服务器端口应指定为443，即：</p>
-<pre><code>···
+<pre tabindex="0"><code>···
 backend v2ray
 
 	mode tcp
